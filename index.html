@@ -27,9 +27,8 @@
       transition: color 0.3s ease, transform 0.2s ease;
     }
 
-    /* Hover effect */
-    .star:hover,
-    .star.hovered {
+    /* Hover effect before selection */
+    .star:hover {
       color: gold;
       transform: scale(1.2);
     }
@@ -69,20 +68,6 @@ let ratingLocked = false;
 
 stars.forEach((star, index) => {
 
-  // Highlight on hover if rating not locked
-  star.addEventListener('mouseover', function() {
-    if(ratingLocked) return;
-    stars.forEach((s, i) => {
-      if(i <= index) s.classList.add('hovered');
-      else s.classList.remove('hovered');
-    });
-  });
-
-  star.addEventListener('mouseout', function() {
-    if(ratingLocked) return;
-    stars.forEach(s => s.classList.remove('hovered'));
-  });
-
   // Click to select rating
   star.addEventListener('click', function() {
     if(ratingLocked) return; // Ignore clicks after selection
@@ -90,19 +75,30 @@ stars.forEach((star, index) => {
     const selectedRating = parseInt(star.getAttribute('data-value'));
     ratingLocked = true; // Lock rating
 
-    // Highlight selected stars
+    // Highlight only the clicked stars
     stars.forEach((s, i) => {
       if(i < selectedRating) s.classList.add('selected');
       else s.classList.remove('selected');
     });
 
-    // Show message
+    // Show message based on rating
     if(selectedRating >= 4) {
       messageDiv.innerText = "Thank you! We're glad you enjoyed your stay!";
     } else {
       messageDiv.innerText = "We're sorry your experience was not perfect. Please provide feedback.";
     }
   });
+
+  // Disable hover after rating is locked
+  star.addEventListener('mouseover', function() {
+    if(ratingLocked) return;
+    for(let i=0; i<=index; i++) stars[i].style.color = "gold";
+  });
+  star.addEventListener('mouseout', function() {
+    if(ratingLocked) return;
+    stars.forEach(s => s.style.color = "gray");
+  });
+
 });
 </script>
 
