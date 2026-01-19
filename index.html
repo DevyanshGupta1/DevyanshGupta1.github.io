@@ -9,7 +9,10 @@
       text-align: center;
       padding: 50px;
     }
+
     h1 { color: #333; }
+    p { color: #555; }
+
     .stars {
       display: flex;
       justify-content: center;
@@ -17,9 +20,30 @@
       cursor: pointer;
       margin-bottom: 20px;
     }
-    .star { padding: 5px; color: gray; }
-    .star.selected { color: gold; }
-    #message { font-size: 20px; margin-top: 30px; color: #555; }
+
+    .star {
+      padding: 5px;
+      color: gray;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    /* Hover effect: fill stars on hover */
+    .star:hover,
+    .star.hovered {
+      color: gold;
+      transform: scale(1.2);
+    }
+
+    /* Selected stars after click */
+    .star.selected {
+      color: gold;
+    }
+
+    #message {
+      font-size: 20px;
+      margin-top: 30px;
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -41,18 +65,35 @@
 const stars = document.querySelectorAll('.star');
 const messageDiv = document.getElementById('message');
 
-stars.forEach(star => {
+let selectedRating = 0;
+
+stars.forEach((star, index) => {
+
+  // Highlight on hover
+  star.addEventListener('mouseover', function() {
+    stars.forEach((s, i) => {
+      if(i <= index) s.classList.add('hovered');
+      else s.classList.remove('hovered');
+    });
+  });
+
+  // Remove hover when leaving the star area
+  star.addEventListener('mouseout', function() {
+    stars.forEach(s => s.classList.remove('hovered'));
+  });
+
+  // Click to select rating
   star.addEventListener('click', function() {
-    const rating = parseInt(this.getAttribute('data-value'));
+    selectedRating = parseInt(star.getAttribute('data-value'));
 
-    // Highlight stars
-    stars.forEach(s => s.classList.remove('selected'));
-    for (let i = 0; i < rating; i++) {
-      stars[i].classList.add('selected');
-    }
+    // Highlight selected stars
+    stars.forEach((s, i) => {
+      if(i < selectedRating) s.classList.add('selected');
+      else s.classList.remove('selected');
+    });
 
-    // Show message based on rating
-    if (rating >= 4) {
+    // Show message
+    if(selectedRating >= 4) {
       messageDiv.innerText = "Thank you! We're glad you enjoyed your stay!";
     } else {
       messageDiv.innerText = "We're sorry your experience was not perfect. Please provide feedback.";
