@@ -1,105 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Hotel Star Rating</title>
+  <meta charset="UTF-8">
+  <title>Rivanta Resort Rating</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
+      background-color: #ffffff;
     }
 
-    h1 { color: #333; }
-    p { color: #555; }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* LEFT SECTION */
+    .left {
+      width: 50%;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      width: 160px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin: 0 0 25px 0;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: #333;
+    }
 
     .stars {
       display: flex;
-      justify-content: center;
-      font-size: 50px;
+      font-size: 45px;
       cursor: pointer;
-      margin-bottom: 20px;
     }
 
     .star {
-      padding: 5px;
-      color: gray;
-      transition: color 0.3s ease, transform 0.2s ease;
+      color: #ccc;
+      margin-right: 10px;
+      transition: color 0.3s ease;
     }
 
-    /* Hover effect before selection */
-    .star:hover {
-      color: gold;
-      transform: scale(1.2);
-    }
-
-    /* Selected stars after click */
     .star.selected {
       color: gold;
     }
 
     #message {
-      font-size: 20px;
       margin-top: 30px;
+      font-size: 18px;
       color: #555;
+    }
+
+    /* RIGHT SECTION */
+    .right {
+      width: 50%;
+      background-image: url("assets/resort.jpg");
+      background-size: cover;
+      background-position: center;
     }
   </style>
 </head>
+
 <body>
 
-<h1>Rate Your Experience</h1>
-<p>Click the stars to give your rating:</p>
+<div class="container">
 
-<div class="stars">
-  <span class="star" data-value="1">&#9733;</span>
-  <span class="star" data-value="2">&#9733;</span>
-  <span class="star" data-value="3">&#9733;</span>
-  <span class="star" data-value="4">&#9733;</span>
-  <span class="star" data-value="5">&#9733;</span>
+  <!-- LEFT PANEL -->
+  <div class="left">
+
+    <!-- LOGO -->
+    <img src="assets/logo.png" alt="Rivanta Resort Logo" class="logo">
+
+    <!-- HEADING -->
+    <h1>RIVANTA RESORT</h1>
+
+    <!-- STAR RATING -->
+    <div class="stars">
+      <span class="star" data-value="1">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <!-- MESSAGE -->
+    <div id="message"></div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right"></div>
+
 </div>
 
-<div id="message"></div>
-
 <script>
-const stars = document.querySelectorAll('.star');
-const messageDiv = document.getElementById('message');
+  const stars = document.querySelectorAll('.star');
+  const message = document.getElementById('message');
+  let locked = false;
 
-let ratingLocked = false;
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      if (locked) return;
 
-stars.forEach((star, index) => {
+      locked = true;
+      const rating = index + 1;
 
-  // Click to select rating
-  star.addEventListener('click', function() {
-    if(ratingLocked) return; // Ignore clicks after selection
+      // Light only selected stars from left
+      stars.forEach((s, i) => {
+        if (i < rating) {
+          s.classList.add('selected');
+        }
+      });
 
-    const selectedRating = parseInt(star.getAttribute('data-value'));
-    ratingLocked = true; // Lock rating
-
-    // Highlight only the clicked stars
-    stars.forEach((s, i) => {
-      if(i < selectedRating) s.classList.add('selected');
-      else s.classList.remove('selected');
+      // Show message
+      if (rating >= 4) {
+        message.innerText = "Thank you for your wonderful feedback!";
+      } else {
+        message.innerText = "Thank you. We’ll use your feedback to improve.";
+      }
     });
-
-    // Show message based on rating
-    if(selectedRating >= 4) {
-      messageDiv.innerText = "Thank you! We're glad you enjoyed your stay!";
-    } else {
-      messageDiv.innerText = "We're sorry your experience was not perfect. Please provide feedback.";
-    }
   });
-
-  // Disable hover after rating is locked
-  star.addEventListener('mouseover', function() {
-    if(ratingLocked) return;
-    for(let i=0; i<=index; i++) stars[i].style.color = "gold";
-  });
-  star.addEventListener('mouseout', function() {
-    if(ratingLocked) return;
-    stars.forEach(s => s.style.color = "gray");
-  });
-
-});
 </script>
 
 </body>
