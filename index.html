@@ -1,202 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Rivanta Resort Rating</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rivanta Resort | Rate Your Stay</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", Arial, sans-serif;
+    }
 
-body {
-  margin: 0;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, #eef5ff, #fdfefe);
-}
+    body {
+      margin: 0;
+      background: #f5f6fa;
+    }
 
-/* MAIN LAYOUT */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
 
-/* LEFT CONTENT */
-.left {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-}
+    /* LEFT SIDE */
+    .left {
+      flex: 1;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ffffff;
+    }
 
-/* CARD */
-.card {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 45px;
-  width: 100%;
-  max-width: 480px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  border-top: 6px solid #3b82f6; /* Accent color */
-  animation: fadeUp 0.8s ease;
-}
+    .logo {
+      max-width: 140px;
+      margin-bottom: 20px;
+    }
 
-.logo {
-  width: 140px;
-  margin-bottom: 20px;
-}
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #1f2937;
+    }
 
-h1 {
-  margin: 0 0 30px 0;
-  font-size: 38px;
-  letter-spacing: 4px;
-  color: #1e40af;
-}
+    h2 {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #374151;
+      font-weight: 500;
+    }
 
-/* STARS */
-.stars {
-  display: flex;
-  font-size: 54px;
-}
+    .stars {
+      display: flex;
+      gap: 12px;
+      font-size: 46px;
+      cursor: pointer;
+      margin-bottom: 25px;
+    }
 
-.star {
-  color: #cbd5e1;
-  margin-right: 12px;
-  cursor: pointer;
-  transition: transform 0.25s ease, color 0.3s ease;
-}
+    .star {
+      color: #d1d5db;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
 
-.star:hover {
-  transform: scale(1.18);
-}
+    .star:hover {
+      transform: scale(1.22);
+      color: #fde047;
+    }
 
-.star.selected {
-  color: #fbbf24;
-  text-shadow: 0 0 10px rgba(251,191,36,0.6);
-  animation: pop 0.3s ease;
-}
+    .star.selected {
+      color: #facc15;
+      text-shadow:
+        0 0 6px rgba(250,204,21,0.9),
+        0 0 14px rgba(250,204,21,0.75),
+        0 0 28px rgba(250,204,21,0.55);
+      transform: scale(1.22);
+      animation: pop 0.35s ease;
+    }
 
-#message {
-  margin-top: 30px;
-  font-size: 18px;
-  color: #475569;
-}
+    @keyframes pop {
+      0% { transform: scale(0.9); }
+      100% { transform: scale(1.22); }
+    }
 
-/* RIGHT IMAGE */
-.right {
-  width: 50%;
-  background-image:
-    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
-    url("assets/resort.jpg");
-  background-size: cover;
-  background-position: center;
-  animation: fadeIn 1s ease;
-}
+    .message {
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 15px;
+      color: #1f2937;
+      min-height: 24px;
+    }
 
-/* ANIMATIONS */
-@keyframes pop {
-  0% { transform: scale(0.85); }
-  100% { transform: scale(1); }
-}
+    /* RIGHT SIDE */
+    .right {
+      flex: 1;
+      background: url("images/resort.jpg") center/cover no-repeat;
+    }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+      .right {
+        height: 40vh;
+      }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
+      .left {
+        text-align: center;
+        align-items: center;
+      }
 
-  .right {
-    width: 100%;
-    height: 42vh;
-  }
-
-  .left {
-    width: 100%;
-    padding: 30px 20px;
-  }
-
-  .card {
-    padding: 35px 25px;
-    text-align: center;
-  }
-
-  .logo {
-    margin: 0 auto 20px;
-  }
-
-  .stars {
-    justify-content: center;
-    font-size: 48px;
-  }
-}
-</style>
+      .stars {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container">
 
-<div class="container">
-
-  <!-- LEFT CONTENT -->
-  <div class="left">
-    <div class="card">
-
-      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
+    <!-- LEFT -->
+    <div class="left">
+      <img src="images/logo.png" alt="Rivanta Resort Logo" class="logo">
 
       <h1>RIVANTA RESORT</h1>
+      <h2>How was your experience with us?</h2>
 
-      <div class="stars">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
+      <div class="stars" id="stars">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
       </div>
 
-      <div id="message"></div>
-
+      <div class="message" id="message"></div>
     </div>
+
+    <!-- RIGHT -->
+    <div class="right"></div>
+
   </div>
 
-  <!-- RIGHT IMAGE -->
-  <div class="right"></div>
+  <script>
+    const stars = document.querySelectorAll(".star");
+    const message = document.getElementById("message");
+    let locked = false;
 
-</div>
+    stars.forEach(star => {
+      star.addEventListener("click", () => {
+        if (locked) return;
 
-<script>
-const stars = document.querySelectorAll('.star');
-const message = document.getElementById('message');
-let locked = false;
+        const rating = parseInt(star.dataset.value);
 
-stars.forEach((star, index) => {
-  star.addEventListener('click', () => {
-    if (locked) return;
+        stars.forEach(s => {
+          const val = parseInt(s.dataset.value);
+          s.classList.toggle("selected", val <= rating);
+        });
 
-    locked = true;
-    const rating = index + 1;
+        if (rating >= 4) {
+          message.textContent = "Thank you! We’re glad you enjoyed your stay.";
+        } else {
+          message.textContent = "Thank you. We’ll work on improving your experience.";
+        }
 
-    stars.forEach((s, i) => {
-      if (i < rating) s.classList.add('selected');
+        locked = true;
+      });
     });
-
-    message.innerText =
-      rating >= 4
-        ? "Thank you for your wonderful experience with us."
-        : "Thank you. We’d love to hear how we can improve.";
-  });
-});
-</script>
-
+  </script>
 </body>
 </html>
