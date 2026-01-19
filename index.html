@@ -194,13 +194,17 @@ stars.forEach((star, index) => {
       if (i < rating) s.classList.add('selected');
     });
 
-    message.innerText =
-      rating >= 4
-        ? "Thank you for your wonderful experience with us."
-        : "Thank you. We’d love to hear how we can improve.";
+    if (rating >= 4) {
+      // 4-5 stars: show message only
+      message.innerText = "Thank you for your wonderful experience with us.";
+    } else {
+      // 1-3 stars: redirect to feedback page
+      window.location.href = "feedback.html";
+    }
   });
 });
 </script>
+
 
 </body>
 </html>
