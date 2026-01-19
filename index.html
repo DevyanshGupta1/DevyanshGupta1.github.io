@@ -1,10 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hotel Rating Test</title>
+  <title>Hotel Star Rating</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 { color: #333; }
+    .stars {
+      display: flex;
+      justify-content: center;
+      font-size: 50px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .star { padding: 5px; color: gray; }
+    .star.selected { color: gold; }
+    #message { font-size: 20px; margin-top: 30px; color: #555; }
+  </style>
 </head>
 <body>
-  <h1>It works!</h1>
-  <p>This website is live on GitHub Pages.</p>
+
+<h1>Rate Your Experience</h1>
+<p>Click the stars to give your rating:</p>
+
+<div class="stars">
+  <span class="star" data-value="1">&#9733;</span>
+  <span class="star" data-value="2">&#9733;</span>
+  <span class="star" data-value="3">&#9733;</span>
+  <span class="star" data-value="4">&#9733;</span>
+  <span class="star" data-value="5">&#9733;</span>
+</div>
+
+<div id="message"></div>
+
+<script>
+const stars = document.querySelectorAll('.star');
+const messageDiv = document.getElementById('message');
+
+stars.forEach(star => {
+  star.addEventListener('click', function() {
+    const rating = parseInt(this.getAttribute('data-value'));
+
+    // Highlight stars
+    stars.forEach(s => s.classList.remove('selected'));
+    for (let i = 0; i < rating; i++) {
+      stars[i].classList.add('selected');
+    }
+
+    // Show message based on rating
+    if (rating >= 4) {
+      messageDiv.innerText = "Thank you! We're glad you enjoyed your stay!";
+    } else {
+      messageDiv.innerText = "We're sorry your experience was not perfect. Please provide feedback.";
+    }
+  });
+});
+</script>
+
 </body>
 </html>
