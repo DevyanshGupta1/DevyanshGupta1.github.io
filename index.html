@@ -13,7 +13,8 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #e4e8ec);
+  background: linear-gradient(135deg, #1f2933, #111827);
+  color: #e5e7eb;
 }
 
 /* MAIN LAYOUT */
@@ -22,49 +23,51 @@ body {
   min-height: 100vh;
 }
 
-/* LEFT CONTENT */
+/* LEFT SIDE */
 .left {
   width: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 40px;
 }
 
-/* CONTENT CARD */
+/* CARD */
 .card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 45px;
+  background: linear-gradient(180deg, #243447, #1b2635);
+  border-radius: 18px;
+  padding: 50px 45px;
   width: 100%;
-  max-width: 460px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  animation: fadeUp 0.8s ease;
+  max-width: 480px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+  animation: slideUp 0.8s ease;
 }
 
+/* LOGO */
 .logo {
-  width: 140px;
-  margin-bottom: 25px;
+  width: 150px;
+  margin-bottom: 30px;
 }
 
+/* HEADING */
 h1 {
-  margin: 0 0 35px 0;
-  font-size: 36px;
-  letter-spacing: 4px;
-  color: #1f2a44;
+  font-size: 38px;
+  letter-spacing: 5px;
+  margin-bottom: 40px;
+  color: #f9fafb;
 }
 
 /* STARS */
 .stars {
   display: flex;
-  font-size: 52px;
+  font-size: 56px;
 }
 
 .star {
-  color: #d3d3d3;
-  margin-right: 10px;
+  color: #475569;
+  margin-right: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.3s ease;
+  transition: color 0.35s ease, transform 0.2s ease;
 }
 
 .star:hover {
@@ -72,21 +75,23 @@ h1 {
 }
 
 .star.selected {
-  color: #f4c430;
+  color: #facc15;
+  text-shadow: 0 0 12px rgba(250,204,21,0.6);
   animation: pop 0.3s ease;
 }
 
+/* MESSAGE */
 #message {
-  margin-top: 30px;
+  margin-top: 35px;
   font-size: 18px;
-  color: #555;
+  color: #cbd5f5;
 }
 
 /* RIGHT IMAGE */
 .right {
   width: 50%;
   background-image:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)),
     url("assets/resort.jpg");
   background-size: cover;
   background-position: center;
@@ -95,12 +100,12 @@ h1 {
 
 /* ANIMATIONS */
 @keyframes pop {
-  0% { transform: scale(0.8); }
+  0% { transform: scale(0.85); }
   100% { transform: scale(1); }
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -122,21 +127,21 @@ h1 {
 
   .left {
     width: 100%;
-    padding: 30px 20px;
+    padding: 25px;
   }
 
   .card {
-    padding: 35px 25px;
+    padding: 40px 30px;
     text-align: center;
   }
 
   .logo {
-    margin: 0 auto 20px;
+    margin: 0 auto 25px;
   }
 
   .stars {
     justify-content: center;
-    font-size: 46px;
+    font-size: 48px;
   }
 }
 </style>
@@ -150,7 +155,7 @@ h1 {
   <div class="left">
     <div class="card">
 
-      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
+      <img src="assets/logo.png" alt="Rivanta Resort Logo" class="logo">
 
       <h1>RIVANTA RESORT</h1>
 
@@ -190,8 +195,8 @@ stars.forEach((star, index) => {
 
     message.innerText =
       rating >= 4
-      ? "Thank you for your wonderful experience with us."
-      : "Thank you. Your feedback helps us improve.";
+        ? "Thank you for your wonderful experience with us."
+        : "Thank you. Your feedback helps us improve our service.";
   });
 });
 </script>
