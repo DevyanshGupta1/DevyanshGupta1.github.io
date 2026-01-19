@@ -16,14 +16,22 @@ body {
   background: linear-gradient(135deg, #eef5ff, #fdfefe);
 }
 
+/* MAIN LAYOUT */
 .container {
+  display: flex;
   min-height: 100vh;
+}
+
+/* LEFT FORM AREA */
+.left {
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 40px;
 }
 
+/* FORM CARD */
 .form-card {
   background: #ffffff;
   width: 100%;
@@ -33,6 +41,11 @@ body {
   box-shadow: 0 22px 45px rgba(0,0,0,0.12);
   border-top: 6px solid #3b82f6;
   animation: fadeUp 0.8s ease;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 20px;
 }
 
 h1 {
@@ -97,20 +110,51 @@ button:hover {
   box-shadow: 0 10px 22px rgba(59,130,246,0.35);
 }
 
-/* ANIMATION */
+/* RIGHT IMAGE */
+.right {
+  width: 50%;
+  background-image:
+    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
+    url("assets/resort.jpg");
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 1s ease;
+}
+
+/* ANIMATIONS */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(25px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* MOBILE */
-@media (max-width: 480px) {
-  .form-card {
-    padding: 30px 25px;
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
   }
 
-  h1 {
-    font-size: 26px;
+  .right {
+    width: 100%;
+    height: 40vh;
+  }
+
+  .left {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .form-card {
+    padding: 30px 25px;
+    text-align: center;
+  }
+
+  .logo {
+    margin: 0 auto 20px;
   }
 }
 </style>
@@ -119,34 +163,44 @@ button:hover {
 <body>
 
 <div class="container">
-  <div class="form-card">
 
-    <h1>We Value Your Feedback</h1>
-    <p>Please tell us how we can improve your experience at Rivanta Resort.</p>
+  <!-- LEFT FORM -->
+  <div class="left">
+    <div class="form-card">
 
-    <form id="feedbackForm">
-      <label for="name">Name</label>
-      <input type="text" id="name" required>
+      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+      <h1>We Value Your Feedback</h1>
+      <p>Please tell us how we can improve your experience at Rivanta Resort.</p>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" required>
+      <form id="feedbackForm">
+        <label>Name</label>
+        <input type="text" required>
 
-      <label for="feedback">Your Feedback</label>
-      <textarea id="feedback" required></textarea>
+        <label>Email</label>
+        <input type="email" required>
 
-      <button type="submit">Submit Feedback</button>
-    </form>
+        <label>Phone Number</label>
+        <input type="tel" required>
 
+        <label>Your Feedback</label>
+        <textarea required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+
+    </div>
   </div>
+
+  <!-- RIGHT IMAGE -->
+  <div class="right"></div>
+
 </div>
 
 <script>
 document.getElementById("feedbackForm").addEventListener("submit", function(e) {
   e.preventDefault();
-  alert("Thank you for your feedback. Our team will get in touch with you shortly.");
+  alert("Thank you for your feedback. Our team will reach out shortly.");
   this.reset();
 });
 </script>
