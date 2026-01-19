@@ -2,143 +2,143 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rivanta Resort Rating</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 * {
   box-sizing: border-box;
-  font-family: "Poppins", Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  background: #eef1f6;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #eef5ff, #fdfefe);
 }
 
 /* MAIN LAYOUT */
-.main-box {
+.container {
   display: flex;
   min-height: 100vh;
 }
 
-/* LEFT BOX */
-.left-box {
-  flex: 1;
-  background: #ffffff;
-  padding: 50px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: 6px 0 25px rgba(0,0,0,0.08);
-}
-
-.logo-box {
-  width: 150px;
-  height: 70px;
-  background: linear-gradient(135deg,#0f766e,#22c55e);
-  border-radius: 12px;
+/* LEFT CONTENT */
+.left {
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
-  margin-bottom: 25px;
+  padding: 40px;
+}
+
+/* CARD */
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 45px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  border-top: 6px solid #3b82f6; /* Accent color */
+  animation: fadeUp 0.8s ease;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 36px;
-  margin: 10px 0;
-  color: #1f2937;
-}
-
-h2 {
-  font-size: 20px;
-  margin-bottom: 30px;
-  color: #4b5563;
-}
-
-/* RATING CARD */
-.rating-box {
-  background: #f9fafb;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 18px 35px rgba(0,0,0,0.1);
-  width: fit-content;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: #1e40af;
 }
 
 /* STARS */
 .stars {
   display: flex;
-  gap: 14px;
-  font-size: 50px;
+  font-size: 54px;
 }
 
 .star {
+  color: #cbd5e1;
+  margin-right: 12px;
   cursor: pointer;
-  color: #d1d5db;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, color 0.3s ease;
 }
 
 .star:hover {
-  transform: scale(1.2);
+  transform: scale(1.18);
 }
 
-/* STRONG GLOW */
 .star.selected {
-  color: #facc15;
-  text-shadow:
-    0 0 6px rgba(250,204,21,0.95),
-    0 0 16px rgba(250,204,21,0.85),
-    0 0 32px rgba(250,204,21,0.65);
-  transform: scale(1.22);
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251,191,36,0.6);
+  animation: pop 0.3s ease;
 }
 
-/* MESSAGE */
-.message {
-  margin-top: 22px;
+#message {
+  margin-top: 30px;
   font-size: 18px;
-  font-weight: 500;
-  color: #111827;
-  min-height: 26px;
+  color: #475569;
 }
 
-/* RIGHT BOX (GRAPHICS) */
-.right-box {
-  flex: 1;
-  background:
-    linear-gradient(135deg, rgba(15,118,110,0.9), rgba(34,197,94,0.85)),
-    radial-gradient(circle at top right, rgba(255,255,255,0.25), transparent 60%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* RIGHT IMAGE */
+.right {
+  width: 50%;
+  background-image:
+    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
+    url("assets/resort.jpg");
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 1s ease;
 }
 
-.right-box::after {
-  content: "WELCOME";
-  font-size: 64px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.15);
-  letter-spacing: 6px;
+/* ANIMATIONS */
+@keyframes pop {
+  0% { transform: scale(0.85); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* MOBILE */
-@media (max-width: 900px) {
-  .main-box {
+@media (max-width: 768px) {
+  .container {
     flex-direction: column;
   }
 
-  .right-box {
-    height: 35vh;
+  .right {
+    width: 100%;
+    height: 42vh;
   }
 
-  .left-box {
-    align-items: center;
+  .left {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .card {
+    padding: 35px 25px;
     text-align: center;
   }
 
-  .rating-box {
-    margin: auto;
+  .logo {
+    margin: 0 auto 20px;
+  }
+
+  .stars {
+    justify-content: center;
+    font-size: 48px;
   }
 }
 </style>
@@ -146,55 +146,54 @@ h2 {
 
 <body>
 
-<div class="main-box">
+<div class="container">
 
-  <!-- LEFT -->
-  <div class="left-box">
+  <!-- LEFT CONTENT -->
+  <div class="left">
+    <div class="card">
 
-    <div class="logo-box">RIVANTA</div>
+      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
-    <h1>RIVANTA RESORT</h1>
-    <h2>How was your experience with us?</h2>
+      <h1>RIVANTA RESORT</h1>
 
-    <div class="rating-box">
       <div class="stars">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
       </div>
-      <div class="message" id="message"></div>
-    </div>
 
+      <div id="message"></div>
+
+    </div>
   </div>
 
-  <!-- RIGHT -->
-  <div class="right-box"></div>
+  <!-- RIGHT IMAGE -->
+  <div class="right"></div>
 
 </div>
 
 <script>
-const stars = document.querySelectorAll(".star");
-const message = document.getElementById("message");
+const stars = document.querySelectorAll('.star');
+const message = document.getElementById('message');
 let locked = false;
 
-stars.forEach(star => {
-  star.addEventListener("click", () => {
+stars.forEach((star, index) => {
+  star.addEventListener('click', () => {
     if (locked) return;
 
-    const rating = Number(star.dataset.value);
+    locked = true;
+    const rating = index + 1;
 
-    stars.forEach(s => {
-      s.classList.toggle("selected", Number(s.dataset.value) <= rating);
+    stars.forEach((s, i) => {
+      if (i < rating) s.classList.add('selected');
     });
 
-    message.textContent =
+    message.innerText =
       rating >= 4
-        ? "Thank you! We’re glad you enjoyed your stay."
-        : "Thank you. We’ll use your feedback to improve.";
-
-    locked = true;
+        ? "Thank you for your wonderful experience with us."
+        : "Thank you. We’d love to hear how we can improve.";
   });
 });
 </script>
