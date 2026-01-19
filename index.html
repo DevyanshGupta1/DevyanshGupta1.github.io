@@ -39,7 +39,7 @@ body {
   width: 100%;
   max-width: 480px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  border-top: 6px solid #3b82f6; /* Accent color */
+  border-top: 6px solid #3b82f6;
   animation: fadeUp 0.8s ease;
 }
 
@@ -65,17 +65,23 @@ h1 {
   color: #cbd5e1;
   margin-right: 12px;
   cursor: pointer;
-  transition: transform 0.25s ease, color 0.3s ease;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
+/* 🔧 UPDATED HOVER EFFECT (ONLY CHANGE) */
 .star:hover {
-  transform: scale(1.18);
+  transform: scale(1.22);
+  color: #fde047;
 }
 
+/* 🔧 UPDATED GLOW (ONLY CHANGE) */
 .star.selected {
-  color: #fbbf24;
-  text-shadow: 0 0 10px rgba(251,191,36,0.6);
-  animation: pop 0.3s ease;
+  color: #facc15;
+  text-shadow:
+    0 0 6px rgba(250,204,21,0.95),
+    0 0 16px rgba(250,204,21,0.8),
+    0 0 30px rgba(250,204,21,0.6);
+  animation: pop 0.35s ease;
 }
 
 #message {
@@ -148,7 +154,6 @@ h1 {
 
 <div class="container">
 
-  <!-- LEFT CONTENT -->
   <div class="left">
     <div class="card">
 
@@ -169,7 +174,6 @@ h1 {
     </div>
   </div>
 
-  <!-- RIGHT IMAGE -->
   <div class="right"></div>
 
 </div>
