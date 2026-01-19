@@ -13,7 +13,7 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #e4e8ec);
+  background: linear-gradient(135deg, #eef5ff, #fdfefe);
 }
 
 /* MAIN LAYOUT */
@@ -34,59 +34,61 @@ body {
 /* CARD */
 .card {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 45px;
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  border-top: 6px solid #3b82f6; /* Accent color */
   animation: fadeUp 0.8s ease;
 }
 
 .logo {
   width: 140px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  margin: 0 0 35px 0;
-  font-size: 36px;
+  margin: 0 0 30px 0;
+  font-size: 38px;
   letter-spacing: 4px;
-  color: #1f2a44;
+  color: #1e40af;
 }
 
 /* STARS */
 .stars {
   display: flex;
-  font-size: 52px;
+  font-size: 54px;
 }
 
 .star {
-  color: #d3d3d3;
-  margin-right: 10px;
+  color: #cbd5e1;
+  margin-right: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.3s ease;
+  transition: transform 0.25s ease, color 0.3s ease;
 }
 
 .star:hover {
-  transform: scale(1.15);
+  transform: scale(1.18);
 }
 
 .star.selected {
-  color: #f4c430;
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251,191,36,0.6);
   animation: pop 0.3s ease;
 }
 
 #message {
   margin-top: 30px;
   font-size: 18px;
-  color: #555;
+  color: #475569;
 }
 
 /* RIGHT IMAGE */
 .right {
   width: 50%;
   background-image:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
     url("assets/resort.jpg");
   background-size: cover;
   background-position: center;
@@ -95,7 +97,7 @@ h1 {
 
 /* ANIMATIONS */
 @keyframes pop {
-  0% { transform: scale(0.8); }
+  0% { transform: scale(0.85); }
   100% { transform: scale(1); }
 }
 
@@ -136,7 +138,7 @@ h1 {
 
   .stars {
     justify-content: center;
-    font-size: 46px;
+    font-size: 48px;
   }
 }
 </style>
@@ -191,7 +193,7 @@ stars.forEach((star, index) => {
     message.innerText =
       rating >= 4
         ? "Thank you for your wonderful experience with us."
-        : "Thank you. Your feedback helps us improve.";
+        : "Thank you. We’d love to hear how we can improve.";
   });
 });
 </script>
