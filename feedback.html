@@ -2,208 +2,71 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rivanta Resort | Feedback</title>
+<title>Rivanta Resort Feedback</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, #eef5ff, #fdfefe);
-}
-
-/* MAIN LAYOUT */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* LEFT FORM AREA */
-.left {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-}
-
-/* FORM CARD */
-.form-card {
-  background: #ffffff;
-  width: 100%;
-  max-width: 520px;
-  padding: 40px 45px;
-  border-radius: 18px;
-  box-shadow: 0 22px 45px rgba(0,0,0,0.12);
-  border-top: 6px solid #3b82f6;
-  animation: fadeUp 0.8s ease;
-}
-
-.logo {
-  width: 140px;
-  margin-bottom: 20px;
-}
-
-h1 {
-  margin: 0 0 10px;
-  font-size: 30px;
-  letter-spacing: 2px;
-  color: #1e40af;
-}
-
-p {
-  margin-bottom: 30px;
-  color: #475569;
-  font-size: 16px;
-}
-
-/* INPUTS */
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #334155;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 22px;
-  border-radius: 10px;
-  border: 1.8px solid #cbd5e1;
-  font-size: 15px;
-  transition: border 0.25s ease, box-shadow 0.25s ease;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
-}
-
-textarea {
-  resize: vertical;
-  min-height: 110px;
-}
-
-/* BUTTON */
-button {
-  width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  color: white;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(59,130,246,0.35);
-}
-
-/* RIGHT IMAGE */
-.right {
-  width: 50%;
-  background-image:
-    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
-    url("assets/resort.jpg");
-  background-size: cover;
-  background-position: center;
-  animation: fadeIn 1s ease;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .right {
-    width: 100%;
-    height: 40vh;
-  }
-
-  .left {
-    width: 100%;
-    padding: 30px 20px;
-  }
-
-  .form-card {
-    padding: 30px 25px;
-    text-align: center;
-  }
-
-  .logo {
-    margin: 0 auto 20px;
-  }
-}
+* { box-sizing: border-box; }
+body { margin:0; font-family: "Segoe UI", sans-serif; background: linear-gradient(135deg,#eef5ff,#fdfefe);}
+.container { display:flex; min-height:100vh; }
+.left { width:50%; display:flex; align-items:center; justify-content:center; padding:40px; }
+.form-card { background:#fff; width:100%; max-width:520px; padding:40px 45px; border-radius:18px; box-shadow:0 22px 45px rgba(0,0,0,0.12); border-top:6px solid #3b82f6; }
+.logo { width:140px; margin-bottom:20px; }
+h1 { margin:0 0 10px; font-size:30px; color:#1e40af; letter-spacing:2px; }
+label { display:block; margin-bottom:6px; font-weight:600; color:#334155; }
+input, textarea { width:100%; padding:12px 14px; margin-bottom:22px; border-radius:10px; border:1.8px solid #cbd5e1; font-size:15px; }
+textarea { resize:vertical; min-height:110px; }
+button { width:100%; padding:14px; font-size:16px; font-weight:600; border:none; border-radius:12px; background:linear-gradient(135deg,#2563eb,#3b82f6); color:white; cursor:pointer; }
+button:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(59,130,246,0.35); }
+.right { width:50%; background-image: linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)), url("assets/resort.jpg"); background-size:cover; background-position:center; }
+@media(max-width:768px){.container{flex-direction:column;}.right{width:100%; height:40vh;}.left{width:100%;padding:30px 20px;}.form-card{text-align:center;}.logo{margin:0 auto 20px;}}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
-  <!-- LEFT FORM -->
   <div class="left">
     <div class="form-card">
-
-      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
-
+      <img src="assets/logo.png" class="logo" alt="Logo">
       <h1>We Value Your Feedback</h1>
-      <p>Please tell us how we can improve your experience at Rivanta Resort.</p>
-
-      <form id="feedbackForm">
+      <form id="feedbackForm" method="POST" action="save_feedback.php">
         <label>Name</label>
-        <input type="text" required>
-
+        <input type="text" name="name" required>
         <label>Email</label>
-        <input type="email" required>
-
-        <label>Phone Number</label>
-        <input type="tel" required>
-
-        <label>Your Feedback</label>
-        <textarea required></textarea>
-
+        <input type="email" name="email" required>
+        <label>Phone</label>
+        <input type="tel" name="phone" required>
+        <label>Feedback</label>
+        <textarea name="feedback" required></textarea>
         <button type="submit">Submit Feedback</button>
       </form>
-
+      <div id="msg" style="margin-top:20px;color:green;"></div>
     </div>
   </div>
-
-  <!-- RIGHT IMAGE -->
   <div class="right"></div>
-
 </div>
 
 <script>
-document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  alert("Thank you for your feedback. Our team will reach out shortly.");
-  this.reset();
+const form = document.getElementById("feedbackForm");
+const msg = document.getElementById("msg");
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    fetch("save_feedback.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(res => {
+        if(res.trim() === "success"){
+            msg.innerText = "Thank you! Feedback saved.";
+            form.reset();
+        } else {
+            msg.innerText = "Error saving feedback.";
+        }
+    })
+    .catch(err => { msg.innerText="Error connecting to server."; });
 });
 </script>
-
 </body>
 </html>
