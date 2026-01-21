@@ -2,66 +2,83 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rate Your Experience</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivanta Resort Rating</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  height: 100vh;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #f6f8fb, #e9edf3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #eef5ff, #fdfefe);
 }
 
+/* MAIN LAYOUT */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* LEFT CONTENT */
+.left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* CARD */
 .card {
   background: #ffffff;
-  padding: 40px 30px;
-  border-radius: 16px;
-  width: 320px;
+  border-radius: 18px;
+  padding: 45px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  border-top: 6px solid #3b82f6; /* Accent color */
+  animation: fadeUp 0.8s ease;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
-.card h1 {
-  margin-bottom: 10px;
-  font-size: 24px;
-  color: #222;
+.logo {
+  width: 140px;
+  margin-bottom: 20px;
 }
 
-.card p {
-  margin-bottom: 25px;
-  color: #666;
-  font-size: 14px;
+h1 {
+  margin: 0 0 20px 0;
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: #1e40af;
 }
 
+/* STARS */
 .stars {
   display: flex;
   justify-content: center;
-  flex-direction: row-reverse;
+  font-size: 54px;
   margin-bottom: 30px;
 }
 
-.stars input {
-  display: none;
-}
-
-.stars label {
-  font-size: 38px;
-  color: #dcdcdc;
+.star {
+  color: #cbd5e1;
+  margin-right: 12px;
   cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s ease;
-  padding: 0 4px;
+  transition: transform 0.25s ease, color 0.3s ease;
 }
 
-.stars input:checked ~ label,
-.stars label:hover,
-.stars label:hover ~ label {
-  color: #f5b301;
-  transform: scale(1.15);
+.star:hover {
+  transform: scale(1.18);
+}
+
+.star.selected {
+  color: #fbbf24;
+  text-shadow: 0 0 15px rgba(251,191,36,0.8);
+  animation: pop 0.3s ease;
 }
 
 button {
@@ -80,51 +97,122 @@ button:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 25px rgba(0,123,255,0.55);
 }
+
+/* RIGHT IMAGE */
+.right {
+  width: 50%;
+  background-image:
+    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
+    url("assets/resort.jpg"); /* replace with your resort image */
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 1s ease;
+}
+
+/* ANIMATIONS */
+@keyframes pop {
+  0% { transform: scale(0.85); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .right {
+    width: 100%;
+    height: 42vh;
+  }
+
+  .left {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .card {
+    padding: 35px 25px;
+    text-align: center;
+  }
+
+  .logo {
+    margin: 0 auto 20px;
+  }
+
+  .stars {
+    font-size: 48px;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Rate Your Stay</h1>
-  <p>Your feedback helps us improve</p>
+<div class="container">
 
-  <div class="stars">
-    <input type="radio" name="rating" id="star5" value="5">
-    <label for="star5">★</label>
+  <!-- LEFT CONTENT -->
+  <div class="left">
+    <div class="card">
 
-    <input type="radio" name="rating" id="star4" value="4">
-    <label for="star4">★</label>
+      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
-    <input type="radio" name="rating" id="star3" value="3">
-    <label for="star3">★</label>
+      <h1>RIVANTA RESORT</h1>
 
-    <input type="radio" name="rating" id="star2" value="2">
-    <label for="star2">★</label>
+      <div class="stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
 
-    <input type="radio" name="rating" id="star1" value="1">
-    <label for="star1">★</label>
+      <button onclick="submitRating()">Submit Rating</button>
+
+    </div>
   </div>
 
-  <button onclick="submitRating()">Submit Rating</button>
+  <!-- RIGHT IMAGE -->
+  <div class="right"></div>
+
 </div>
 
 <script>
-function submitRating() {
-  const selected = document.querySelector('input[name="rating"]:checked');
+const stars = document.querySelectorAll('.star');
+let selectedRating = 0;
 
-  if (!selected) {
+// Highlight on click
+stars.forEach((star, index) => {
+  star.addEventListener('click', () => {
+    selectedRating = parseInt(star.getAttribute('data-value'));
+    stars.forEach((s, i) => {
+      if (i < selectedRating) s.classList.add('selected');
+      else s.classList.remove('selected');
+    });
+  });
+});
+
+function submitRating() {
+  if (selectedRating === 0) {
     alert("Please select a rating");
     return;
   }
 
-  const rating = parseInt(selected.value);
-
-  if (rating <= 3) {
-    // 1,2,3 stars → feedback form
+  if (selectedRating <= 3) {
+    // Feedback form for low ratings
     window.location.href = "feedback.html";
   } else {
-    // 4,5 stars → Google Write Review directly
+    // Google Write Review directly for 4–5 stars
     const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
     const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
     window.location.href = googleReviewURL;
