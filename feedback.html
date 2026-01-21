@@ -35,11 +35,12 @@ body {
   max-width: 480px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
   border-top: 6px solid #ef4444;
+  text-align: center;
 }
 
 h2 {
-  margin-bottom: 20px;
   color: #b91c1c;
+  margin-bottom: 25px;
 }
 
 input, textarea {
@@ -47,7 +48,7 @@ input, textarea {
   padding: 12px;
   margin-top: 15px;
   font-size: 15px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #cbd5e1;
 }
 
@@ -56,11 +57,27 @@ button {
   padding: 14px;
   width: 100%;
   font-size: 16px;
-  border-radius: 10px;
+  font-weight: 600;
+  border-radius: 14px;
   border: none;
-  background: #ef4444;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
   color: white;
   cursor: pointer;
+  box-shadow: 0 12px 30px rgba(239,68,68,0.35);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(239,68,68,0.5);
+}
+
+.thankyou {
+  display: none;
+  font-size: 28px;
+  font-weight: 700;
+  color: #16a34a;
+  margin-top: 40px;
 }
 
 .right {
@@ -95,7 +112,9 @@ button {
         <button type="submit">Submit Feedback</button>
       </form>
 
-      <p id="status"></p>
+      <div class="thankyou" id="thankyouMsg">
+        Thank you for your feedback 🙏
+      </div>
 
     </div>
   </div>
@@ -112,8 +131,8 @@ document.getElementById("feedbackForm").onsubmit = function(e) {
   e.preventDefault();
 
   const data = {
-    name: document.getElementById("name").value,
-    feedback: document.getElementById("feedback").value,
+    name: name.value,
+    feedback: feedback.value,
     rating: rating
   };
 
@@ -121,10 +140,8 @@ document.getElementById("feedbackForm").onsubmit = function(e) {
     method: "POST",
     body: JSON.stringify(data)
   }).then(() => {
-    document.getElementById("status").innerText =
-      "Feedback submitted. Thank you.";
-    document.querySelectorAll("input, textarea, button")
-      .forEach(el => el.disabled = true);
+    feedbackForm.style.display = "none";
+    document.getElementById("thankyouMsg").style.display = "block";
   });
 };
 </script>
