@@ -50,10 +50,16 @@ body {
 }
 
 h1 {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   font-size: 38px;
   letter-spacing: 4px;
   color: #1e40af;
+}
+
+p {
+  font-size: 18px;
+  color: #475569;
+  margin-bottom: 30px;
 }
 
 /* STARS */
@@ -179,6 +185,7 @@ button:disabled {
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
       <h1>RIVANTA RESORT</h1>
+      <p>Rate your stay with us</p>
 
       <div class="stars">
         <span class="star" data-value="1">&#9733;</span>
@@ -187,6 +194,8 @@ button:disabled {
         <span class="star" data-value="4">&#9733;</span>
         <span class="star" data-value="5">&#9733;</span>
       </div>
+
+      <p id="message"></p>
 
       <button id="submitBtn" onclick="submitRating()" disabled>Submit Rating</button>
       <button id="changeBtn" onclick="changeRating()" style="display:none;">Change Rating</button>
@@ -203,11 +212,11 @@ button:disabled {
 const stars = document.querySelectorAll('.star');
 const submitBtn = document.getElementById('submitBtn');
 const changeBtn = document.getElementById('changeBtn');
+const message = document.getElementById('message');
 let selectedRating = 0;
 let locked = false;
 
-// Star click
-stars.forEach((star, index) => {
+stars.forEach((star) => {
   star.addEventListener('click', () => {
     if (locked) return;
 
@@ -218,6 +227,13 @@ stars.forEach((star, index) => {
       if (i < selectedRating) s.classList.add('selected');
       else s.classList.remove('selected');
     });
+
+    // Dynamic message
+    if(selectedRating >= 4) {
+      message.innerText = "Thank you for your wonderful experience with us!";
+    } else {
+      message.innerText = "Thank you. We’d love to hear how we can improve.";
+    }
   });
 });
 
@@ -228,14 +244,16 @@ function submitRating() {
   submitBtn.style.display = "none";
   changeBtn.style.display = "block";
 
-  // Small star pop animation before redirect
+  // Star pop animation
   stars.forEach(star => star.style.transform = "scale(1.2)");
   setTimeout(() => {
     stars.forEach(star => star.style.transform = "");
-    
+
     if (selectedRating <= 3) {
+      // redirect to feedback form
       window.location.href = "feedback.html";
     } else {
+      // redirect to Google write review
       const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
       const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
       window.location.href = googleReviewURL;
@@ -250,6 +268,7 @@ function changeRating() {
   submitBtn.style.display = "block";
   changeBtn.style.display = "none";
   submitBtn.disabled = true;
+  message.innerText = "";
 }
 </script>
 
