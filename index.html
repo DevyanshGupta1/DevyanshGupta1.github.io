@@ -35,6 +35,7 @@ body {
   max-width: 480px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
   border-top: 6px solid #3b82f6;
+  text-align: center;
 }
 
 .logo {
@@ -43,7 +44,7 @@ body {
 }
 
 h1 {
-  margin: 0 0 30px 0;
+  margin-bottom: 30px;
   font-size: 38px;
   letter-spacing: 4px;
   color: #1e40af;
@@ -51,41 +52,63 @@ h1 {
 
 .stars {
   display: flex;
+  justify-content: center;
   font-size: 54px;
 }
 
 .star {
   color: #cbd5e1;
-  margin-right: 12px;
+  margin: 0 6px;
   cursor: pointer;
-  transition: transform 0.25s, color 0.3s;
+  transition: transform 0.25s ease, color 0.3s ease;
 }
 
-.star:hover { transform: scale(1.15); }
+.star:hover { transform: scale(1.18); }
 
 .star.selected {
   color: #fbbf24;
-  text-shadow: 0 0 16px rgba(251,191,36,0.9);
+  text-shadow: 0 0 18px rgba(251,191,36,0.95);
+}
+
+/* BUTTONS */
+.button-wrap {
+  margin-top: 30px;
 }
 
 button {
-  margin-top: 25px;
-  padding: 14px 28px;
+  padding: 14px 34px;
   font-size: 16px;
-  border-radius: 12px;
+  font-weight: 600;
+  border-radius: 14px;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+#submitBtn {
   background: linear-gradient(135deg, #2563eb, #3b82f6);
   color: white;
-  cursor: pointer;
+}
+
+#submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(37,99,235,0.35);
 }
 
 #changeBtn {
   background: #64748b;
-  margin-left: 10px;
+  color: white;
+  margin-left: 12px;
+}
+
+#changeBtn:hover {
+  background: #475569;
+  transform: translateY(-2px);
 }
 
 #message {
-  margin-top: 25px;
+  margin-top: 30px;
   font-size: 18px;
   color: #475569;
 }
@@ -103,7 +126,6 @@ button {
   .container { flex-direction: column; }
   .left, .right { width: 100%; }
   .right { height: 40vh; }
-  .stars { justify-content: center; }
 }
 </style>
 </head>
@@ -116,19 +138,20 @@ button {
     <div class="card">
 
       <img src="assets/logo.png" class="logo" alt="Logo">
-
       <h1>RIVANTA RESORT</h1>
 
       <div class="stars">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
       </div>
 
-      <button id="submitBtn">Submit Rating</button>
-      <button id="changeBtn" style="display:none;">Change Rating</button>
+      <div class="button-wrap">
+        <button id="submitBtn">Submit Rating</button>
+        <button id="changeBtn" style="display:none;">Change Rating</button>
+      </div>
 
       <div id="message"></div>
 
