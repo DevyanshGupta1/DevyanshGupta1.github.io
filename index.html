@@ -6,61 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-* { box-sizing: border-box; }
-
 body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #eef5ff, #fdfefe);
-}
-
-/* LAYOUT */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
-.left {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
   padding: 40px;
 }
 
-.card {
-  background: white;
-  border-radius: 18px;
-  padding: 45px;
-  width: 100%;
-  max-width: 480px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  border-top: 6px solid #2563eb;
-}
-
-.logo {
-  width: 140px;
-  margin-bottom: 20px;
-}
-
-h1 {
-  margin: 0 0 30px 0;
-  font-size: 34px;
-  letter-spacing: 4px;
-  color: #1e40af;
-}
-
-/* STARS */
-.stars {
-  display: flex;
-  font-size: 54px;
-}
-
 .star {
-  color: #cbd5e1;
-  margin-right: 12px;
+  font-size: 45px;
   cursor: pointer;
-  transition: transform 0.25s ease, color 0.3s ease;
+  color: #ccc;
+  transition: transform 0.2s, color 0.2s;
 }
 
 .star:hover {
@@ -68,128 +24,81 @@ h1 {
 }
 
 .star.selected {
-  color: #fbbf24;
-  text-shadow: 0 0 18px rgba(251,191,36,0.9);
+  color: gold;
+  text-shadow: 0 0 12px gold;
 }
 
-/* SUBMIT BUTTON */
-#submitRating {
-  margin-top: 30px;
-  padding: 14px;
-  width: 100%;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  color: white;
-  cursor: pointer;
-  opacity: 0.6;
-}
-
-#submitRating.enabled {
-  opacity: 1;
-}
-
-#submitRating:disabled {
-  cursor: not-allowed;
-}
-
-#message {
+button {
   margin-top: 25px;
-  font-size: 18px;
-  color: #475569;
-}
-
-/* IMAGE SIDE */
-.right {
-  width: 50%;
-  background:
-    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
-    url("assets/resort.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .container { flex-direction: column; }
-  .left, .right { width: 100%; }
-  .right { height: 40vh; }
-  .stars { justify-content: center; }
-  .card { text-align: center; }
-  .logo { margin: 0 auto 20px; }
+  padding: 10px 22px;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h1>RIVANTA RESORT</h1>
+<p>Please rate your experience</p>
 
-  <div class="left">
-    <div class="card">
-
-      <img src="assets/logo.png" class="logo" alt="Logo">
-
-      <h1>RIVANTA RESORT</h1>
-
-      <div class="stars">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-      </div>
-
-      <button id="submitRating" disabled>Submit Rating</button>
-
-      <div id="message"></div>
-
-    </div>
-  </div>
-
-  <div class="right"></div>
-
+<div id="stars">
+  <span class="star" data-val="1">★</span>
+  <span class="star" data-val="2">★</span>
+  <span class="star" data-val="3">★</span>
+  <span class="star" data-val="4">★</span>
+  <span class="star" data-val="5">★</span>
 </div>
 
-<script>
-const stars = document.querySelectorAll('.star');
-const submitBtn = document.getElementById('submitRating');
-const message = document.getElementById('message');
+<br>
 
-let selectedRating = 0;
+<button id="submitBtn">Submit Rating</button>
+<button id="changeBtn" style="display:none;">Change Rating</button>
+
+<p id="message"></p>
+
+<script>
+let rating = 0;
 let locked = false;
 
-// STAR SELECTION
-stars.forEach((star, index) => {
-  star.addEventListener('click', () => {
+const stars = document.querySelectorAll('.star');
+const submitBtn = document.getElementById('submitBtn');
+const changeBtn = document.getElementById('changeBtn');
+const message = document.getElementById('message');
+
+stars.forEach(star => {
+  star.onclick = () => {
     if (locked) return;
-
-    selectedRating = index + 1;
-
-    stars.forEach((s, i) => {
-      s.classList.toggle('selected', i < selectedRating);
-    });
-
-    submitBtn.disabled = false;
-    submitBtn.classList.add('enabled');
-  });
+    rating = star.dataset.val;
+    stars.forEach(s =>
+      s.classList.toggle('selected', s.dataset.val <= rating)
+    );
+  };
 });
 
-// SUBMIT RATING
-submitBtn.addEventListener('click', () => {
-  if (locked || selectedRating === 0) return;
+submitBtn.onclick = () => {
+  if (rating === 0) {
+    alert("Please select a rating");
+    return;
+  }
 
   locked = true;
-  submitBtn.disabled = true;
+  submitBtn.style.display = "none";
+  changeBtn.style.display = "inline";
 
-  if (selectedRating >= 4) {
-    message.innerText = "Thank you for your wonderful experience with us.";
+  if (rating <= 3) {
+    window.location.href = "feedback.html?rating=" + rating;
   } else {
-    window.location.href = `feedback.html?rating=${selectedRating}`;
+    message.innerText = "Thank you for your wonderful experience!";
   }
-});
+};
+
+changeBtn.onclick = () => {
+  locked = false;
+  submitBtn.style.display = "inline";
+  changeBtn.style.display = "none";
+  message.innerText = "";
+};
 </script>
 
 </body>
