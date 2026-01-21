@@ -39,7 +39,7 @@ body {
   width: 100%;
   max-width: 480px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  border-top: 6px solid #3b82f6; /* Accent color */
+  border-top: 6px solid #3b82f6;
   animation: fadeUp 0.8s ease;
   text-align: center;
 }
@@ -61,7 +61,7 @@ h1 {
   display: flex;
   justify-content: center;
   font-size: 54px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .star {
@@ -81,6 +81,7 @@ h1 {
   animation: pop 0.3s ease;
 }
 
+/* BUTTONS */
 button {
   padding: 14px 34px;
   font-size: 16px;
@@ -91,6 +92,8 @@ button {
   color: #fff;
   box-shadow: 0 8px 20px rgba(0,123,255,0.45);
   transition: all 0.3s ease;
+  margin: 10px auto 0 auto;
+  display: block;
 }
 
 button:hover {
@@ -103,7 +106,7 @@ button:hover {
   width: 50%;
   background-image:
     linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
-    url("assets/resort.jpg"); /* replace with your resort image */
+    url("assets/resort.jpg");
   background-size: cover;
   background-position: center;
   animation: fadeIn 1s ease;
@@ -177,7 +180,8 @@ button:hover {
         <span class="star" data-value="5">&#9733;</span>
       </div>
 
-      <button onclick="submitRating()">Submit Rating</button>
+      <button id="submitBtn" onclick="submitRating()">Submit Rating</button>
+      <button id="changeBtn" onclick="changeRating()" style="display:none;">Change Rating</button>
 
     </div>
   </div>
@@ -189,11 +193,16 @@ button:hover {
 
 <script>
 const stars = document.querySelectorAll('.star');
+const submitBtn = document.getElementById('submitBtn');
+const changeBtn = document.getElementById('changeBtn');
 let selectedRating = 0;
+let locked = false;
 
-// Highlight on click
+// Star click
 stars.forEach((star, index) => {
   star.addEventListener('click', () => {
+    if (locked) return;
+
     selectedRating = parseInt(star.getAttribute('data-value'));
     stars.forEach((s, i) => {
       if (i < selectedRating) s.classList.add('selected');
@@ -208,15 +217,25 @@ function submitRating() {
     return;
   }
 
+  locked = true;
+  submitBtn.style.display = "none";
+  changeBtn.style.display = "block";
+
   if (selectedRating <= 3) {
-    // Feedback form for low ratings
     window.location.href = "feedback.html";
   } else {
-    // Google Write Review directly for 4–5 stars
     const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
     const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
     window.location.href = googleReviewURL;
   }
+}
+
+function changeRating() {
+  locked = false;
+  selectedRating = 0;
+  stars.forEach(s => s.classList.remove('selected'));
+  submitBtn.style.display = "block";
+  changeBtn.style.display = "none";
 }
 </script>
 
