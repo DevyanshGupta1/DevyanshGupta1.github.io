@@ -2,23 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Feedback</title>
+<title>Rivanta Resort Feedback</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background: linear-gradient(135deg, #eef5ff, #fdfefe);
 }
 
+/* MAIN LAYOUT */
 .container {
   display: flex;
   min-height: 100vh;
 }
 
+/* LEFT CONTENT */
 .left {
   width: 50%;
   display: flex;
@@ -27,72 +31,138 @@ body {
   padding: 40px;
 }
 
+/* CARD */
 .card {
-  background: white;
+  background: #ffffff;
   border-radius: 18px;
   padding: 45px;
   width: 100%;
   max-width: 480px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  border-top: 6px solid #ef4444;
+  border-top: 6px solid #3b82f6;
+  animation: fadeUp 0.8s ease;
   text-align: center;
 }
 
-h2 {
-  color: #b91c1c;
-  margin-bottom: 25px;
+.logo {
+  width: 140px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0 0 20px 0;
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: #1e40af;
+}
+
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 input, textarea {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  font-size: 15px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-}
-
-button {
-  margin-top: 25px;
-  padding: 14px;
-  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
   font-size: 16px;
-  font-weight: 600;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 12px 30px rgba(239,68,68,0.35);
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  outline: none;
   transition: all 0.3s ease;
 }
 
-button:hover {
+input:focus, textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59,130,246,0.3);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* BUTTON */
+button {
+  padding: 14px 34px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #007bff, #0056d2);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,123,255,0.45);
+  transition: all 0.3s ease;
+  margin: 10px auto 0 auto;
+  display: block;
+}
+
+button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(239,68,68,0.5);
+  box-shadow: 0 12px 25px rgba(0,123,255,0.55);
 }
 
-.thankyou {
-  display: none;
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* THANK YOU MESSAGE */
+#thankYou {
   font-size: 28px;
-  font-weight: 700;
-  color: #16a34a;
-  margin-top: 40px;
+  color: #1e40af;
+  margin-top: 20px;
+  display: none;
 }
 
+/* RIGHT IMAGE */
 .right {
   width: 50%;
   background-image:
-    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
+    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
     url("assets/resort.jpg");
   background-size: cover;
   background-position: center;
+  animation: fadeIn 1s ease;
 }
 
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
-  .container { flex-direction: column; }
-  .left, .right { width: 100%; }
-  .right { height: 40vh; }
+  .container {
+    flex-direction: column;
+  }
+
+  .right {
+    width: 100%;
+    height: 42vh;
+  }
+
+  .left {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .card {
+    padding: 35px 25px;
+    text-align: center;
+  }
+
+  .logo {
+    margin: 0 auto 20px;
+  }
 }
 </style>
 </head>
@@ -101,54 +171,66 @@ button:hover {
 
 <div class="container">
 
+  <!-- LEFT CONTENT -->
   <div class="left">
     <div class="card">
 
-      <h2>We’re sorry. Please tell us what we can improve.</h2>
+      <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
+
+      <h1>FEEDBACK</h1>
 
       <form id="feedbackForm">
         <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your Email" required>
-        <input type="tel" id="phone" placeholder="Phone Number" required>
-        <textarea id="feedback" rows="4" placeholder="Your Feedback" required></textarea>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+        <textarea id="feedback" placeholder="Your Feedback" required></textarea>
 
-        <button type="submit">Submit Feedback</button>
+        <button type="submit" id="submitBtn" disabled>Submit Feedback</button>
       </form>
 
-      <div class="thankyou" id="thankyouMsg">
-        Thank you for your feedback 🙏
-      </div>
+      <div id="thankYou">Thank You for Your Feedback!</div>
 
     </div>
   </div>
 
+  <!-- RIGHT IMAGE -->
   <div class="right"></div>
 
 </div>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const rating = params.get("rating");
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const feedbackInput = document.getElementById('feedback');
+const submitBtn = document.getElementById('submitBtn');
+const form = document.getElementById('feedbackForm');
+const thankYou = document.getElementById('thankYou');
 
-document.getElementById("feedbackForm").onsubmit = function(e) {
+function validateForm() {
+  const nameValid = nameInput.value.trim() !== "";
+  const emailValid = emailInput.value.trim() !== "" && emailInput.checkValidity();
+  const phoneValid = phoneInput.value.trim() !== "" && phoneInput.checkValidity();
+  const feedbackValid = feedbackInput.value.trim() !== "";
+
+  submitBtn.disabled = !(nameValid && emailValid && phoneValid && feedbackValid);
+}
+
+// Listen to input events
+[nameInput, emailInput, phoneInput, feedbackInput].forEach(input => {
+  input.addEventListener('input', validateForm);
+});
+
+// Form submission
+form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const data = {
-    name: name.value,
-    email: email.value,
-    phone: phone.value,
-    feedback: feedback.value,
-    rating: rating
-  };
+  // Here you can send data to Google Sheets / API
 
-  fetch("PASTE_GOOGLE_APPS_SCRIPT_URL_HERE", {
-    method: "POST",
-    body: JSON.stringify(data)
-  }).then(() => {
-    feedbackForm.style.display = "none";
-    document.getElementById("thankyouMsg").style.display = "block";
-  });
-};
+  // Show Thank You message
+  form.style.display = "none";
+  thankYou.style.display = "block";
+});
 </script>
 
 </body>
