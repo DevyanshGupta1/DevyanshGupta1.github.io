@@ -2,27 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rivanta Resort Rating</title>
+<title>Rate Your Stay – Rivanta Resort</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #eef5ff, #fdfefe);
 }
 
-/* MAIN LAYOUT */
 .container {
   display: flex;
   min-height: 100vh;
 }
 
-/* LEFT CONTENT */
+/* LEFT */
 .left {
   width: 50%;
   display: flex;
@@ -31,15 +28,13 @@ body {
   padding: 40px;
 }
 
-/* CARD WITH GLASSMORPHISM */
 .card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
+  background: #fff;
+  border-radius: 18px;
   padding: 45px;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
   border-top: 6px solid #3b82f6;
   animation: fadeUp 0.8s ease;
   text-align: center;
@@ -51,86 +46,71 @@ body {
 }
 
 h1 {
-  margin: 0 0 10px 0;
-  font-size: 38px;
-  letter-spacing: 4px;
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: 3px;
   color: #1e40af;
 }
 
-p {
+p.subtitle {
+  margin-top: 12px;
   font-size: 18px;
   color: #475569;
-  margin-bottom: 30px;
 }
 
 /* STARS */
 .stars {
   display: flex;
   justify-content: center;
-  font-size: 54px;
-  margin-bottom: 20px;
-  position: relative;
+  margin-top: 30px;
+  font-size: 56px;
 }
 
 .star {
   color: #cbd5e1;
-  margin-right: 12px;
+  margin: 0 10px;
   cursor: pointer;
-  transition: transform 0.25s ease, color 0.3s ease, text-shadow 0.3s ease;
-  position: relative;
+  transition: transform 0.25s ease, color 0.3s ease;
 }
 
 .star:hover {
-  transform: scale(1.25);
+  transform: scale(1.2);
 }
 
 .star.selected {
   color: #fbbf24;
-  text-shadow: 0 0 15px rgba(251,191,36,0.8);
+  text-shadow: 0 0 18px rgba(251,191,36,0.9);
   animation: pop 0.3s ease;
-  cursor: default;
 }
 
-/* Tooltip */
-.star[data-title]:hover::after {
-  content: attr(data-title);
-  position: absolute;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1e40af;
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0.95;
-}
-
-/* BUTTONS */
 button {
+  margin-top: 35px;
   padding: 14px 34px;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  background: linear-gradient(135deg, #007bff, #0056d2);
+  border-radius: 40px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
   color: #fff;
-  box-shadow: 0 8px 20px rgba(0,123,255,0.45);
-  transition: all 0.3s ease;
-  margin: 10px auto 0 auto;
-  display: block;
-}
-
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(0,123,255,0.55);
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(37,99,235,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(37,99,235,0.5);
+}
+
+#message {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #475569;
 }
 
 /* RIGHT IMAGE */
@@ -162,32 +142,9 @@ button:disabled {
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .right {
-    width: 100%;
-    height: 42vh;
-  }
-
-  .left {
-    width: 100%;
-    padding: 30px 20px;
-  }
-
-  .card {
-    padding: 35px 25px;
-    text-align: center;
-  }
-
-  .logo {
-    margin: 0 auto 20px;
-  }
-
-  .stars {
-    font-size: 48px;
-  }
+  .container { flex-direction: column; }
+  .right { width: 100%; height: 42vh; }
+  .left { width: 100%; padding: 30px 20px; }
 }
 </style>
 </head>
@@ -196,98 +153,71 @@ button:disabled {
 
 <div class="container">
 
-  <!-- LEFT CONTENT -->
   <div class="left">
     <div class="card">
 
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
-      <h1>RIVANTA RESORT</h1>
-      <p>We hope you enjoyed your stay! Please rate your experience.</p>
+      <h1>RATE YOUR STAY</h1>
+      <p class="subtitle">Your feedback helps us improve</p>
 
       <div class="stars">
-        <span class="star" data-value="1" data-title="Poor">&#9733;</span>
-        <span class="star" data-value="2" data-title="Average">&#9733;</span>
-        <span class="star" data-value="3" data-title="Good">&#9733;</span>
-        <span class="star" data-value="4" data-title="Excellent">&#9733;</span>
-        <span class="star" data-value="5" data-title="Outstanding">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
       </div>
 
-      <p id="message"></p>
+      <button id="submitBtn" disabled>Submit Rating</button>
 
-      <button id="submitBtn" onclick="submitRating()" disabled>Submit Rating</button>
-      <button id="changeBtn" onclick="changeRating()" style="display:none;">Change Rating</button>
+      <div id="message"></div>
 
     </div>
   </div>
 
-  <!-- RIGHT IMAGE -->
   <div class="right"></div>
 
 </div>
 
 <script>
-const stars = document.querySelectorAll('.star');
-const submitBtn = document.getElementById('submitBtn');
-const changeBtn = document.getElementById('changeBtn');
-const message = document.getElementById('message');
-let selectedRating = 0;
-let locked = false;
+const stars = document.querySelectorAll(".star");
+const submitBtn = document.getElementById("submitBtn");
+const message = document.getElementById("message");
 
-// Star selection with animation
-stars.forEach((star) => {
-  star.addEventListener('click', () => {
-    if (locked) return;
+let rating = 0;
+let submitted = false;
 
-    selectedRating = parseInt(star.getAttribute('data-value'));
+// Ensure rating is always reset on page load
+stars.forEach(star => star.classList.remove("selected"));
+submitBtn.disabled = true;
+rating = 0;
+submitted = false;
+
+stars.forEach((star, index) => {
+  star.addEventListener("click", () => {
+    if (submitted) return;
+
+    rating = index + 1;
     submitBtn.disabled = false;
 
     stars.forEach((s, i) => {
-      if (i < selectedRating) s.classList.add('selected');
-      else s.classList.remove('selected');
+      s.classList.toggle("selected", i < rating);
     });
-
-    if(selectedRating >= 4) {
-      message.innerText = "Thank you for your wonderful experience with us!";
-    } else {
-      message.innerText = "Thank you. We’d love to hear how we can improve.";
-    }
   });
 });
 
-// Submit button
-function submitRating() {
-  if (selectedRating === 0) return;
+submitBtn.addEventListener("click", () => {
+  if (rating === 0 || submitted) return;
+  submitted = true;
 
-  locked = true;
-  submitBtn.style.display = "none";
-  changeBtn.style.display = "block";
-
-  // Stars pop effect
-  stars.forEach(star => star.style.transform = "scale(1.2)");
-  setTimeout(() => {
-    stars.forEach(star => star.style.transform = "");
-
-    if (selectedRating <= 3) {
-      window.location.href = "feedback.html";
-    } else {
-      const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
-      const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
-      window.location.href = googleReviewURL;
-    }
-  }, 200);
-}
-
-// Change rating button
-function changeRating() {
-  locked = false;
-  selectedRating = 0;
-  stars.forEach(s => s.classList.remove('selected'));
-  submitBtn.style.display = "block";
-  changeBtn.style.display = "none";
-  submitBtn.disabled = true;
-  message.innerText = "";
-}
+  if (rating >= 4) {
+    window.location.href =
+      "https://www.google.com/maps/place/?q=place_id:ChIJR-avknhdBDkRMRZ_x360K1o&review=1";
+  } else {
+    window.location.href = "feedback.html";
+  }
+});
 </script>
 
 </body>
