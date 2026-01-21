@@ -68,17 +68,20 @@ h1 {
   color: #cbd5e1;
   margin-right: 12px;
   cursor: pointer;
-  transition: transform 0.25s ease, color 0.3s ease;
+  transition: transform 0.25s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .star:hover {
   transform: scale(1.18);
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(251,191,36,0.6);
 }
 
 .star.selected {
   color: #fbbf24;
   text-shadow: 0 0 15px rgba(251,191,36,0.8);
   animation: pop 0.3s ease;
+  cursor: default;
 }
 
 /* BUTTONS */
@@ -96,9 +99,14 @@ button {
   display: block;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 12px 25px rgba(0,123,255,0.55);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* RIGHT IMAGE */
@@ -180,7 +188,7 @@ button:hover {
         <span class="star" data-value="5">&#9733;</span>
       </div>
 
-      <button id="submitBtn" onclick="submitRating()">Submit Rating</button>
+      <button id="submitBtn" onclick="submitRating()" disabled>Submit Rating</button>
       <button id="changeBtn" onclick="changeRating()" style="display:none;">Change Rating</button>
 
     </div>
@@ -204,6 +212,8 @@ stars.forEach((star, index) => {
     if (locked) return;
 
     selectedRating = parseInt(star.getAttribute('data-value'));
+    submitBtn.disabled = false;
+
     stars.forEach((s, i) => {
       if (i < selectedRating) s.classList.add('selected');
       else s.classList.remove('selected');
@@ -212,22 +222,25 @@ stars.forEach((star, index) => {
 });
 
 function submitRating() {
-  if (selectedRating === 0) {
-    alert("Please select a rating");
-    return;
-  }
+  if (selectedRating === 0) return;
 
   locked = true;
   submitBtn.style.display = "none";
   changeBtn.style.display = "block";
 
-  if (selectedRating <= 3) {
-    window.location.href = "feedback.html";
-  } else {
-    const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
-    const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
-    window.location.href = googleReviewURL;
-  }
+  // Small star pop animation before redirect
+  stars.forEach(star => star.style.transform = "scale(1.2)");
+  setTimeout(() => {
+    stars.forEach(star => star.style.transform = "");
+    
+    if (selectedRating <= 3) {
+      window.location.href = "feedback.html";
+    } else {
+      const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
+      const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
+      window.location.href = googleReviewURL;
+    }
+  }, 200);
 }
 
 function changeRating() {
@@ -236,6 +249,7 @@ function changeRating() {
   stars.forEach(s => s.classList.remove('selected'));
   submitBtn.style.display = "block";
   changeBtn.style.display = "none";
+  submitBtn.disabled = true;
 }
 </script>
 
