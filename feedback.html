@@ -31,14 +31,15 @@ body {
   padding: 40px;
 }
 
-/* CARD */
+/* CARD WITH GLASSMORPHISM */
 .card {
-  background: #ffffff;
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
   padding: 45px;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
   border-top: 6px solid #3b82f6;
   animation: fadeUp 0.8s ease;
   text-align: center;
@@ -50,28 +51,33 @@ body {
 }
 
 h1 {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   font-size: 38px;
   letter-spacing: 4px;
   color: #1e40af;
 }
 
-/* FORM */
+p {
+  font-size: 18px;
+  color: #475569;
+  margin-bottom: 30px;
+}
+
+/* FORM STYLING */
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 input, textarea {
-  width: 100%;
-  padding: 12px 14px;
-  margin: 10px 0;
-  font-size: 16px;
+  padding: 12px 14px 12px 40px;
+  margin-bottom: 20px;
   border-radius: 12px;
   border: 1px solid #cbd5e1;
+  font-size: 16px;
   outline: none;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 input:focus, textarea:focus {
@@ -79,10 +85,30 @@ input:focus, textarea:focus {
   box-shadow: 0 0 10px rgba(59,130,246,0.3);
 }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
+/* Icons in input fields */
+.input-icon {
+  position: relative;
 }
+
+.input-icon input, .input-icon textarea {
+  padding-left: 40px;
+}
+
+.input-icon::before {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Arial';
+  font-size: 18px;
+  color: #1e40af;
+}
+
+/* Specific icons */
+.name-icon::before { content: "👤"; }
+.email-icon::before { content: "📧"; }
+.phone-icon::before { content: "📞"; }
+.feedback-icon::before { content: "💬"; }
 
 /* BUTTON */
 button {
@@ -109,14 +135,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* THANK YOU MESSAGE */
-#thankYou {
-  font-size: 28px;
-  color: #1e40af;
-  margin-top: 20px;
-  display: none;
-}
-
 /* RIGHT IMAGE */
 .right {
   width: 50%;
@@ -126,6 +144,15 @@ button:disabled {
   background-size: cover;
   background-position: center;
   animation: fadeIn 1s ease;
+}
+
+/* THANK YOU MESSAGE */
+#thankYou {
+  font-size: 24px;
+  color: #1e40af;
+  margin-top: 20px;
+  display: none;
+  animation: fadeUp 0.6s ease forwards;
 }
 
 /* ANIMATIONS */
@@ -157,11 +184,6 @@ button:disabled {
 
   .card {
     padding: 35px 25px;
-    text-align: center;
-  }
-
-  .logo {
-    margin: 0 auto 20px;
   }
 }
 </style>
@@ -177,18 +199,26 @@ button:disabled {
 
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
-      <h1>FEEDBACK</h1>
+      <h1>RIVANTA RESORT</h1>
+      <p>Please provide your feedback so we can improve.</p>
 
       <form id="feedbackForm">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Email Address" required>
-        <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
-        <textarea id="feedback" placeholder="Your Feedback" required></textarea>
-
+        <div class="input-icon name-icon">
+          <input type="text" id="name" placeholder="Your Name" required>
+        </div>
+        <div class="input-icon email-icon">
+          <input type="email" id="email" placeholder="Your Email" required>
+        </div>
+        <div class="input-icon phone-icon">
+          <input type="tel" id="phone" placeholder="Your Phone" required>
+        </div>
+        <div class="input-icon feedback-icon">
+          <textarea id="feedback" placeholder="Your Feedback" rows="5" required></textarea>
+        </div>
         <button type="submit" id="submitBtn" disabled>Submit Feedback</button>
       </form>
 
-      <div id="thankYou">Thank You for Your Feedback!</div>
+      <p id="thankYou">Thank you for your feedback!</p>
 
     </div>
   </div>
@@ -199,37 +229,39 @@ button:disabled {
 </div>
 
 <script>
+const form = document.getElementById('feedbackForm');
+const submitBtn = document.getElementById('submitBtn');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const feedbackInput = document.getElementById('feedback');
-const submitBtn = document.getElementById('submitBtn');
-const form = document.getElementById('feedbackForm');
 const thankYou = document.getElementById('thankYou');
 
 function validateForm() {
-  const nameValid = nameInput.value.trim() !== "";
-  const emailValid = emailInput.value.trim() !== "" && emailInput.checkValidity();
-  const phoneValid = phoneInput.value.trim() !== "" && phoneInput.checkValidity();
-  const feedbackValid = feedbackInput.value.trim() !== "";
-
-  submitBtn.disabled = !(nameValid && emailValid && phoneValid && feedbackValid);
+  if(nameInput.value && emailInput.value && phoneInput.value && feedbackInput.value){
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
 }
 
-// Listen to input events
-[nameInput, emailInput, phoneInput, feedbackInput].forEach(input => {
-  input.addEventListener('input', validateForm);
+// Enable submit only if all fields filled
+[nameInput,emailInput,phoneInput,feedbackInput].forEach(el=>{
+  el.addEventListener('input', validateForm);
 });
 
-// Form submission
-form.addEventListener('submit', (e) => {
+// Form submit
+form.addEventListener('submit', (e)=>{
   e.preventDefault();
 
-  // Here you can send data to Google Sheets / API
-
-  // Show Thank You message
-  form.style.display = "none";
+  // Show thank you message
   thankYou.style.display = "block";
+  
+  // Optionally: send data to Google Sheets via your script
+  // After submission, disable all inputs
+  [nameInput,emailInput,phoneInput,feedbackInput,submitBtn].forEach(el=>{
+    el.disabled = true;
+  });
 });
 </script>
 
