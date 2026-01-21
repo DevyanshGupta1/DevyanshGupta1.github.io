@@ -104,11 +104,14 @@ button:hover {
   <div class="left">
     <div class="card">
 
-      <h2>We’re sorry. Please tell us what went wrong.</h2>
+      <h2>We’re sorry. Please tell us what we can improve.</h2>
 
       <form id="feedbackForm">
         <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
         <textarea id="feedback" rows="4" placeholder="Your Feedback" required></textarea>
+
         <button type="submit">Submit Feedback</button>
       </form>
 
@@ -132,6 +135,8 @@ document.getElementById("feedbackForm").onsubmit = function(e) {
 
   const data = {
     name: name.value,
+    email: email.value,
+    phone: phone.value,
     feedback: feedback.value,
     rating: rating
   };
