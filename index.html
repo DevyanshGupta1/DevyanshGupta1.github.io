@@ -31,14 +31,15 @@ body {
   padding: 40px;
 }
 
-/* CARD */
+/* CARD WITH GLASSMORPHISM */
 .card {
-  background: #ffffff;
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
   padding: 45px;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
   border-top: 6px solid #3b82f6;
   animation: fadeUp 0.8s ease;
   text-align: center;
@@ -68,6 +69,7 @@ p {
   justify-content: center;
   font-size: 54px;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .star {
@@ -75,12 +77,11 @@ p {
   margin-right: 12px;
   cursor: pointer;
   transition: transform 0.25s ease, color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
 }
 
 .star:hover {
-  transform: scale(1.18);
-  color: #fbbf24;
-  text-shadow: 0 0 12px rgba(251,191,36,0.6);
+  transform: scale(1.25);
 }
 
 .star.selected {
@@ -88,6 +89,23 @@ p {
   text-shadow: 0 0 15px rgba(251,191,36,0.8);
   animation: pop 0.3s ease;
   cursor: default;
+}
+
+/* Tooltip */
+.star[data-title]:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e40af;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0.95;
 }
 
 /* BUTTONS */
@@ -185,14 +203,14 @@ button:disabled {
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
       <h1>RIVANTA RESORT</h1>
-      <p>Rate your stay with us</p>
+      <p>We hope you enjoyed your stay! Please rate your experience.</p>
 
       <div class="stars">
-        <span class="star" data-value="1">&#9733;</span>
-        <span class="star" data-value="2">&#9733;</span>
-        <span class="star" data-value="3">&#9733;</span>
-        <span class="star" data-value="4">&#9733;</span>
-        <span class="star" data-value="5">&#9733;</span>
+        <span class="star" data-value="1" data-title="Poor">&#9733;</span>
+        <span class="star" data-value="2" data-title="Average">&#9733;</span>
+        <span class="star" data-value="3" data-title="Good">&#9733;</span>
+        <span class="star" data-value="4" data-title="Excellent">&#9733;</span>
+        <span class="star" data-value="5" data-title="Outstanding">&#9733;</span>
       </div>
 
       <p id="message"></p>
@@ -216,6 +234,7 @@ const message = document.getElementById('message');
 let selectedRating = 0;
 let locked = false;
 
+// Star selection with animation
 stars.forEach((star) => {
   star.addEventListener('click', () => {
     if (locked) return;
@@ -228,7 +247,6 @@ stars.forEach((star) => {
       else s.classList.remove('selected');
     });
 
-    // Dynamic message
     if(selectedRating >= 4) {
       message.innerText = "Thank you for your wonderful experience with us!";
     } else {
@@ -237,6 +255,7 @@ stars.forEach((star) => {
   });
 });
 
+// Submit button
 function submitRating() {
   if (selectedRating === 0) return;
 
@@ -244,16 +263,14 @@ function submitRating() {
   submitBtn.style.display = "none";
   changeBtn.style.display = "block";
 
-  // Star pop animation
+  // Stars pop effect
   stars.forEach(star => star.style.transform = "scale(1.2)");
   setTimeout(() => {
     stars.forEach(star => star.style.transform = "");
 
     if (selectedRating <= 3) {
-      // redirect to feedback form
       window.location.href = "feedback.html";
     } else {
-      // redirect to Google write review
       const PLACE_ID = "ChIJR-avknhdBDkRMRZ_x360K1o";
       const googleReviewURL = "https://search.google.com/local/writereview?placeid=" + PLACE_ID;
       window.location.href = googleReviewURL;
@@ -261,6 +278,7 @@ function submitRating() {
   }, 200);
 }
 
+// Change rating button
 function changeRating() {
   locked = false;
   selectedRating = 0;
