@@ -6,32 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, #eef5ff, #fdfefe);
-}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: linear-gradient(135deg, #eef5ff, #fdfefe); }
 
 /* MAIN LAYOUT */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
+.container { display: flex; min-height: 100vh; }
 
 /* LEFT CONTENT */
-.left {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-}
+.left { width: 50%; display: flex; align-items: center; justify-content: center; padding: 40px; }
 
-/* CARD WITH GLASSMORPHISM */
+/* CARD */
 .card {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
@@ -45,31 +29,12 @@ body {
   text-align: center;
 }
 
-.logo {
-  width: 140px;
-  margin-bottom: 20px;
-}
+.logo { width: 140px; margin-bottom: 20px; }
+h1 { margin: 0 0 10px 0; font-size: 38px; letter-spacing: 4px; color: #1e40af; }
+p { font-size: 18px; color: #475569; margin-bottom: 30px; }
 
-h1 {
-  margin: 0 0 10px 0;
-  font-size: 38px;
-  letter-spacing: 4px;
-  color: #1e40af;
-}
-
-p {
-  font-size: 18px;
-  color: #475569;
-  margin-bottom: 30px;
-}
-
-/* FORM STYLING */
-form {
-  display: flex;
-  flex-direction: column;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
+/* FORM */
+form { display: flex; flex-direction: column; transition: opacity 0.6s ease, transform 0.6s ease; }
 input, textarea {
   padding: 12px 14px 12px 40px;
   margin-bottom: 20px;
@@ -80,21 +45,11 @@ input, textarea {
   transition: all 0.3s ease;
   width: 100%;
 }
-
-input:focus, textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 10px rgba(59,130,246,0.3);
-}
+input:focus, textarea:focus { border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.3); }
 
 /* Icons in input fields */
-.input-icon {
-  position: relative;
-}
-
-.input-icon input, .input-icon textarea {
-  padding-left: 40px;
-}
-
+.input-icon { position: relative; }
+.input-icon input, .input-icon textarea { padding-left: 40px; }
 .input-icon::before {
   position: absolute;
   left: 12px;
@@ -104,8 +59,6 @@ input:focus, textarea:focus {
   font-size: 18px;
   color: #1e40af;
 }
-
-/* Specific icons */
 .name-icon::before { content: "👤"; }
 .email-icon::before { content: "📧"; }
 .phone-icon::before { content: "📞"; }
@@ -125,23 +78,16 @@ button {
   margin: 10px auto 0 auto;
   display: block;
 }
-
 button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 12px 25px rgba(0,123,255,0.55);
 }
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* RIGHT IMAGE */
 .right {
   width: 50%;
-  background-image:
-    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
-    url("assets/resort.jpg");
+  background-image: linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)), url("assets/resort.jpg");
   background-size: cover;
   background-position: center;
   animation: fadeIn 1s ease;
@@ -159,41 +105,20 @@ button:disabled {
 }
 
 /* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .right {
-    width: 100%;
-    height: 42vh;
-  }
-
-  .left {
-    width: 100%;
-    padding: 30px 20px;
-  }
-
-  .card {
-    padding: 35px 25px;
-  }
+  .container { flex-direction: column; }
+  .right { width: 100%; height: 42vh; }
+  .left { width: 100%; padding: 30px 20px; }
+  .card { padding: 35px 25px; }
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
   <!-- LEFT CONTENT -->
@@ -240,6 +165,7 @@ const phoneInput = document.getElementById('phone');
 const feedbackInput = document.getElementById('feedback');
 const thankYou = document.getElementById('thankYou');
 
+// Enable submit button only when all fields are filled
 function validateForm() {
   if(nameInput.value && emailInput.value && phoneInput.value && feedbackInput.value){
     submitBtn.disabled = false;
@@ -247,34 +173,48 @@ function validateForm() {
     submitBtn.disabled = true;
   }
 }
-
-// Enable submit only if all fields filled
 [nameInput,emailInput,phoneInput,feedbackInput].forEach(el=>{
   el.addEventListener('input', validateForm);
 });
 
-// Form submit
+// Form submit to Google Sheets
 form.addEventListener('submit', (e)=>{
   e.preventDefault();
 
-  // Animate form fade out
-  form.style.opacity = "0";
-  form.style.transform = "translateY(25px)";
-  setTimeout(()=>{
-    form.style.display = "none";
+  const data = {
+    name: nameInput.value,
+    email: emailInput.value,
+    phone: phoneInput.value,
+    feedback: feedbackInput.value
+  };
 
-    // Show and animate Thank You
-    thankYou.style.display = "block";
-    setTimeout(()=>{
-      thankYou.style.opacity = "1";
-      thankYou.style.transform = "translateY(0)";
-    },50);
-  },600);
+  fetch("https://script.google.com/macros/s/AKfycbyNvWZp2HnGq0oxV9Cotv6p511IKv-14U4p6Pcw0i_am4chMsnRAzzR6D-0LqZH0QP6rg/exec", {
+    method: "POST",
+    body: new URLSearchParams(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if(result.result === "success") {
+      // Animate form fade out
+      form.style.opacity = "0";
+      form.style.transform = "translateY(25px)";
+      setTimeout(()=>{
+        form.style.display = "none";
+        // Show Thank You
+        thankYou.style.display = "block";
+        setTimeout(()=>{
+          thankYou.style.opacity = "1";
+          thankYou.style.transform = "translateY(0)";
+        },50);
+      },600);
 
-  // Disable inputs just in case
-  [nameInput,emailInput,phoneInput,feedbackInput,submitBtn].forEach(el=>{
-    el.disabled = true;
-  });
+      // Disable inputs
+      [nameInput,emailInput,phoneInput,feedbackInput,submitBtn].forEach(el=>{
+        el.disabled = true;
+      });
+    }
+  })
+  .catch(err => alert("Error submitting feedback. Please try again."));
 });
 </script>
 
