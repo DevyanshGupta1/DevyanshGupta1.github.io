@@ -6,98 +6,180 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+* { box-sizing: border-box; }
+
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #eef5ff, #fdfefe);
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 40px;
 }
 
-.star {
-  font-size: 45px;
-  cursor: pointer;
-  color: #ccc;
-  transition: transform 0.2s, color 0.2s;
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 45px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  border-top: 6px solid #3b82f6;
 }
 
-.star:hover {
-  transform: scale(1.2);
+.logo {
+  width: 140px;
+  margin-bottom: 20px;
 }
+
+h1 {
+  margin: 0 0 30px 0;
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: #1e40af;
+}
+
+.stars {
+  display: flex;
+  font-size: 54px;
+}
+
+.star {
+  color: #cbd5e1;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: transform 0.25s, color 0.3s;
+}
+
+.star:hover { transform: scale(1.15); }
 
 .star.selected {
-  color: gold;
-  text-shadow: 0 0 12px gold;
+  color: #fbbf24;
+  text-shadow: 0 0 16px rgba(251,191,36,0.9);
 }
 
 button {
   margin-top: 25px;
-  padding: 10px 22px;
+  padding: 14px 28px;
   font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
   cursor: pointer;
+}
+
+#changeBtn {
+  background: #64748b;
+  margin-left: 10px;
+}
+
+#message {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #475569;
+}
+
+.right {
+  width: 50%;
+  background-image:
+    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
+    url("assets/resort.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .container { flex-direction: column; }
+  .left, .right { width: 100%; }
+  .right { height: 40vh; }
+  .stars { justify-content: center; }
 }
 </style>
 </head>
 
 <body>
 
-<h1>RIVANTA RESORT</h1>
-<p>Please rate your experience</p>
+<div class="container">
 
-<div id="stars">
-  <span class="star" data-val="1">★</span>
-  <span class="star" data-val="2">★</span>
-  <span class="star" data-val="3">★</span>
-  <span class="star" data-val="4">★</span>
-  <span class="star" data-val="5">★</span>
+  <div class="left">
+    <div class="card">
+
+      <img src="assets/logo.png" class="logo" alt="Logo">
+
+      <h1>RIVANTA RESORT</h1>
+
+      <div class="stars">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+      </div>
+
+      <button id="submitBtn">Submit Rating</button>
+      <button id="changeBtn" style="display:none;">Change Rating</button>
+
+      <div id="message"></div>
+
+    </div>
+  </div>
+
+  <div class="right"></div>
+
 </div>
 
-<br>
-
-<button id="submitBtn">Submit Rating</button>
-<button id="changeBtn" style="display:none;">Change Rating</button>
-
-<p id="message"></p>
-
 <script>
-let rating = 0;
-let locked = false;
-
 const stars = document.querySelectorAll('.star');
 const submitBtn = document.getElementById('submitBtn');
 const changeBtn = document.getElementById('changeBtn');
 const message = document.getElementById('message');
 
-stars.forEach(star => {
+let rating = 0;
+let locked = false;
+
+stars.forEach((star, index) => {
   star.onclick = () => {
     if (locked) return;
-    rating = star.dataset.val;
-    stars.forEach(s =>
-      s.classList.toggle('selected', s.dataset.val <= rating)
+    rating = index + 1;
+    stars.forEach((s, i) =>
+      s.classList.toggle('selected', i < rating)
     );
   };
 });
 
 submitBtn.onclick = () => {
-  if (rating === 0) {
-    alert("Please select a rating");
-    return;
-  }
+  if (rating === 0) return alert("Please select a rating");
 
   locked = true;
   submitBtn.style.display = "none";
-  changeBtn.style.display = "inline";
+  changeBtn.style.display = "inline-block";
 
   if (rating <= 3) {
-    window.location.href = "feedback.html?rating=" + rating;
+    window.location.href = `feedback.html?rating=${rating}`;
   } else {
-    message.innerText = "Thank you for your wonderful experience!";
+    message.innerText =
+      "Thank you for your wonderful experience with us.";
   }
 };
 
 changeBtn.onclick = () => {
   locked = false;
-  submitBtn.style.display = "inline";
+  rating = 0;
+  submitBtn.style.display = "inline-block";
   changeBtn.style.display = "none";
   message.innerText = "";
+  stars.forEach(s => s.classList.remove('selected'));
 };
 </script>
 
