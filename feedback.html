@@ -4,69 +4,169 @@
 <meta charset="UTF-8">
 <title>Rivanta Resort Feedback</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-* { box-sizing: border-box; }
-body { margin:0; font-family: "Segoe UI", sans-serif; background: linear-gradient(135deg,#eef5ff,#fdfefe);}
-.container { display:flex; min-height:100vh; }
-.left { width:50%; display:flex; align-items:center; justify-content:center; padding:40px; }
-.form-card { background:#fff; width:100%; max-width:520px; padding:40px 45px; border-radius:18px; box-shadow:0 22px 45px rgba(0,0,0,0.12); border-top:6px solid #3b82f6; }
-.logo { width:140px; margin-bottom:20px; }
-h1 { margin:0 0 10px; font-size:30px; color:#1e40af; letter-spacing:2px; }
-label { display:block; margin-bottom:6px; font-weight:600; color:#334155; }
-input, textarea { width:100%; padding:12px 14px; margin-bottom:22px; border-radius:10px; border:1.8px solid #cbd5e1; font-size:15px; }
-textarea { resize:vertical; min-height:110px; }
-button { width:100%; padding:14px; font-size:16px; font-weight:600; border:none; border-radius:12px; background:linear-gradient(135deg,#2563eb,#3b82f6); color:white; cursor:pointer; }
-button:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(59,130,246,0.35); }
-.right { width:50%; background-image: linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)), url("assets/resort.jpg"); background-size:cover; background-position:center; }
-@media(max-width:768px){.container{flex-direction:column;}.right{width:100%; height:40vh;}.left{width:100%;padding:30px 20px;}.form-card{text-align:center;}.logo{margin:0 auto 20px;}}
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f1f5ff;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: white;
+  padding: 35px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.logo {
+  width: 130px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  color: #1e40af;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+}
+
+button:disabled {
+  background: #94a3b8;
+}
+
+#msg {
+  margin-top: 15px;
+  color: green;
+  font-weight: 600;
+}
+
+.right {
+  width: 50%;
+  background: url("assets/resort.jpg") center/cover no-repeat;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .container { flex-direction: column; }
+  .left, .right { width: 100%; }
+  .right { height: 40vh; }
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
+
   <div class="left">
-    <div class="form-card">
-      <img src="assets/logo.png" class="logo" alt="Logo">
-      <h1>We Value Your Feedback</h1>
-      <form id="feedbackForm" method="POST" action="save_feedback.php">
+    <div class="card">
+
+      <img src="assets/logo.png" class="logo">
+
+      <h1>Help Us Improve</h1>
+
+      <form id="feedbackForm">
+        <input type="hidden" id="rating">
+
         <label>Name</label>
-        <input type="text" name="name" required>
+        <input type="text" id="name" required>
+
         <label>Email</label>
-        <input type="email" name="email" required>
+        <input type="email" id="email" required>
+
         <label>Phone</label>
-        <input type="tel" name="phone" required>
+        <input type="tel" id="phone" required>
+
         <label>Feedback</label>
-        <textarea name="feedback" required></textarea>
-        <button type="submit">Submit Feedback</button>
+        <textarea id="feedback" required></textarea>
+
+        <button type="submit" id="submitBtn">Submit Feedback</button>
       </form>
-      <div id="msg" style="margin-top:20px;color:green;"></div>
+
+      <div id="msg"></div>
+
     </div>
   </div>
+
   <div class="right"></div>
+
 </div>
 
 <script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("rating").value = params.get("rating") || "1";
+
+const scriptURL = "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 const form = document.getElementById("feedbackForm");
+const btn = document.getElementById("submitBtn");
 const msg = document.getElementById("msg");
 
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-    const formData = new FormData(form);
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  btn.disabled = true;
 
-    fetch("save_feedback.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.text())
-    .then(res => {
-        if(res.trim() === "success"){
-            msg.innerText = "Thank you! Feedback saved.";
-            form.reset();
-        } else {
-            msg.innerText = "Error saving feedback.";
-        }
-    })
-    .catch(err => { msg.innerText="Error connecting to server."; });
+  const data = {
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    feedback: feedback.value,
+    rating: rating.value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    msg.innerText = "Thank you. Your feedback has been submitted.";
+  })
+  .catch(() => {
+    msg.innerText = "Error submitting feedback.";
+    btn.disabled = false;
+  });
 });
 </script>
+
 </body>
 </html>
