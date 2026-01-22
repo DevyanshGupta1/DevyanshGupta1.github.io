@@ -49,17 +49,10 @@ body {
   margin-bottom: 20px;
 }
 
-h1 {
-  margin: 0;
-  font-size: 34px;
-  letter-spacing: 3px;
-  color: #ffffff;
-}
-
 .subtitle {
   margin-top: 14px;
   font-size: 18px;
-  color: #e5e7eb;
+  color: #ffffff;
 }
 
 /* STARS */
@@ -67,7 +60,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin-top: 35px;
-  font-size: 58px;
+  font-size: 52px; /* slightly reduced */
 }
 
 .star {
@@ -78,7 +71,7 @@ h1 {
 }
 
 .star:hover {
-  transform: scale(1.25);
+  transform: scale(1.2);
 }
 
 .star.selected {
@@ -142,7 +135,10 @@ h1 {
     <div class="card">
 
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
-      <p class="subtitle">How was your experience with Rivanta? We’d love to hear your feedback. </p>
+
+      <p class="subtitle">
+        How was your experience with Rivanta? We’d love to hear your feedback.
+      </p>
 
       <div class="stars">
         <span class="star">&#9733;</span>
@@ -169,11 +165,8 @@ function resetRating() {
   stars.forEach(star => star.classList.remove("selected"));
 }
 
-// Fix browser back-button cache
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted) resetRating();
-});
-
+/* Always reset when coming back */
+window.addEventListener("pageshow", resetRating);
 resetRating();
 
 stars.forEach((star, index) => {
@@ -194,7 +187,7 @@ stars.forEach((star, index) => {
       } else {
         window.location.href = "feedback.html";
       }
-    }, 400); // slight UX delay
+    }, 400);
   });
 });
 </script>
