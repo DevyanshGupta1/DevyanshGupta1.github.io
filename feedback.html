@@ -63,16 +63,17 @@ button {
   background: #000000;
   color: #ffffff;
   border: none;
-  border-radius: 32px;
-  padding: 14px 28px;
+  border-radius: 8px; /* rounded corners, square shape */
+  padding: 12px 20px;
   font-size: 16px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  float: left; /* left-aligned */
 }
 
-button:hover:not(:disabled) { transform: translateY(-2px); }
+button:hover:not(:disabled) { transform: translateY(-1px); }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* RIGHT IMAGE */
@@ -102,6 +103,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   .right { width: 100%; height: 42vh; }
   .left { width: 100%; padding: 30px 20px; }
   .card { padding: 35px 25px; }
+  button { float: none; } /* center on mobile for better UX */
 }
 </style>
 </head>
