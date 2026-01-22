@@ -7,7 +7,13 @@
 
 <style>
 * { box-sizing: border-box; }
-body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #1e3032; color: #ffffff; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #1e3032;
+  color: #ffffff;
+}
 
 /* MAIN LAYOUT */
 .container { display: flex; min-height: 100vh; }
@@ -24,13 +30,10 @@ body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #1e303
   max-width: 480px;
   box-shadow: 0 25px 50px rgba(0,0,0,0.6);
   animation: fadeUp 0.8s ease;
-  text-align: left; /* card content aligned left */
+  text-align: left;
 }
 
 .logo { width: 140px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; }
-
-h1 { margin: 0 0 10px 0; font-size: 34px; letter-spacing: 3px; color: #cda146; text-align: center; }
-.subtitle { margin-top: 14px; font-size: 18px; color: #ffffff; text-align: center; margin-bottom: 30px; }
 
 /* FORM */
 form { display: flex; flex-direction: column; transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -44,7 +47,7 @@ input, textarea {
   transition: all 0.3s ease;
   width: 100%;
   background: #1e3032;
-  color: #fff;
+  color: #ffffff;
 }
 input::placeholder, textarea::placeholder { color: #cda146; }
 input:focus, textarea:focus { border-color: #cda146; box-shadow: 0 0 10px rgba(205,161,70,0.5); }
@@ -66,21 +69,19 @@ input:focus, textarea:focus { border-color: #cda146; box-shadow: 0 0 10px rgba(2
 .phone-icon::before { content: "📞"; }
 .feedback-icon::before { content: "💬"; }
 
-/* BUTTON CONTAINER FOR LEFT ALIGN */
-.button-container { text-align: left; }
-
 /* BUTTON */
+.button-container { text-align: left; }
 button {
   padding: 14px 34px;
   font-size: 16px;
   border: none;
-  border-radius: 12px; 
+  border-radius: 12px;
   cursor: pointer;
   background: #000;
   color: #fff;
   box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   transition: all 0.3s ease;
-  display: inline-block; /* inline to respect container alignment */
+  display: inline-block;
 }
 button:hover:not(:disabled) {
   transform: translateY(-2px);
@@ -131,9 +132,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
     <div class="card">
 
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
-
-      <h1>RIVANTA RESORT</h1>
-      <p class="subtitle">How was your experience with Rivanta? We’d love to hear your feedback.</p>
 
       <form id="feedbackForm">
         <div class="input-icon name-icon">
@@ -203,12 +201,10 @@ form.addEventListener('submit', (e)=>{
   .then(response => response.json())
   .then(result => {
     if(result.result === "success") {
-      // Animate form fade out
       form.style.opacity = "0";
       form.style.transform = "translateY(25px)";
       setTimeout(()=>{
         form.style.display = "none";
-        // Show Thank You
         thankYou.style.display = "block";
         setTimeout(()=>{
           thankYou.style.opacity = "1";
@@ -216,7 +212,6 @@ form.addEventListener('submit', (e)=>{
         },50);
       },600);
 
-      // Disable inputs
       [nameInput,emailInput,phoneInput,feedbackInput,submitBtn].forEach(el=>{
         el.disabled = true;
       });
