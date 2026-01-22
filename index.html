@@ -6,14 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #eef5ff, #fdfefe);
+  background: #1e3032;
+  color: #ffffff;
 }
 
+/* MAIN LAYOUT */
 .container {
   display: flex;
   min-height: 100vh;
@@ -28,14 +32,14 @@ body {
   padding: 40px;
 }
 
+/* CARD */
 .card {
-  background: #fff;
+  background: #1e3032;
   border-radius: 18px;
   padding: 45px;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-  border-top: 6px solid #3b82f6;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
   animation: fadeUp 0.8s ease;
   text-align: center;
 }
@@ -49,75 +53,45 @@ h1 {
   margin: 0;
   font-size: 34px;
   letter-spacing: 3px;
-  color: #1e40af;
+  color: #ffffff;
 }
 
-p.subtitle {
-  margin-top: 12px;
+.subtitle {
+  margin-top: 14px;
   font-size: 18px;
-  color: #475569;
+  color: #e5e7eb;
 }
 
 /* STARS */
 .stars {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-  font-size: 56px;
+  margin-top: 35px;
+  font-size: 58px;
 }
 
 .star {
-  color: #cbd5e1;
-  margin: 0 10px;
+  color: #6b7280;
+  margin: 0 12px;
   cursor: pointer;
   transition: transform 0.25s ease, color 0.3s ease;
 }
 
 .star:hover {
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
 
 .star.selected {
-  color: #fbbf24;
-  text-shadow: 0 0 18px rgba(251,191,36,0.9);
+  color: #cda146;
+  text-shadow: 0 0 22px rgba(205,161,70,0.9);
   animation: pop 0.3s ease;
-}
-
-button {
-  margin-top: 35px;
-  padding: 14px 34px;
-  font-size: 18px;
-  border: none;
-  border-radius: 40px;
-  background: linear-gradient(135deg, #2563eb, #1e40af);
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 12px 28px rgba(37,99,235,0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 35px rgba(37,99,235,0.5);
-}
-
-#message {
-  margin-top: 25px;
-  font-size: 18px;
-  color: #475569;
 }
 
 /* RIGHT IMAGE */
 .right {
   width: 50%;
   background-image:
-    linear-gradient(rgba(30,64,175,0.25), rgba(0,0,0,0.3)),
+    linear-gradient(rgba(30,48,50,0.45), rgba(0,0,0,0.55)),
     url("assets/resort.jpg");
   background-size: cover;
   background-position: center;
@@ -142,9 +116,19 @@ button:hover:not(:disabled) {
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .container { flex-direction: column; }
-  .right { width: 100%; height: 42vh; }
-  .left { width: 100%; padding: 30px 20px; }
+  .container {
+    flex-direction: column;
+  }
+
+  .right {
+    width: 100%;
+    height: 42vh;
+  }
+
+  .left {
+    width: 100%;
+    padding: 30px 20px;
+  }
 }
 </style>
 </head>
@@ -153,13 +137,12 @@ button:hover:not(:disabled) {
 
 <div class="container">
 
+  <!-- LEFT -->
   <div class="left">
     <div class="card">
 
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
-
-      <h1>RATE YOUR STAY</h1>
-      <p class="subtitle">Your feedback helps us improve</p>
+      <p class="subtitle">How was your experience with Rivanta? We’d love to hear your feedback. </p>
 
       <div class="stars">
         <span class="star">&#9733;</span>
@@ -169,65 +152,50 @@ button:hover:not(:disabled) {
         <span class="star">&#9733;</span>
       </div>
 
-      <button id="submitBtn" disabled>Submit Rating</button>
-
-      <div id="message"></div>
-
     </div>
   </div>
 
+  <!-- RIGHT -->
   <div class="right"></div>
 
 </div>
 
 <script>
 const stars = document.querySelectorAll(".star");
-const submitBtn = document.getElementById("submitBtn");
-const message = document.getElementById("message");
-
-let rating = 0;
 let submitted = false;
 
 function resetRating() {
-  rating = 0;
   submitted = false;
-  submitBtn.disabled = true;
   stars.forEach(star => star.classList.remove("selected"));
 }
 
-// 🔑 THIS FIXES THE BACK-BUTTON ISSUE
+// Fix browser back-button cache
 window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    resetRating();
-  }
+  if (event.persisted) resetRating();
 });
 
-// Also reset on normal load
 resetRating();
 
 stars.forEach((star, index) => {
   star.addEventListener("click", () => {
     if (submitted) return;
+    submitted = true;
 
-    rating = index + 1;
-    submitBtn.disabled = false;
+    const rating = index + 1;
 
     stars.forEach((s, i) => {
       s.classList.toggle("selected", i < rating);
     });
+
+    setTimeout(() => {
+      if (rating >= 4) {
+        window.location.href =
+          "https://search.google.com/local/writereview?placeid=ChIJR-avknhdBDkRMRZ_x360K1o";
+      } else {
+        window.location.href = "feedback.html";
+      }
+    }, 400); // slight UX delay
   });
-});
-
-submitBtn.addEventListener("click", () => {
-  if (rating === 0 || submitted) return;
-  submitted = true;
-
-  if (rating >= 4) {
-    window.location.href =
-      "https://search.google.com/local/writereview?placeid=ChIJR-avknhdBDkRMRZ_x360K1o";
-  } else {
-    window.location.href = "feedback.html";
-  }
 });
 </script>
 
