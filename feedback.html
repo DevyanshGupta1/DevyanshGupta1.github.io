@@ -58,20 +58,26 @@ input:focus, textarea:focus { border-color: #ffffff; }
 .feedback-icon span { content: "💬"; }
 
 /* BUTTON */
+/* BUTTON */
 button {
-  margin-top: 14px;
-  background: #000000;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px; /* rounded corners, square shape */
-  padding: 12px 20px;
+  padding: 14px 34px;
   font-size: 16px;
+  border: none;
+  border-radius: 12px; /* slightly rounded */
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  float: left; /* left-aligned */
+  background: #000; /* black */
+  color: #fff;      /* white text */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  transition: all 0.3s ease;
+  display: inline-block;  /* keep it inline */
+  margin: 0 0 0 0;        /* remove auto centering */
 }
+
+/* Add spacing from input above */
+form button {
+  margin-top: 10px;
+}
+
 
 button:hover:not(:disabled) { transform: translateY(-1px); }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
