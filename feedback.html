@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rivanta Feedback</title>
+<title>Rivanta Resort Feedback</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -12,7 +12,7 @@ body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #1e303
 /* MAIN LAYOUT */
 .container { display: flex; min-height: 100vh; }
 
-/* LEFT */
+/* LEFT CONTENT */
 .left { width: 50%; display: flex; align-items: center; justify-content: center; padding: 40px; }
 
 /* CARD */
@@ -24,62 +24,68 @@ body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #1e303
   max-width: 480px;
   box-shadow: 0 25px 50px rgba(0,0,0,0.6);
   animation: fadeUp 0.8s ease;
-  text-align: center;
+  text-align: left; /* card content aligned left */
 }
 
-.logo { width: 140px; margin-bottom: 22px; }
-.subtitle { font-size: 18px; margin-bottom: 28px; color: #e5e7eb; }
+.logo { width: 140px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; }
 
-/* FORM FIELDS */
-.field { position: relative; margin-bottom: 18px; }
-.field span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); opacity: 0.75; }
+h1 { margin: 0 0 10px 0; font-size: 34px; letter-spacing: 3px; color: #cda146; text-align: center; }
+.subtitle { margin-top: 14px; font-size: 18px; color: #ffffff; text-align: center; margin-bottom: 30px; }
 
+/* FORM */
+form { display: flex; flex-direction: column; transition: opacity 0.6s ease, transform 0.6s ease; }
 input, textarea {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.35);
+  padding: 12px 14px 12px 40px;
+  margin-bottom: 20px;
   border-radius: 12px;
-  padding: 14px 16px 14px 42px;
+  border: 1px solid #6b7280;
   font-size: 16px;
-  color: #ffffff;
   outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+  background: #1e3032;
+  color: #fff;
 }
+input::placeholder, textarea::placeholder { color: #cda146; }
+input:focus, textarea:focus { border-color: #cda146; box-shadow: 0 0 10px rgba(205,161,70,0.5); }
 
-textarea { resize: none; }
+/* Icons in input fields */
+.input-icon { position: relative; }
+.input-icon input, .input-icon textarea { padding-left: 40px; }
+.input-icon::before {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Arial';
+  font-size: 18px;
+  color: #cda146;
+}
+.name-icon::before { content: "👤"; }
+.email-icon::before { content: "📧"; }
+.phone-icon::before { content: "📞"; }
+.feedback-icon::before { content: "💬"; }
 
-input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.6); }
+/* BUTTON CONTAINER FOR LEFT ALIGN */
+.button-container { text-align: left; }
 
-input:focus, textarea:focus { border-color: #ffffff; }
-
-/* FIELD ICONS */
-.name-icon span { content: "👤"; }
-.phone-icon span { content: "📞"; }
-.email-icon span { content: "📧"; }
-.feedback-icon span { content: "💬"; }
-
-/* BUTTON */
 /* BUTTON */
 button {
   padding: 14px 34px;
   font-size: 16px;
   border: none;
-  border-radius: 12px; /* slightly rounded */
+  border-radius: 12px; 
   cursor: pointer;
-  background: #000; /* black */
-  color: #fff;      /* white text */
+  background: #000;
+  color: #fff;
   box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   transition: all 0.3s ease;
-  display: inline-block;  /* keep it inline */
-  margin: 0 0 0 0;        /* remove auto centering */
+  display: inline-block; /* inline to respect container alignment */
 }
-
-/* Add spacing from input above */
-form button {
-  margin-top: 10px;
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.55);
 }
-
-
-button:hover:not(:disabled) { transform: translateY(-1px); }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* RIGHT IMAGE */
@@ -92,11 +98,15 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 
 /* THANK YOU MESSAGE */
-.thank-you {
-  display: none;
-  font-size: 22px;
-  margin-top: 20px;
+#thankYou {
+  font-size: 26px;
   color: #cda146;
+  margin-top: 20px;
+  display: none;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  text-align: center;
 }
 
 /* ANIMATIONS */
@@ -109,7 +119,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   .right { width: 100%; height: 42vh; }
   .left { width: 100%; padding: 30px 20px; }
   .card { padding: 35px 25px; }
-  button { float: none; } /* center on mobile for better UX */
 }
 </style>
 </head>
@@ -117,76 +126,73 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 <body>
 <div class="container">
 
-  <!-- LEFT -->
+  <!-- LEFT CONTENT -->
   <div class="left">
     <div class="card">
 
       <img src="assets/logo.png" class="logo" alt="Rivanta Resort Logo">
 
+      <h1>RIVANTA RESORT</h1>
       <p class="subtitle">How was your experience with Rivanta? We’d love to hear your feedback.</p>
 
       <form id="feedbackForm">
-
-        <div class="field name-icon">
-          <span>👤</span>
+        <div class="input-icon name-icon">
           <input type="text" id="name" placeholder="Your Name" required>
         </div>
-
-        <div class="field phone-icon">
-          <span>📞</span>
-          <input type="tel" id="phone" placeholder="Phone Number" required>
+        <div class="input-icon email-icon">
+          <input type="email" id="email" placeholder="Your Email" required>
+        </div>
+        <div class="input-icon phone-icon">
+          <input type="tel" id="phone" placeholder="Your Phone" required>
+        </div>
+        <div class="input-icon feedback-icon">
+          <textarea id="feedback" placeholder="Your Feedback" rows="5" required></textarea>
         </div>
 
-        <div class="field email-icon">
-          <span>📧</span>
-          <input type="email" id="email" placeholder="Email Address" required>
+        <div class="button-container">
+          <button type="submit" id="submitBtn" disabled>Submit Feedback →</button>
         </div>
-
-        <div class="field feedback-icon">
-          <span>💬</span>
-          <textarea id="feedback" rows="4" placeholder="Write your feedback here..." required></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn" disabled>Submit →</button>
-
       </form>
 
-      <div class="thank-you" id="thankYou">
-        Thank you for your feedback!
-      </div>
+      <p id="thankYou">Thank you for your feedback!</p>
 
     </div>
   </div>
 
-  <!-- RIGHT -->
+  <!-- RIGHT IMAGE -->
   <div class="right"></div>
 
 </div>
 
 <script>
-const form = document.getElementById("feedbackForm");
-const thankYou = document.getElementById("thankYou");
+const form = document.getElementById('feedbackForm');
+const submitBtn = document.getElementById('submitBtn');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const feedbackInput = document.getElementById('feedback');
+const thankYou = document.getElementById('thankYou');
 
-const nameInput = document.getElementById("name");
-const phoneInput = document.getElementById("phone");
-const emailInput = document.getElementById("email");
-const feedbackInput = document.getElementById("feedback");
-const submitBtn = document.getElementById("submitBtn");
-
-// Enable submit only when all fields filled
+// Enable submit button only when all fields are filled
 function validateForm() {
-  submitBtn.disabled = !(nameInput.value && phoneInput.value && emailInput.value && feedbackInput.value);
+  if(nameInput.value && emailInput.value && phoneInput.value && feedbackInput.value){
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
 }
-[nameInput,phoneInput,emailInput,feedbackInput].forEach(el=>el.addEventListener("input", validateForm));
+[nameInput,emailInput,phoneInput,feedbackInput].forEach(el=>{
+  el.addEventListener('input', validateForm);
+});
 
-// Submit to Google Sheets
-form.addEventListener("submit", function(e){
+// Form submit to Google Sheets
+form.addEventListener('submit', (e)=>{
   e.preventDefault();
 
   const data = {
     name: nameInput.value,
-    phone: phoneInput.value,
     email: emailInput.value,
+    phone: phoneInput.value,
     feedback: feedbackInput.value
   };
 
@@ -194,22 +200,29 @@ form.addEventListener("submit", function(e){
     method: "POST",
     body: new URLSearchParams(data)
   })
-  .then(res => res.json())
+  .then(response => response.json())
   .then(result => {
-    if(result.result === "success"){
+    if(result.result === "success") {
+      // Animate form fade out
       form.style.opacity = "0";
-      setTimeout(()=> {
+      form.style.transform = "translateY(25px)";
+      setTimeout(()=>{
         form.style.display = "none";
+        // Show Thank You
         thankYou.style.display = "block";
         setTimeout(()=>{
           thankYou.style.opacity = "1";
+          thankYou.style.transform = "translateY(0)";
         },50);
       },600);
 
-      [nameInput, phoneInput, emailInput, feedbackInput, submitBtn].forEach(el => el.disabled=true);
+      // Disable inputs
+      [nameInput,emailInput,phoneInput,feedbackInput,submitBtn].forEach(el=>{
+        el.disabled = true;
+      });
     }
   })
-  .catch(err => alert("Error submitting feedback."));
+  .catch(err => alert("Error submitting feedback. Please try again."));
 });
 </script>
 
