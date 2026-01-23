@@ -7,13 +7,13 @@
 
   <style>
     /* =========================
-       VARIABLES (CHANGE LATER)
+       VARIABLES
     ========================== */
     :root {
-      --accent-color: #7b5a2b;   /* Button color (temporary) */
-      --gold-glow: #d4af37;      /* Golden hover shadow */
-      --section-bg: #f3efe8;     /* REPLACE with your hex code */
-      --footer-bg: #1e1e1e;      /* Footer color (temporary) */
+      --accent-color: #cda146;   /* Button color */
+      --gold-glow: #cda146;      /* Button hover shadow */
+      --section-bg: #1e3032;     /* Content background */
+      --footer-bg: #1e3032;      /* Footer background */
     }
 
     /* RESET */
@@ -50,16 +50,16 @@
 
     /* NAVBAR */
     .navbar {
-      position: relative;
+      position: relative;          /* Change to fixed if sticky needed */
       z-index: 2;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 25px 60px;
+      align-items: flex-start;     /* Align logo + nav to top */
+      padding: 20px 60px;          /* Adjust top padding */
     }
 
     .logo img {
-      height: 155px;
+      height: 100px; /* Updated logo size */
     }
 
     .nav-links {
@@ -124,7 +124,7 @@
       margin: auto;
       font-size: 16px;
       line-height: 1.8;
-      color: #222;
+      color: #fff;
     }
 
     .content-container p {
@@ -132,7 +132,7 @@
     }
 
     /* =========================
-       FOOTER (PLACEHOLDER)
+       FOOTER
     ========================== */
     .site-footer {
       background: var(--footer-bg);
@@ -141,6 +141,7 @@
       padding: 40px 20px;
       font-size: 14px;
     }
+
   </style>
 </head>
 
