@@ -7,7 +7,7 @@
 <title>Rivanta Resorts</title>
 
 <style>
-/* ===== RESET ===== */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -16,34 +16,36 @@
 
 html, body {
   width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
   font-family: celebrity;
   background: #000;
   color: #ffffff;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero {
   position: relative;
   height: 100vh;
   width: 100%;
-  background: url("images/hero/hero-main.jpg") center center / cover no-repeat;
+  background: url("images/hero/hero-main.jpg") center / cover no-repeat;
   background-attachment: fixed;
+  color: #ffffff;
 }
 
-/* overlay */
+/* dark overlay */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.38);
+  background: rgba(0,0,0,0.42);
   z-index: 1;
 }
 
 /* phone */
 .hero-phone {
   position: absolute;
-  top: 18px;
+  top: 14px;
   right: 32px;
   z-index: 3;
   color: #cda146;
@@ -52,21 +54,25 @@ html, body {
 
 /* navbar */
 .navbar {
-  position: relative;
+  position: absolute;
+  top: 48px; /* FIXED: directly under phone */
+  left: 0;
+  width: 100%;
   z-index: 3;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 70px 48px 0;
+  align-items: center;
+  padding: 0 48px;
 }
 
 .nav-logo {
-  height: 145px;
+  height: 155px; /* PC enlarged */
 }
 
 .nav-links {
   display: flex;
-  gap: 34px;
+  gap: 32px;
+  white-space: nowrap;
 }
 
 .nav-links a {
@@ -82,9 +88,9 @@ html, body {
 
 /* hero center */
 .hero-center {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 2;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,8 +115,9 @@ html, body {
   color: #000;
   padding: 14px 38px;
   border-radius: 999px;
-  text-decoration: none;
   font-size: 16px;
+  text-decoration: none;
+  white-space: nowrap;
   transition: all 0.3s ease;
 }
 
@@ -119,10 +126,11 @@ html, body {
   box-shadow: 0 0 18px #cda146, 0 0 8px rgba(0,120,255,0.4);
 }
 
-/* ===== MAIN ===== */
+/* ================= MAIN ================= */
 .main {
   background: #1e3032;
   padding: 70px 12%;
+  color: #ffffff;
   box-shadow: 0 -14px 28px rgba(0,0,0,0.55);
 }
 
@@ -131,10 +139,11 @@ html, body {
   line-height: 1.65;
 }
 
-/* ===== FOOTER ===== */
+/* ================= FOOTER ================= */
 .footer {
   background: #0b0b0b;
   padding: 50px 64px 24px;
+  color: #ffffff;
 }
 
 .footer-top {
@@ -158,52 +167,56 @@ html, body {
   gap: 16px;
 }
 
+/* last icon enlarged on PC */
 .socials img {
   height: 22px;
 }
 
-/* footer right */
+.socials img:last-child {
+  height: 28px;
+}
+
 .footer-right {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  font-size: 17px;
+  font-size: 18px;
   align-items: flex-start;
 }
 
 .footer-right a {
-  color: #cda146;
+  color: #ffffff;
   text-decoration: none;
 }
 
 .footer-right span {
-  color: #bbbbbb;
+  color: #ffffff;
 }
 
-/* footer bottom */
 .footer-bottom {
   margin-top: 38px;
   text-align: center;
   font-size: 14px;
 }
 
-.footer-bottom .location {
-  margin-bottom: 6px;
-}
-
-/* ===== RESPONSIVE ===== */
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
 
-  .nav-logo {
-    height: 95px;
+  .navbar {
+    padding: 0 20px;
+    top: 44px;
   }
 
-  .navbar {
-    padding: 60px 24px 0;
+  .nav-logo {
+    height: 90px;
   }
 
   .nav-links {
-    gap: 22px;
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
   }
 
   .hero-center h1 {
@@ -214,6 +227,11 @@ html, body {
     font-size: 16px;
   }
 
+  .book-btn {
+    padding: 12px 26px;
+    font-size: 15px;
+  }
+
   .footer {
     padding: 40px 24px 20px;
   }
@@ -221,13 +239,18 @@ html, body {
   .footer-logo {
     height: 70px;
   }
+
+  /* prevent horizontal scroll */
+  body, .hero, .main, .footer {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-phone">+91 8629864262</div>
 
@@ -248,28 +271,20 @@ html, body {
   </div>
 </section>
 
-<!-- MAIN -->
 <section class="main">
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   <p>Integer vehicula, metus nec porta fermentum.</p>
   <p>Curabitur euismod elit sit amet nulla tincidunt.</p>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-top">
     <div class="footer-left">
       <img src="images/logos/logo-primary.png" class="footer-logo">
       <div class="socials">
-        <a href="https://www.instagram.com/rivantaresorts" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
-        </a>
-        <a href="https://www.facebook.com/rivantaresorts" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
-        </a>
-        <a href="https://www.google.com/search?q=Rivanta+Resorts" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
-        </a>
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
+        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
       </div>
     </div>
 
@@ -281,7 +296,7 @@ html, body {
   </div>
 
   <div class="footer-bottom">
-    <div class="location">Kasol, INDIA</div>
+    <div>Kasol, INDIA</div>
     <div>© 2026 [Trailside Hospitality] | Powered by [Rivanta Resorts]</div>
   </div>
 </footer>
