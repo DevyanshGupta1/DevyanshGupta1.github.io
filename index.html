@@ -6,15 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* =========================
-       VARIABLES
-    ========================== */
     :root {
-      --accent-color: #cda146;    /* Button color */
-      --hover-color: #d0b55e;     /* Button hover */
-      --section-bg: #1e3032;      /* Main content background */
-      --footer-bg: #1e3032;       /* Footer background */
-      --nav-text-color: #ffffff;  /* Bright text for navbar links */
+      --accent-color: #cda146;
+      --hover-color: #d0b55e;
+      --section-bg: #1e3032;
+      --footer-bg: #1e3032;
+      --nav-text-color: #ffffff;
     }
 
     /* RESET & GLOBAL FONT */
@@ -22,16 +19,14 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Celebrity', Celebri; /* Global font */
+      font-family: 'Celebri'; /* Global font */
     }
 
     body {
       overflow-x: hidden;
     }
 
-    /* =========================
-       HERO / HEADER
-    ========================== */
+    /* HERO / HEADER */
     .hero {
       height: 100vh;
       background-image: url("images/hero/hero-main.jpg");
@@ -55,27 +50,29 @@
       z-index: 2;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start; /* Align to top */
+      align-items: flex-start;
       padding: 20px 60px;
+      flex-wrap: nowrap; /* prevent links dropping below logo */
     }
 
     .logo img {
-      height: 145px; /* Desktop default */
+      height: 145px; /* desktop default */
     }
 
     .nav-links {
       list-style: none;
       display: flex;
       gap: 30px;
+      flex-wrap: nowrap; /* keep links in one line */
     }
 
     .nav-links a {
-      color: var(--nav-text-color); /* Bright white */
+      color: var(--nav-text-color);
       text-decoration: none;
       font-size: 1rem;
       letter-spacing: 1px;
       transition: all 0.3s ease;
-      text-shadow: 0 0 3px rgba(0,0,0,0.5); /* subtle glow */
+      text-shadow: 0 0 3px rgba(0,0,0,0.5);
     }
 
     .nav-links a:hover {
@@ -95,12 +92,12 @@
     }
 
     .hero-center h1 {
-      font-size: 6vw; /* responsive size */
+      font-size: 6vw;
       margin-bottom: 10px;
     }
 
     .hero-center p {
-      font-size: 1.5vw; /* responsive size */
+      font-size: 1.5vw;
       margin-bottom: 30px;
     }
 
@@ -109,9 +106,9 @@
       display: inline-block;
       padding: 1rem 2.5rem;
       background: var(--accent-color);
-      color: #ffffff; /* vibrant white */
+      color: #ffffff;
       text-decoration: none;
-      border-radius: 50px; /* oval shape */
+      border-radius: 50px;
       transition: all 0.3s ease;
       font-weight: bold;
       font-size: 1rem;
@@ -123,13 +120,11 @@
       background: var(--hover-color);
     }
 
-    /* =========================
-       MAIN CONTENT SECTION
-    ========================== */
+    /* MAIN CONTENT */
     .content-section {
       background: var(--section-bg);
       padding: 80px 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Shadow */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       border-radius: 5px;
       margin-bottom: 40px;
     }
@@ -146,9 +141,7 @@
       margin-bottom: 25px;
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
+    /* FOOTER */
     .site-footer {
       background: var(--footer-bg);
       color: #aaa;
@@ -157,77 +150,33 @@
       font-size: 0.9rem;
     }
 
-    /* =========================
-       MEDIA QUERIES
-    ========================== */
+    /* RESPONSIVE MEDIA QUERIES */
     @media (max-width: 1200px) {
-      .logo img {
-        height: 120px;
-      }
+      .logo img { height: 120px; }
     }
 
     @media (max-width: 992px) {
-      .logo img {
-        height: 100px;
-      }
-      .hero-center h1 {
-        font-size: 8vw;
-      }
-      .hero-center p {
-        font-size: 2.5vw;
-      }
-      .btn-primary {
-        font-size: 0.9rem;
-        padding: 0.8rem 2rem;
-      }
-      .nav-links {
-        gap: 20px;
-      }
+      .logo img { height: 100px; }
+      .hero-center h1 { font-size: 8vw; }
+      .hero-center p { font-size: 2.5vw; }
+      .btn-primary { font-size: 0.9rem; padding: 0.8rem 2rem; }
+      .nav-links { gap: 20px; }
     }
 
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-top: 10px;
-      }
-      .logo img {
-        height: 90px;
-      }
-      .hero-center h1 {
-        font-size: 10vw;
-      }
-      .hero-center p {
-        font-size: 3vw;
-      }
-      .btn-primary {
-        font-size: 0.85rem;
-        padding: 0.7rem 1.8rem;
-      }
+      .logo img { height: 90px; }
+      .hero-center h1 { font-size: 10vw; }
+      .hero-center p { font-size: 3vw; }
+      .btn-primary { font-size: 0.85rem; padding: 0.7rem 1.8rem; }
+      .nav-links { gap: 15px; }
     }
 
     @media (max-width: 480px) {
-      .logo img {
-        height: 70px;
-      }
-      .hero-center h1 {
-        font-size: 12vw;
-      }
-      .hero-center p {
-        font-size: 4vw;
-      }
-      .btn-primary {
-        font-size: 0.8rem;
-        padding: 0.6rem 1.5rem;
-      }
-      .nav-links {
-        gap: 10px;
-        font-size: 0.9rem;
-      }
+      .logo img { height: 70px; }
+      .hero-center h1 { font-size: 12vw; }
+      .hero-center p { font-size: 4vw; }
+      .btn-primary { font-size: 0.8rem; padding: 0.6rem 1.5rem; }
+      .nav-links { gap: 10px; font-size: 0.9rem; }
     }
 
   </style>
@@ -257,7 +206,7 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT (COLOR BACKGROUND + SHADOW) -->
+  <!-- MAIN CONTENT -->
   <section class="content-section">
     <div class="content-container">
       <p>
