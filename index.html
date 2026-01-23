@@ -1,191 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Rivanta Resorts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
-:root {
-  --gold: #cda146;
-  --bg-dark: #1e3032;
-  --white-soft: #f5f7f7;
+/* ================= VARIABLES ================= */
+:root{
+  --gold:#cda146;
+  --dark:#1e3032;
+  --white:#f5f7f7;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Celebri", sans-serif;
+/* ================= GLOBAL ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Celebri", sans-serif;
 }
 
-body {
-  background: #000;
-  color: #fff;
-  overflow-x: hidden;
+body{
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* ================= HEADER / HERO ================= */
-.hero {
-  min-height: 100vh;
-  background: 
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("images/hero-main.jpg") center/cover no-repeat;
-  background-attachment: fixed;
-  display: grid;
-  grid-template-rows: auto 1fr;
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+    url("images/hero/hero-main.jpg") center/cover no-repeat;
+  background-attachment:fixed;
 }
 
-/* Top bar (phone + nav) */
-.hero-top {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  padding: clamp(12px, 2vw, 24px);
-  gap: clamp(16px, 3vw, 40px);
+/* top header container */
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:20px clamp(20px,4vw,60px);
 }
 
-/* Logo */
-.logo img {
-  height: clamp(90px, 12vw, 145px);
+/* logo */
+.logo img{
+  height:clamp(110px,14vw,145px);
 }
 
-/* Right side: phone + nav */
-.top-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
+/* right side */
+.top-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
 }
 
-/* Phone */
-.hero-phone {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  font-weight: 600;
+/* phone */
+.hero-phone{
+  font-size:clamp(1.1rem,2vw,1.4rem);
+  font-weight:600;
 }
 
-/* Nav */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: clamp(14px, 2.5vw, 30px);
+/* nav */
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:clamp(16px,3vw,32px);
 }
 
-.nav-links a {
-  color: var(--white-soft);
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+.nav-links a{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.5px;
+  transition:all .3s ease;
 }
 
-.nav-links a:hover {
-  color: var(--gold);
+.nav-links a:hover{
+  color:var(--gold);
+  text-shadow:0 0 12px var(--gold);
 }
 
-/* Hero center */
-.hero-center {
-  align-self: center;
-  text-align: center;
-  padding: 0 20px;
+/* center hero text */
+.hero-center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 20px;
 }
 
-.hero-center h1 {
-  font-size: clamp(3rem, 8vw, 5.5rem);
+.hero-center h1{
+  font-size:clamp(3.5rem,8vw,6rem);
 }
 
-.hero-center p {
-  margin: 15px 0 35px;
-  font-size: clamp(1rem, 3vw, 1.4rem);
+.hero-center p{
+  margin:15px 0 35px;
+  font-size:clamp(1.1rem,2.8vw,1.5rem);
 }
 
-.btn {
-  padding: 14px 40px;
-  border-radius: 999px;
-  background: var(--gold);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  transition: 0.3s ease;
+/* button */
+.btn{
+  padding:14px 42px;
+  border-radius:999px;
+  background:var(--gold);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  transition:all .3s ease;
 }
 
-.btn:hover {
-  box-shadow: 0 0 20px var(--gold);
-  transform: scale(1.05);
+.btn:hover{
+  transform:scale(1.06);
+  box-shadow:0 0 22px var(--gold);
 }
 
-/* ================= CONTENT ================= */
-.content {
-  background: var(--bg-dark);
-  padding: clamp(60px, 10vw, 100px) 20px;
-  box-shadow: 0 -20px 30px rgba(0,0,0,0.4);
+/* ================= MAIN SECTION ================= */
+.main{
+  background:var(--dark);
+  padding:clamp(70px,10vw,110px) 20px;
+  box-shadow:0 -25px 40px rgba(0,0,0,.5);
 }
 
-.content-inner {
-  max-width: 900px;
-  margin: auto;
-  line-height: 1.8;
+.main-inner{
+  max-width:900px;
+  margin:auto;
+  line-height:1.8;
+  font-size:1rem;
 }
 
 /* ================= FOOTER ================= */
-footer {
-  background: var(--bg-dark);
-  padding: clamp(40px, 8vw, 80px) 20px 40px;
+footer{
+  background:var(--dark);
+  padding:clamp(50px,9vw,90px) 20px 40px;
 }
 
-/* Footer main row */
-.footer-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(20px, 6vw, 80px);
-  align-items: start;
+/* footer layout */
+.footer-main{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:clamp(30px,6vw,90px);
 }
 
-/* Left footer */
-.footer-left img {
-  width: clamp(140px, 30vw, 220px);
-  margin-bottom: 12px;
+/* left */
+.footer-left img{
+  width:clamp(160px,30vw,230px);
+  margin-bottom:14px;
 }
 
-.socials {
-  display: flex;
-  gap: 12px;
+.socials{
+  display:flex;
+  gap:14px;
 }
 
-.socials img {
-  width: 28px;
-  height: 28px;
+.socials img{
+  width:28px;
+  height:28px;
 }
 
-/* Right footer */
-.footer-right {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-end;
+/* right */
+.footer-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
 }
 
-.footer-right a {
-  color: var(--gold);
-  text-decoration: none;
-  font-weight: 600;
+.footer-right a{
+  color:var(--gold);
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
 }
 
-.footer-right span {
-  color: var(--white-soft);
+.footer-right a:hover{
+  text-shadow:0 0 10px var(--gold);
 }
 
-/* Footer bottom */
-.footer-bottom {
-  text-align: center;
-  margin-top: clamp(30px, 6vw, 60px);
-  font-size: 0.9rem;
-  line-height: 1.6;
+.footer-right span{
+  color:var(--white);
 }
 
-/* ================= RESPONSIVE FIX ================= */
-@media (max-width: 768px) {
-  .footer-main {
-    grid-template-columns: 1fr 1fr;
+/* bottom */
+.footer-bottom{
+  margin-top:clamp(35px,7vw,60px);
+  text-align:center;
+  font-size:.9rem;
+  line-height:1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .hero-top{
+    padding:16px 20px;
+  }
+  .footer-main{
+    gap:30px;
   }
 }
 </style>
@@ -193,10 +211,11 @@ footer {
 
 <body>
 
+<!-- HERO -->
 <header class="hero">
   <div class="hero-top">
     <div class="logo">
-      <img src="images/logo-primary.png" alt="Rivanta Resorts">
+      <img src="images/logos/logo-primary.png" alt="Rivanta Resorts">
     </div>
 
     <div class="top-right">
@@ -213,22 +232,24 @@ footer {
   <div class="hero-center">
     <h1>Rivanta</h1>
     <p>Where every stay becomes a story</p>
-    <a class="btn" href="#">Book Now</a>
+    <a href="#" class="btn">Book Now</a>
   </div>
 </header>
 
-<section class="content">
-  <div class="content-inner">
-    <p>Sample content paragraph one.</p>
-    <p>Sample content paragraph two.</p>
-    <p>Sample content paragraph three.</p>
+<!-- MAIN -->
+<section class="main">
+  <div class="main-inner">
+    <p>Rivanta Resorts blends nature, comfort, and elegance into one immersive experience.</p>
+    <p>Designed for calm, celebration, and unforgettable memories.</p>
+    <p>Every stay becomes a story worth remembering.</p>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-main">
     <div class="footer-left">
-      <img src="images/logo-primary.png" alt="Rivanta Resorts">
+      <img src="images/logos/logo-primary.png" alt="Rivanta Resorts">
       <div class="socials">
         <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
         <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
