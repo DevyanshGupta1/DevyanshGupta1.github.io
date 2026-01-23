@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rivanta Resorts</title>
-
 <style>
 * {
   margin: 0;
@@ -30,7 +29,8 @@ html, body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.35); /* dark overlay */
+  z-index: 1;
 }
 
 /* Phone number */
@@ -47,12 +47,10 @@ html, body {
 .navbar {
   position: absolute;
   top: 62px; /* directly below phone */
-  left: 0;
-  width: 100%;
-  padding: 0 50px;
+  left: 50px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 36px;
   z-index: 3;
 }
 
@@ -63,7 +61,6 @@ html, body {
 .nav-links {
   display: flex;
   gap: 36px;
-  white-space: nowrap;
 }
 
 .nav-links a {
@@ -119,7 +116,7 @@ html, body {
 .main {
   background: #1e3032;
   padding: 80px 12%;
-  box-shadow: 0 -18px 36px rgba(0,0,0,0.55);
+  box-shadow: 0 -18px 36px rgba(0,0,0,0.55); /* shadow under main */
 }
 
 .main p {
@@ -159,11 +156,10 @@ html, body {
   height: 26px;
 }
 
-/* RIGHT SIDE – left-aligned text */
 .footer-right {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-start; /* left-aligned text inside right block */
   gap: 14px;
   font-size: 18px;
 }
@@ -177,39 +173,42 @@ html, body {
   color: #ffffff;
 }
 
-/* Footer bottom */
 .footer-bottom {
   margin-top: 45px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px; /* slightly bigger */
 }
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
 
   .hero-phone {
-    font-size: 16px;
+    font-size: 18px;
     right: 20px;
   }
 
   .navbar {
-    padding: 0 20px;
+    left: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .nav-logo {
-    height: 100px;
+    height: 120px; /* slightly smaller on mobile */
   }
 
   .nav-links {
-    gap: 18px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .nav-links a {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .hero-center h1 {
-    font-size: 34px;
+    font-size: 36px;
   }
 
   .hero-center p {
@@ -217,8 +216,10 @@ html, body {
   }
 
   .book-btn {
-    padding: 14px 30px;
+    padding: 12px 28px;
     font-size: 16px;
+    max-width: 90%; /* prevent overflow */
+    text-align: center;
   }
 
   .footer {
@@ -226,12 +227,19 @@ html, body {
   }
 
   .footer-logo {
-    height: 110px;
+    height: 120px;
+  }
+
+  .footer-right {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    font-size: 14px;
   }
 }
 </style>
 </head>
-
 <body>
 
 <section class="hero">
