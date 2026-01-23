@@ -10,18 +10,18 @@
        VARIABLES
     ========================== */
     :root {
-      --accent-color: #cda146;   /* Button color */
-      --gold-glow: #cda146;      /* Button hover shadow */
-      --section-bg: #1e3032;     /* Content background */
-      --footer-bg: #1e3032;      /* Footer background */
+      --accent-color: #cda146;    /* Button color */
+      --hover-color: #d0b55e;     /* Button hover (slightly lighter + bluish tint) */
+      --section-bg: #1e3032;      /* Main content background */
+      --footer-bg: #1e3032;       /* Footer background */
     }
 
-    /* RESET */
+    /* RESET & GLOBAL FONT */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Celebrity', sans-serif; /* Global font */
     }
 
     body {
@@ -50,16 +50,16 @@
 
     /* NAVBAR */
     .navbar {
-      position: relative;          /* Change to fixed if sticky needed */
+      position: relative;
       z-index: 2;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;     /* Align logo + nav to top */
-      padding: 20px 60px;          /* Adjust top padding */
+      align-items: flex-start; /* Align to top */
+      padding: 20px 60px;
     }
 
     .logo img {
-      height: 100px; /* Updated logo size */
+      height: 155px; /* original height */
     }
 
     .nav-links {
@@ -73,6 +73,12 @@
       text-decoration: none;
       font-size: 14px;
       letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    /* Buttons hover color */
+    .nav-links a:hover {
+      color: var(--hover-color); /* Slightly brighter + blue tint effect */
     }
 
     /* HERO CENTER CONTENT */
@@ -108,7 +114,8 @@
 
     .btn-primary:hover {
       transform: scale(1.06);
-      box-shadow: 0 0 20px var(--gold-glow);
+      box-shadow: 0 0 20px var(--hover-color);
+      background: var(--hover-color);
     }
 
     /* =========================
@@ -117,6 +124,9 @@
     .content-section {
       background: var(--section-bg);
       padding: 100px 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Shadow for distinction */
+      border-radius: 5px;
+      margin-bottom: 40px;
     }
 
     .content-container {
@@ -169,7 +179,7 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT (COLOR BACKGROUND) -->
+  <!-- MAIN CONTENT (COLOR BACKGROUND + SHADOW) -->
   <section class="content-section">
     <div class="content-container">
       <p>
