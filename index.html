@@ -32,17 +32,16 @@ body {
   background-image: url("images/hero/hero-main.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* fixed image for parallax effect */
+  background-attachment: fixed; /* fixed hero image */
   position: relative;
   color: #fff;
-  transition: opacity 0.5s ease; /* smooth fade */
 }
 
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35); /* slight dark overlay */
+  background: rgba(0, 0, 0, 0.45); /* slightly darker overlay */
 }
 
 /* NAVBAR */
@@ -52,7 +51,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start; 
-  padding: 20px 20px; /* reduced padding */
+  padding: 20px 20px; /* reduced padding for mobile spacing */
   flex-wrap: nowrap;
 }
 
@@ -179,10 +178,10 @@ body {
   .hero-center p { font-size: 4vw; }
   .btn-primary { font-size: 0.8rem; padding: 0.6rem 1.5rem; }
   .nav-links { gap: 10px; }
-  
+
   /* Fix mobile parallax jitter */
   .hero {
-    background-attachment: scroll;
+    background-attachment: scroll; /* mobile-safe */
   }
 }
 
@@ -191,7 +190,7 @@ body {
 
 <body>
 
-<header class="hero" id="hero">
+<header class="hero">
   <nav class="navbar">
     <div class="logo">
       <img src="images/logos/logo-primary.png" alt="Rivanta Resorts Logo">
@@ -236,19 +235,6 @@ body {
 <footer class="site-footer">
   © Rivanta Resorts. All Rights Reserved.
 </footer>
-
-<script>
-// Fade out hero on scroll
-window.addEventListener('scroll', function() {
-  const hero = document.getElementById('hero');
-  const scrollY = window.scrollY;
-  const fadeStart = 0;
-  const fadeEnd = 300; // hero fades over 300px scroll
-  let opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
-  if(opacity < 0) opacity = 0;
-  hero.style.opacity = opacity;
-});
-</script>
 
 </body>
 </html>
