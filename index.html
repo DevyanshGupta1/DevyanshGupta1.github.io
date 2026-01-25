@@ -6,7 +6,6 @@
 <title>Rivanta Resorts</title>
 
 <style>
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -24,58 +23,55 @@ html, body {
 .hero {
     position: relative;
     height: 100vh;
-    background: url("assets/images/hero/hero-main.jpg") center/cover no-repeat;
+    background: url("images/hero/hero-main.jpg") center/cover no-repeat;
 }
 
-.hero-overlay {
+.hero::after {
+    content: "";
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.45);
-    z-index: 1;
 }
 
-/* TOP BAR */
-.top-bar {
+/* TOP AREA */
+.top-wrap {
     position: absolute;
     top: 20px;
-    left: 20px;
-    right: 20px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    left: 30px;
+    right: 30px;
     z-index: 3;
-}
-
-/* LOGO */
-.logo img {
-    height: 90px;
-    width: auto;
-}
-
-/* RIGHT AREA */
-.right-area {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
 }
 
 /* NUMBER */
 .contact-number {
-    font-size: 28px;
+    text-align: right;
+    font-size: 30px;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
-/* NAVBAR */
+/* HEADER ROW */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* LOGO */
+.logo img {
+    height: 145px;
+}
+
+/* NAV */
 .navbar {
     display: flex;
     gap: 22px;
+    align-items: center;
 }
 
 .navbar a {
-    text-decoration: none;
     color: #fff;
+    text-decoration: none;
     font-size: 16px;
     position: relative;
 }
@@ -84,7 +80,7 @@ html, body {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px;
+    bottom: -5px;
     width: 0;
     height: 2px;
     background: gold;
@@ -95,7 +91,6 @@ html, body {
     width: 100%;
 }
 
-/* BOOK NOW */
 .book-now {
     background: gold;
     color: #fff;
@@ -120,46 +115,43 @@ html, body {
     letter-spacing: 4px;
 }
 
-.hero-text p {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-/* SHADOW AFTER HERO */
+/* SHADOW */
 .section-shadow {
-    height: 40px;
+    height: 50px;
     background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
 }
 
-/* ABOUT — FIXED OVERLAP (ONLY CHANGE YOU ASKED) */
+/* ABOUT */
 .about-section {
-    padding: 120px 40px 80px;
-    background: #000;
+    padding: 140px 40px 80px;
     text-align: center;
-}
-
-.about-section h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.about-section p {
-    font-size: 18px;
-    max-width: 800px;
-    margin: auto;
 }
 
 /* FOOTER */
 .footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 40px;
-    background: #000;
+}
+
+.footer-left {
+    max-width: 40%;
 }
 
 .footer-left img {
-    height: 80px;
+    width: 100%;
+    max-width: 220px;
+}
+
+.socials {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.socials img {
+    width: 26px;
 }
 
 .footer-right {
@@ -169,33 +161,34 @@ html, body {
 .footer-right a {
     color: #fff;
     text-decoration: none;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
     font-size: 16px;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-
-    .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
+    .logo img {
+        height: 90px;
     }
 
-    .right-area {
-        align-items: flex-start;
-        margin-top: 8px;
+    .contact-number {
+        font-size: 22px;
     }
 
     .navbar {
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 14px;
     }
 
-    .logo img {
-        height: 70px;
-    }
-
-    .hero-text h1 {
-        font-size: 40px;
+    .footer {
+        flex-direction: column;
+        gap: 30px;
     }
 }
 </style>
@@ -204,48 +197,54 @@ html, body {
 <body>
 
 <header class="hero">
-    <div class="hero-overlay"></div>
+    <div class="top-wrap">
+        <div class="contact-number">+91 86298 64262</div>
 
-    <div class="top-bar">
-        <div class="logo">
-            <img src="assets/images/logos/logo-primary.png" alt="Rivanta Logo">
-        </div>
+        <div class="header-row">
+            <div class="logo">
+                <img src="images/logos/logo-primary.png" alt="Rivanta">
+            </div>
 
-        <div class="right-area">
-            <div class="contact-number">+91 98765 43210</div>
             <nav class="navbar">
-                <a href="#about">About Us</a>
-                <a href="#amenities">Amenities</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#booking" class="book-now">Book Now</a>
+                <a href="#">About Us</a>
+                <a href="#">Amenities</a>
+                <a href="#">Gallery</a>
+                <a href="#" class="book-now">Book Now</a>
             </nav>
         </div>
     </div>
 
     <div class="hero-text">
         <h1>RIVANTA RESORTS</h1>
-        <p>Luxury • Comfort • Experience</p>
     </div>
 </header>
 
 <div class="section-shadow"></div>
 
-<section id="about" class="about-section">
+<section class="about-section">
     <h2>About Us</h2>
-    <p>
-        Rivanta Resorts offers a premium hospitality experience across India,
-        combining luxury with nature.
-    </p>
 </section>
 
-<footer class="footer">
-    <div class="footer-left">
-        <img src="assets/images/logos/logo-secondary.png" alt="Footer Logo">
+<footer>
+    <div class="footer">
+        <div class="footer-left">
+            <img src="images/logos/logo-secondary.png" alt="Rivanta">
+            <div class="socials">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Google_2015_logo.svg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cancellation Policy</a>
+            <div>info@trailside.in</div>
+        </div>
     </div>
-    <div class="footer-right">
-        <p><a href="#">Privacy Policy</a></p>
-        <p><a href="#">Cancellation Policy</a></p>
-        <p>info@rivantaresorts.com</p>
+
+    <div class="footer-bottom">
+        © 2026 [Trailside Hospitality] | Powered by [Rivanta Resorts]
     </div>
 </footer>
 
