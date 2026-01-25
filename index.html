@@ -216,6 +216,39 @@ footer {
     border-radius: 6px;
     flex-shrink: 0;
 }
+.gallery-section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.gallery-subtitle {
+  font-family: "Calibri", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.gallery-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+}
+
+.gallery-track img {
+  width: 22vw;           /* KEY FIX: prevents half-cut image on PC */
+  max-width: 300px;
+  min-width: 220px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
@@ -271,8 +304,8 @@ footer {
         font-size: 32px;
     }
     .gallery-track img {
-        width: 80vw;
-        height: 240px;
+        width: 70vw;
+        height: 160px;
     }
 }
 </style>
@@ -306,24 +339,24 @@ footer {
 
     </div>
 </header>
-<section class="temp-gallery">
-    <h2>Gallery</h2>
-    <h4>Peak Into Our World</h4>
+<section class="gallery-section">
+  <h3 class="gallery-subtitle">Peek into our world</h3>
 
-    <div class="gallery-viewport">
-    <div class="gallery-track" id="galleryTrack">
-        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80">
-        <img src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?auto=format&fit=crop&w=1200&q=80">
+  <div class="gallery-wrapper">
+    <div class="gallery-track">
+      <!-- Original images -->
+      <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210c2" alt="">
+      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb" alt="">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="">
+      <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" alt="">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="">
+      <img src="https://images.unsplash.com/photo-1519821172141-b5d8dceec4d0" alt="">
+      <img src="https://images.unsplash.com/photo-1541971875076-8f970d573be6" alt="">
+      <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa" alt="">
     </div>
-</div>
-
+  </div>
 </section>
+
 
 <section class="main">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -359,23 +392,34 @@ footer {
     </div>
 </footer>
 <script>
-const track = document.getElementById("galleryTrack");
-const images = track.children;
-let index = 0;
+  const track = document.querySelector(".gallery-track");
+  const images = Array.from(track.children);
 
-function slideGallery() {
-    const imageWidth = images[0].offsetWidth + 25;
-    index++;
+  // Clone images for seamless loop
+  images.forEach(img => {
+    const clone = img.cloneNode(true);
+    track.appendChild(clone);
+  });
 
-    if (index > images.length - 4) {
-        index = 0;
+  let position = 0;
+  let speed = 0.5; // adjust speed here
+
+  function moveGallery() {
+    position -= speed;
+
+    const firstImageWidth = images[0].offsetWidth + 20;
+
+    if (Math.abs(position) >= firstImageWidth * images.length) {
+      position = 0;
     }
 
-    track.style.transform = `translateX(-${index * imageWidth}px)`;
-}
+    track.style.transform = `translateX(${position}px)`;
+    requestAnimationFrame(moveGallery);
+  }
 
-setInterval(slideGallery, 2500);
+  moveGallery();
 </script>
+
 
 </body>
 </html>
