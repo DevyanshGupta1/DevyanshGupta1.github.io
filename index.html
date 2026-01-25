@@ -197,6 +197,25 @@ footer {
     object-fit: cover;
     border-radius: 6px;
 }
+    /* ================= SCROLLING GALLERY ================= */
+.gallery-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.gallery-track {
+    display: flex;
+    gap: 25px;
+    transition: transform 0.8s ease-in-out;
+}
+
+.gallery-track img {
+    width: calc(25vw - 25px); /* 4 images visible on PC */
+    height: 320px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
@@ -251,6 +270,10 @@ footer {
     .temp-gallery h2 {
         font-size: 32px;
     }
+    .gallery-track img {
+        width: 80vw;
+        height: 240px;
+    }
 }
 </style>
 </head>
@@ -284,10 +307,12 @@ footer {
     </div>
 </header>
 <section class="temp-gallery">
-    <h2>Peek Into Our World</h2>
+    <h2>Gallery</h2>
+    <h4>Peak Into Our World</h4>
 
-    <div class="temp-gallery-grid">
-        <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210c7?auto=format&fit=crop&w=1200&q=80">
+    <div class="gallery-viewport">
+    <div class="gallery-track" id="galleryTrack">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80">
@@ -296,6 +321,8 @@ footer {
         <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80">
         <img src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?auto=format&fit=crop&w=1200&q=80">
     </div>
+</div>
+
 </section>
 
 <section class="main">
@@ -331,6 +358,24 @@ footer {
         Copyright © 2026 [Trailside Hospitality] | Powered by [Rivanta Resorts]
     </div>
 </footer>
+<script>
+const track = document.getElementById("galleryTrack");
+const images = track.children;
+let index = 0;
+
+function slideGallery() {
+    const imageWidth = images[0].offsetWidth + 25;
+    index++;
+
+    if (index > images.length - 4) {
+        index = 0;
+    }
+
+    track.style.transform = `translateX(-${index * imageWidth}px)`;
+}
+
+setInterval(slideGallery, 2500);
+</script>
 
 </body>
 </html>
