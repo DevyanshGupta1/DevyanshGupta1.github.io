@@ -248,6 +248,21 @@ footer {
   border-radius: 10px;
   flex-shrink: 0;
 }
+/* ===== Gallery Motion Fix ===== */
+.gallery-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 20px;
+  will-change: transform;
+}
+
+.gallery-track img {
+  flex-shrink: 0;
+}
 
 
 /* ================= RESPONSIVE ================= */
@@ -392,33 +407,46 @@ footer {
     </div>
 </footer>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
   const track = document.querySelector(".gallery-track");
   const images = Array.from(track.children);
 
-  // Clone images for seamless loop
-  images.forEach(img => {
+  if (!track || images.length === 0) return;
+
+  // Clone first few images for seamless loop
+  images.slice(0, 4).forEach(img => {
     const clone = img.cloneNode(true);
     track.appendChild(clone);
   });
 
-  let position = 0;
-  let speed = 0.5; // adjust speed here
+  let index = 0;
+  const gap = 20;
+  const imgWidth = images[0].offsetWidth + gap;
+
+  const PAUSE_TIME = 2000; // 2 seconds pause
+  const MOVE_TIME = 600;   // animation duration
 
   function moveGallery() {
-    position -= speed;
+    index++;
 
-    const firstImageWidth = images[0].offsetWidth + 20;
+    track.style.transition = `transform ${MOVE_TIME}ms ease-in-out`;
+    track.style.transform = `translateX(-${imgWidth * index}px)`;
 
-    if (Math.abs(position) >= firstImageWidth * images.length) {
-      position = 0;
+    // When reaching cloned images, reset seamlessly
+    if (index === images.length) {
+      setTimeout(() => {
+        track.style.transition = "none";
+        track.style.transform = "translateX(0)";
+        index = 0;
+      }, MOVE_TIME);
     }
-
-    track.style.transform = `translateX(${position}px)`;
-    requestAnimationFrame(moveGallery);
   }
 
-  moveGallery();
+  // Controlled interval (NO reflow spam)
+  setInterval(moveGallery, PAUSE_TIME + MOVE_TIME);
+});
 </script>
+
 
 
 </body>
