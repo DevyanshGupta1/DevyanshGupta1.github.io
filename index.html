@@ -172,22 +172,42 @@ footer {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-    .logo img {
-        height: 90px;
+
+    /* Reduce left padding causing empty space */
+    .top-bar {
+        padding: 15px 15px 0;
     }
 
-    .phone {
-        font-size: 20px;
+    /* Slightly smaller logo so navbar fits */
+    .logo img {
+        height: 80px;
+    }
+
+    /* Keep navbar fully visible */
+    .navbar {
+        gap: 12px;
     }
 
     .navbar a {
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    .hero-center h1 {
-        font-size: 40px;
+    /* Reduce phone size so it doesn’t push navbar */
+    .phone {
+        font-size: 18px;
+    }
+
+    /* FOOTER SEPARATION */
+    .footer-top {
+        gap: 25px;
+    }
+
+    .footer-right {
+        border-top: 1px solid rgba(255,255,255,0.2);
+        padding-top: 20px;
     }
 }
+
 </style>
 </head>
 
