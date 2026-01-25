@@ -363,6 +363,21 @@ footer {
     width: 100vw;      /* one full screen image */
     flex-shrink: 0;
   }
+  .gallery-wrapper {
+    overflow: hidden;
+  }
+
+  .gallery-track {
+    display: flex;
+    gap: 15px; /* Add gap between images */
+  }
+
+  .gallery-track img {
+    flex: 0 0 calc(100% - 15px); /* One image minus the gap */
+    height: auto;
+    object-fit: cover;
+  }
+
 }
 </style>
 </head>
