@@ -263,6 +263,27 @@ footer {
 .gallery-track img {
   flex-shrink: 0;
 }
+/* ===== Gallery Section Styling ===== */
+.gallery-section {
+  background: #1e3032; /* matches site tone */
+  padding: 80px 40px;
+}
+
+.gallery-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-heading h2 {
+  font-size: 42px;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+.gallery-heading p {
+  font-size: 18px;
+  opacity: 0.85;
+}
 
 
 /* ================= RESPONSIVE ================= */
@@ -322,6 +343,17 @@ footer {
         width: 70vw;
         height: 160px;
     }
+    .gallery-section {
+    padding: 60px 20px;
+    }
+
+    .gallery-heading h2 {
+    font-size: 32px;
+    }
+
+    .gallery-heading p {
+    font-size: 16px;
+    }
 }
 </style>
 </head>
@@ -355,7 +387,10 @@ footer {
     </div>
 </header>
 <section class="gallery-section">
-  <h3 class="gallery-subtitle">Peek into our world</h3>
+  <div class="gallery-heading">
+    <h2>GALLERY</h2>
+    <p>Peek Into Our Gallery</p>
+  </div>
 
   <div class="gallery-wrapper">
     <div class="gallery-track">
