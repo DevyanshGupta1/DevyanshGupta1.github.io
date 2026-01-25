@@ -195,16 +195,24 @@ footer {
         font-size: 18px;
     }
 
-    /* FOOTER MOBILE FIX */
+    /* FOOTER — KEEP LEFT / RIGHT */
     .footer-top {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .footer-left img {
+        height: 80px;
+    }
+
+    .socials a img {
+        height: 22px;
     }
 
     .footer-right {
-        padding-left: 0;
-        border-left: none;
-        border-top: 1px solid rgba(255,255,255,0.25);
-        padding-top: 20px;
+        padding-left: 20px;
+        border-left: 1px solid rgba(255,255,255,0.25);
+        font-size: 14px;
     }
 }
 </style>
