@@ -4,290 +4,249 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rivanta Resorts</title>
+
 <style>
+/* RESET */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
-  width: 100%;
-  overflow-x: hidden;
-  font-family: Celebri;
-  color: #ffffff;
+    overflow-x: hidden;
+    background: #000;
+    color: #fff;
+    font-family: celebrity;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero {
-  position: relative;
-  height: 100vh;
-  background: url("images/hero/hero-main.jpg") center / cover no-repeat fixed;
+    position: relative;
+    height: 100vh;
+    background: url("assets/images/hero/hero-main.jpg") center/cover no-repeat;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35); /* dark overlay */
-  z-index: 1;
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
 }
 
-/* Phone number */
-.hero-phone {
-  position: absolute;
-  top: 18px;
-  right: 40px;
-  font-size: 22px;
-  color: #ffffff;
-  z-index: 3;
+/* TOP BAR */
+.top-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 3;
 }
 
-/* Logo */
-.nav-logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 145px; /* PC logo size */
-  z-index: 3;
+/* LOGO */
+.logo img {
+    height: 90px;
+    width: auto;
 }
 
-/* Navbar */
+/* RIGHT AREA */
+.right-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* NUMBER */
+.contact-number {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+/* NAVBAR */
 .navbar {
-  position: absolute;
-  top: 60px; /* slightly below phone */
-  right: 40px;
-  display: flex;
-  gap: 36px;
-  z-index: 3;
+    display: flex;
+    gap: 22px;
 }
 
 .navbar a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 18px;
-  transition: 0.3s;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    position: relative;
 }
 
-.navbar a:hover {
-  text-shadow: 0 0 14px #cda146;
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: gold;
+    transition: width 0.3s ease;
 }
 
-/* Hero center */
-.hero-center {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.navbar a:hover::after {
+    width: 100%;
 }
 
-.hero-center h1 {
-  font-size: 60px;
-  margin-bottom: 18px;
+/* BOOK NOW */
+.book-now {
+    background: gold;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 4px;
 }
 
-.hero-center p {
-  font-size: 24px;
-  margin-bottom: 40px;
+/* HERO TEXT */
+.hero-text {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-/* Book button */
-.book-btn {
-  background: #cda146;
-  color: #ffffff;
-  padding: 16px 44px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-size: 18px;
-  transition: 0.3s;
+.hero-text h1 {
+    font-size: 64px;
+    letter-spacing: 4px;
 }
 
-.book-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 22px #cda146, 0 0 10px rgba(0,120,255,0.4);
+.hero-text p {
+    font-size: 20px;
+    margin-top: 10px;
 }
 
-/* ================= MAIN ================= */
-.main {
-  background: #1e3032;
-  padding: 80px 12%;
-  box-shadow: 0 -18px 36px rgba(0,0,0,0.55); /* shadow under main */
+/* SHADOW AFTER HERO */
+.section-shadow {
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
 }
 
-.main p {
-  font-size: 17px;
-  line-height: 1.7;
-  margin-bottom: 20px;
+/* ABOUT — FIXED OVERLAP (ONLY CHANGE YOU ASKED) */
+.about-section {
+    padding: 120px 40px 80px;
+    background: #000;
+    text-align: center;
 }
 
-/* ================= FOOTER ================= */
+.about-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about-section p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* FOOTER */
 .footer {
-  background: #1e3032;
-  padding: 70px 90px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    background: #000;
 }
 
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.footer-logo {
-  height: 170px;
-}
-
-.socials {
-  display: flex;
-  gap: 18px;
-}
-
-.socials a img {
-  height: 26px;
+.footer-left img {
+    height: 80px;
 }
 
 .footer-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  font-size: 18px;
+    text-align: left;
 }
 
 .footer-right a {
-  color: #ffffff;
-  text-decoration: none;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
 }
 
-.footer-right span {
-  color: #ffffff;
-}
-
-.footer-bottom {
-  margin-top: 45px;
-  text-align: center;
-  font-size: 16px;
-}
-
-/* ================= MOBILE ================= */
+/* MOBILE */
 @media (max-width: 768px) {
 
-  .hero-phone {
-    font-size: 18px;
-    right: 20px;
-  }
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .nav-logo {
-    height: 100px; /* mobile logo smaller */
-  }
+    .right-area {
+        align-items: flex-start;
+        margin-top: 8px;
+    }
 
-  .navbar {
-    top: 55px;
-    right: 20px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+    .navbar {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 
-  .navbar a {
-    font-size: 16px;
-  }
+    .logo img {
+        height: 70px;
+    }
 
-  .hero-center h1 {
-    font-size: 36px;
-  }
-
-  .hero-center p {
-    font-size: 18px;
-  }
-
-  .book-btn {
-    padding: 12px 28px;
-    font-size: 16px;
-    max-width: 90%;
-    text-align: center;
-  }
-
-  .footer {
-    padding: 50px 24px 24px;
-  }
-
-  .footer-logo {
-    height: 120px;
-  }
-
-  .footer-right {
-    font-size: 16px;
-  }
-
-  .footer-bottom {
-    font-size: 14px;
-  }
+    .hero-text h1 {
+        font-size: 40px;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<section class="hero">
-  <img src="images/logos/logo-primary.png" class="nav-logo" alt="Rivanta Logo">
-  <div class="hero-phone">+91 8629864262</div>
+<header class="hero">
+    <div class="hero-overlay"></div>
 
-  <nav class="navbar">
-    <a href="#">About Us</a>
-    <a href="#">Amenities</a>
-    <a href="#">Gallery</a>
-    <a href="#">Booking</a>
-  </nav>
+    <div class="top-bar">
+        <div class="logo">
+            <img src="assets/images/logos/logo-primary.png" alt="Rivanta Logo">
+        </div>
 
-  <div class="hero-center">
-    <h1>Rivanta</h1>
-    <p>Where every stay becomes a story</p>
-    <a href="#" class="book-btn">Book Now</a>
-  </div>
-</section>
+        <div class="right-area">
+            <div class="contact-number">+91 98765 43210</div>
+            <nav class="navbar">
+                <a href="#about">About Us</a>
+                <a href="#amenities">Amenities</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#booking" class="book-now">Book Now</a>
+            </nav>
+        </div>
+    </div>
 
-<section class="main">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-  <p>Integer vehicula, metus nec porta fermentum.</p>
-  <p>Curabitur euismod elit sit amet nulla tincidunt.</p>
+    <div class="hero-text">
+        <h1>RIVANTA RESORTS</h1>
+        <p>Luxury • Comfort • Experience</p>
+    </div>
+</header>
+
+<div class="section-shadow"></div>
+
+<section id="about" class="about-section">
+    <h2>About Us</h2>
+    <p>
+        Rivanta Resorts offers a premium hospitality experience across India,
+        combining luxury with nature.
+    </p>
 </section>
 
 <footer class="footer">
-  <div class="footer-top">
     <div class="footer-left">
-      <img src="images/logos/logo-primary.png" class="footer-logo">
-      <div class="socials">
-        <a href="https://www.instagram.com/rivantaresorts" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
-        </a>
-        <a href="https://www.facebook.com/rivantaresorts" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
-        </a>
-        <a href="https://www.google.com/search?q=Rivanta+Resorts" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
-        </a>
-      </div>
+        <img src="assets/images/logos/logo-secondary.png" alt="Footer Logo">
     </div>
-
     <div class="footer-right">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Cancellation Policy</a>
-      <span>info@resort.in</span>
+        <p><a href="#">Privacy Policy</a></p>
+        <p><a href="#">Cancellation Policy</a></p>
+        <p>info@rivantaresorts.com</p>
     </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div>Kasol, INDIA</div>
-    <div>© 2026 [Trailside Hospitality] | Powered by [Rivanta Resorts]</div>
-  </div>
 </footer>
 
 </body>
