@@ -131,10 +131,10 @@ footer {
 }
 
 .footer-top {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
+    align-items: start;
 }
 
 .footer-left img {
@@ -153,6 +153,8 @@ footer {
 
 /* FOOTER RIGHT */
 .footer-right {
+    padding-left: 40px;
+    border-left: 1px solid rgba(255,255,255,0.25);
     text-align: left;
 }
 
@@ -173,17 +175,14 @@ footer {
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
 
-    /* Reduce left padding causing empty space */
     .top-bar {
         padding: 15px 15px 0;
     }
 
-    /* Slightly smaller logo so navbar fits */
     .logo img {
         height: 80px;
     }
 
-    /* Keep navbar fully visible */
     .navbar {
         gap: 12px;
     }
@@ -192,22 +191,22 @@ footer {
         font-size: 13px;
     }
 
-    /* Reduce phone size so it doesn’t push navbar */
     .phone {
         font-size: 18px;
     }
 
-    /* FOOTER SEPARATION */
+    /* FOOTER MOBILE FIX */
     .footer-top {
-        gap: 25px;
+        grid-template-columns: 1fr;
     }
 
     .footer-right {
-        border-top: 1px solid rgba(255,255,255,0.2);
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.25);
         padding-top: 20px;
     }
 }
-
 </style>
 </head>
 
