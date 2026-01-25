@@ -354,6 +354,15 @@ footer {
     .gallery-heading p {
     font-size: 16px;
     }
+    /* Make gallery show only ONE image at a time */
+  .gallery-track {
+    gap: 0;
+  }
+
+  .gallery-track img {
+    width: 100vw;      /* one full screen image */
+    flex-shrink: 0;
+  }
 }
 </style>
 </head>
