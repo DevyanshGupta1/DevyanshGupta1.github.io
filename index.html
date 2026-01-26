@@ -112,6 +112,11 @@ html, body {
     padding: 80px 40px;
 }
 
+.main h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
 .main p {
     max-width: 900px;
     margin: 0 auto 20px;
@@ -171,7 +176,7 @@ footer {
     margin-top: 40px;
     font-size: 14px;
 }
-    
+
 /* ================= TEMP GALLERY ================= */
 .temp-gallery {
     background: #1e3032;
@@ -197,76 +202,12 @@ footer {
     object-fit: cover;
     border-radius: 6px;
 }
+
 /* ================= SCROLLING GALLERY ================= */
-.gallery-viewport {
-    width: 100%;
-    overflow: hidden;
-}
-
-.gallery-track {
-    display: flex;
-    gap: 25px;
-    transition: transform 0.8s ease-in-out;
-}
-
-.gallery-track img {
-    width: calc(25vw - 25px); /* 4 images visible on PC */
-    height: 320px;
-    object-fit: cover;
-    border-radius: 6px;
-    flex-shrink: 0;
-}
 .gallery-section {
   padding: 60px 0;
   overflow: hidden;
-}
-
-.gallery-subtitle {
-  font-family: "Calibri", sans-serif;
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.gallery-wrapper {
-  width: 100%;
-  overflow: hidden;
-}
-
-.gallery-track {
-  display: flex;
-  gap: 20px;
-  width: max-content;
-}
-
-.gallery-track img {
-  width: 22vw;           /* KEY FIX: prevents half-cut image on PC */
-  max-width: 300px;
-  min-width: 220px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-/* ===== Gallery Motion Fix ===== */
-.gallery-wrapper {
-  overflow: hidden;
-  position: relative;
-}
-
-.gallery-track {
-  display: flex;
-  gap: 20px;
-  will-change: transform;
-}
-
-.gallery-track img {
-  flex-shrink: 0;
-}
-/* ===== Gallery Section Styling ===== */
-.gallery-section {
-  background: #1e3032; /* matches site tone */
-  padding: 80px 40px;
+  background: #1e3032;
 }
 
 .gallery-heading {
@@ -284,6 +225,7 @@ footer {
   font-size: 18px;
   opacity: 0.85;
 }
+
 .gallery-controls {
   display: flex;
   justify-content: center;
@@ -306,6 +248,30 @@ footer {
   transform: scale(1.1);
   box-shadow: 0 0 10px #cda146;
 }
+
+.gallery-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+}
+
+.gallery-track img {
+  width: 22vw;
+  max-width: 300px;
+  min-width: 220px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
 /* ================= MAIN IMAGE SECTION ================= */
 .main-image-section {
     position: relative;
@@ -320,7 +286,7 @@ footer {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45); /* slight dark for text readability */
+    background: rgba(0, 0, 0, 0.45);
 }
 
 .main-image-overlay {
@@ -337,7 +303,7 @@ footer {
     line-height: 1.6;
     letter-spacing: 1px;
 }
-/* Button inside main image */
+
 .main-image-btn {
     display: inline-block;
     margin-top: 30px;
@@ -358,103 +324,27 @@ footer {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-    .main-image-btn {
-        padding: 12px 28px;
-        font-size: 14px;
-    }
-
-    .top-bar {
-        padding: 15px 15px 0;
-    }
-
-    .logo img {
-        height: 80px;
-    }
-
-    .navbar {
-        gap: 12px;
-    }
-
-    .navbar a {
-        font-size: 13px;
-    }
-
-    .phone {
-        font-size: 18px;
-    }
-
-    /* FOOTER — KEEP LEFT / RIGHT */
-    .footer-top {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .footer-left img {
-        height: 80px;
-    }
-
-    .socials a img {
-        height: 22px;
-    }
-
-    .footer-right {
-        padding-left: 20px;
-        border-left: 1px solid rgba(255,255,255,0.25);
-        font-size: 14px;
-    }
-    .temp-gallery-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .temp-gallery-grid img {
-        height: 240px;
-    }
-
-    .temp-gallery h2 {
-        font-size: 32px;
-    }
-    .gallery-track img {
-        width: 70vw;
-        height: 160px;
-    }
-    .gallery-section {
-    padding: 60px 20px;
-    }
-
-    .gallery-heading h2 {
-    font-size: 32px;
-    }
-
-    .gallery-heading p {
-    font-size: 16px;
-    }
-    /* Make gallery show only ONE image at a time */
-  .gallery-wrapper {
-        overflow: hidden;
-        width: 100%;
-    }
-
-    .gallery-track {
-        display: flex;
-    }
-
-    .gallery-track img {
-        flex: 0 0 100%;
-        width: 100%;
-        height: 260px;              /* IMPORTANT: forces visibility */
-        max-height: 260px;
-        object-fit: cover;         /* back to cover */
-        object-position: center;
-    }
-    .main-image-section {
-        height: 70vh;
-    }
-
-    .main-image-overlay p {
-        font-size: 18px;
-        line-height: 1.5;
-    }
-
+    .main-image-btn { padding: 12px 28px; font-size: 14px; }
+    .top-bar { padding: 15px 15px 0; }
+    .logo img { height: 80px; }
+    .navbar { gap: 12px; }
+    .navbar a { font-size: 13px; }
+    .phone { font-size: 18px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .footer-left img { height: 80px; }
+    .socials a img { height: 22px; }
+    .footer-right { padding-left: 20px; border-left: 1px solid rgba(255,255,255,0.25); font-size: 14px; }
+    .temp-gallery-grid { grid-template-columns: 1fr; }
+    .temp-gallery-grid img { height: 240px; }
+    .temp-gallery h2 { font-size: 32px; }
+    .gallery-track img { width: 70vw; height: 160px; }
+    .gallery-section { padding: 60px 20px; }
+    .gallery-heading h2 { font-size: 32px; }
+    .gallery-heading p { font-size: 16px; }
+    .gallery-wrapper { overflow: hidden; width: 100%; }
+    .gallery-track img { flex: 0 0 100%; width: 100%; height: 260px; object-fit: cover; object-position: center; }
+    .main-image-section { height: 70vh; }
+    .main-image-overlay p { font-size: 18px; line-height: 1.5; }
 }
 </style>
 </head>
@@ -472,8 +362,8 @@ footer {
             <div class="top-right">
                 <div class="phone">+91 86298 64262</div>
                 <nav class="navbar">
+                    <a href="#" onclick="showHome()">Home</a>
                     <a href="#" onclick="loadAbout(event)">About Us</a>
-                    <a href="#">Amenities</a>
                     <a href="#gallery">Gallery</a>
                     <a href="https://bookingengine.stayflexi.com/?hotel_id=30029">Booking</a>
                 </nav>
@@ -488,42 +378,60 @@ footer {
     </div>
 </header>
 
-<!-- MAIN CONTENT CONTAINER FOR SPA -->
+<!-- SPA Container -->
 <div id="content">
-<section id="gallery" class="gallery-section">
-  <div class="gallery-heading">
-    <h2>GALLERY</h2>
-    <p>Peek Into Our Gallery</p>
-  </div>
-  <div class="gallery-controls">
-    <button id="prevBtn">‹</button>
-    <button id="nextBtn">›</button>
-  </div>
-  <div class="gallery-wrapper">
-    <div class="gallery-track">
-      <!-- Random images for now -->
-      <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210c2" alt="">
-      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb" alt="">
-      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="">
-      <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" alt="">
-      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="">
-      <img src="https://images.unsplash.com/photo-1519821172141-b5d8dceec4d0" alt="">
-      <img src="https://images.unsplash.com/photo-1541971875076-8f970d573be6" alt="">
-      <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa" alt="">
-    </div>
-  </div>
-</section>
+  <div id="page-home">
+    <section id="gallery" class="gallery-section">
+      <div class="gallery-heading">
+        <h2>GALLERY</h2>
+        <p>Peek Into Our Gallery</p>
+      </div>
+      <div class="gallery-controls">
+        <button id="prevBtn">‹</button>
+        <button id="nextBtn">›</button>
+      </div>
+      <div class="gallery-wrapper">
+        <div class="gallery-track">
+          <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210c2" alt="">
+          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb" alt="">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="">
+          <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" alt="">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="">
+          <img src="https://images.unsplash.com/photo-1519821172141-b5d8dceec4d0" alt="">
+          <img src="https://images.unsplash.com/photo-1541971875076-8f970d573be6" alt="">
+          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa" alt="">
+        </div>
+      </div>
+    </section>
 
-<section class="main-image-section">
-    <div class="main-image-overlay">
-        <p>
-            At Rivanta Resort, every question brings you closer to your perfect escape.<br><br>
-            Wondering about our amenities, adventures, or how to make your stay unforgettable?<br>
-            Ask your queries—we’re here to craft your story with us
-        </p>
-        <a href="https://bookingengine.stayflexi.com/?hotel_id=30029" class="main-image-btn">MAKE AN ENQUIRY</a>
-    </div>
-</section>
+    <section class="main-image-section">
+        <div class="main-image-overlay">
+            <p>
+                At Rivanta Resort, every question brings you closer to your perfect escape.<br><br>
+                Wondering about our amenities, adventures, or how to make your stay unforgettable?<br>
+                Ask your queries—we’re here to craft your story with us
+            </p>
+            <a href="https://bookingengine.stayflexi.com/?hotel_id=30029" class="main-image-btn">MAKE AN ENQUIRY</a>
+        </div>
+    </section>
+  </div>
+
+  <!-- About Page -->
+  <div id="page-about" style="display:none;">
+    <section class="main">
+      <h2>About Rivanta Resorts</h2>
+      <p>
+        Welcome to Rivanta Resorts — a serene escape in the heart of Kasol. 
+        Our resort offers luxurious accommodations, breathtaking views, and 
+        personalized experiences that make your stay unforgettable.
+      </p>
+      <p>
+        Explore our amenities, indulge in local cuisine, or embark on adventures 
+        curated by our expert team. We’re here to craft your story with comfort and elegance.
+      </p>
+      <button onclick="showHome()" style="margin-top:20px; padding:12px 20px; border:none; border-radius:6px; background:#cda146; color:#fff; cursor:pointer;">Back to Home</button>
+    </section>
+  </div>
 </div>
 
 <div class="section-shadow"></div>
@@ -533,9 +441,9 @@ footer {
         <div class="footer-left">
             <img src="images/logos/logo-primary.png" alt="Rivanta">
             <div class="socials">
-                <a href="https://www.google.com/"><img src="https://cdn.simpleicons.org/google/white"></a>
-                <a href="https://www.instagram.com/rivanta_resorts"><img src="https://cdn.simpleicons.org/instagram/white"></a>
-                <a href="https://www.facebook.com/Rivantaresorts"><img src="https://cdn.simpleicons.org/facebook/white"></a>
+                <a href="#"><img src="https://cdn.simpleicons.org/google/white"></a>
+                <a href="#"><img src="https://cdn.simpleicons.org/instagram/white"></a>
+                <a href="#"><img src="#"><img src="https://cdn.simpleicons.org/facebook/white"></a>
             </div>
         </div>
 
@@ -553,7 +461,7 @@ footer {
 </footer>
 
 <script>
-// ================== GALLERY JS ==================
+// Gallery JS (unchanged)
 const track = document.querySelector('.gallery-track');
 let slides = document.querySelectorAll('.gallery-track img');
 
@@ -634,25 +542,18 @@ window.addEventListener('resize', () => {
   track.style.transform = `translateX(-${slideWidth * index}px)`;
 });
 
-// ================= SPA LOGIC ==================
+// SPA routing
 function loadAbout(e) {
     e.preventDefault();
-    const content = document.getElementById('content');
-    content.innerHTML = `
-        <section class="main">
-            <h2>About Rivanta Resorts</h2>
-            <p>
-                Welcome to Rivanta Resorts — a serene escape in the heart of Kasol. 
-                Our resort offers luxurious accommodations, breathtaking views, and 
-                personalized experiences that make your stay unforgettable.
-            </p>
-            <p>
-                Explore our amenities, indulge in local cuisine, or embark on adventures 
-                curated by our expert team. We’re here to craft your story with comfort and elegance.
-            </p>
-        </section>
-    `;
+    document.getElementById('page-home').style.display = 'none';
+    document.getElementById('page-about').style.display = 'block';
+}
+
+function showHome() {
+    document.getElementById('page-about').style.display = 'none';
+    document.getElementById('page-home').style.display = 'block';
 }
 </script>
+
 </body>
 </html>
