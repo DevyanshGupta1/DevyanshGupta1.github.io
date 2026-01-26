@@ -197,7 +197,7 @@ footer {
     object-fit: cover;
     border-radius: 6px;
 }
-    /* ================= SCROLLING GALLERY ================= */
+/* ================= SCROLLING GALLERY ================= */
 .gallery-viewport {
     width: 100%;
     overflow: hidden;
@@ -337,7 +337,7 @@ footer {
     line-height: 1.6;
     letter-spacing: 1px;
 }
-    /* Button inside main image */
+/* Button inside main image */
 .main-image-btn {
     display: inline-block;
     margin-top: 30px;
@@ -354,51 +354,6 @@ footer {
 .main-image-btn:hover {
     transform: scale(1.06);
     box-shadow: 0 0 20px rgba(205, 161, 70, 0.8);
-}
-/* SPA PAGES */
-.spa-page {
-    display: none;
-    min-height: 100vh;
-    background: #1e3032;
-    color: #fff;
-    font-family: celebri;
-}
-
-.spa-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-}
-
-.spa-topbar img {
-    height: 90px;
-}
-
-.spa-topbar button {
-    background: none;
-    border: 1px solid #cda146;
-    color: #fff;
-    padding: 8px 18px;
-    cursor: pointer;
-    font-family: celebri;
-}
-
-.spa-topbar button:hover {
-    background: #cda146;
-    color: #000;
-}
-
-.spa-content {
-    height: calc(100vh - 140px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.spa-content h1 {
-    font-size: 56px;
-    letter-spacing: 3px;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -517,7 +472,7 @@ footer {
             <div class="top-right">
                 <div class="phone">+91 86298 64262</div>
                 <nav class="navbar">
-                    <a href="javascript:void(0)" onclick="showAbout()">About</a>
+                    <a href="#" onclick="loadAbout(event)">About Us</a>
                     <a href="#">Amenities</a>
                     <a href="#gallery">Gallery</a>
                     <a href="https://bookingengine.stayflexi.com/?hotel_id=30029">Booking</a>
@@ -532,6 +487,9 @@ footer {
 
     </div>
 </header>
+
+<!-- MAIN CONTENT CONTAINER FOR SPA -->
+<div id="content">
 <section id="gallery" class="gallery-section">
   <div class="gallery-heading">
     <h2>GALLERY</h2>
@@ -543,7 +501,7 @@ footer {
   </div>
   <div class="gallery-wrapper">
     <div class="gallery-track">
-      <!-- Original images -->
+      <!-- Random images for now -->
       <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210c2" alt="">
       <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb" alt="">
       <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="">
@@ -556,7 +514,6 @@ footer {
   </div>
 </section>
 
-
 <section class="main-image-section">
     <div class="main-image-overlay">
         <p>
@@ -567,7 +524,7 @@ footer {
         <a href="https://bookingengine.stayflexi.com/?hotel_id=30029" class="main-image-btn">MAKE AN ENQUIRY</a>
     </div>
 </section>
-
+</div>
 
 <div class="section-shadow"></div>
 
@@ -576,9 +533,9 @@ footer {
         <div class="footer-left">
             <img src="images/logos/logo-primary.png" alt="Rivanta">
             <div class="socials">
-                <a href="https://www.google.com/search?sca_esv=693ec14b3197a0d7&rlz=1C1YTUH_enIN1065IN1065&sxsrf=ANbL-n6vwiTwpT_zZnShyg5MqgG2m8kQsw:1769406238803&q=rivanta+resort+kasol&sa=X&ved=2ahUKEwjd7M7yv6iSAxU4WGwGHSVjJFYQ7xYoAHoECA8QAQ&biw=1366&bih=633&dpr=1&aic=0"><img src="https://cdn.simpleicons.org/google/white"></a>
-                <a href="https://www.instagram.com/rivanta_resorts?igsh=MWRta2VrcGFiNDR6Zg%3D%3D&utm_source=qr"><img src="https://cdn.simpleicons.org/instagram/white"></a>
-                <a href="https://www.facebook.com/Rivantaresorts?rdid=Szw5lgCRH8RSeM88&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DefqiRZE1%2F#"><img src="https://cdn.simpleicons.org/facebook/white"></a>
+                <a href="https://www.google.com/"><img src="https://cdn.simpleicons.org/google/white"></a>
+                <a href="https://www.instagram.com/rivanta_resorts"><img src="https://cdn.simpleicons.org/instagram/white"></a>
+                <a href="https://www.facebook.com/Rivantaresorts"><img src="https://cdn.simpleicons.org/facebook/white"></a>
             </div>
         </div>
 
@@ -594,133 +551,108 @@ footer {
         Copyright © 2026 [Trailside Hospitality] | Powered by [Rivanta Resorts]
     </div>
 </footer>
-    <!-- ABOUT PAGE -->
-<div id="aboutPage" class="spa-page">
-    <div class="spa-topbar">
-        <img src="images/logos/logo-primary.png" alt="Rivanta" class="about-logo">
-        <button onclick="showHome()">Back</button>
-    </div>
-    <div class="spa-content">
-        <h1>About</h1>
-    </div>
-</div>
-
-<!-- PRIVACY POLICY PAGE -->
-<div id="privacyPage" class="spa-page">
-    <div class="spa-topbar">
-        <img src="images/logos/logo-primary.png" alt="Rivanta" class="about-logo">
-        <button onclick="showHome()">Back</button>
-    </div>
-    <div class="spa-content">
-        <h1>Privacy Policy</h1>
-    </div>
-</div>
-
-<!-- CANCELLATION POLICY PAGE -->
-<div id="cancelPage" class="spa-page">
-    <div class="spa-topbar">
-        <img src="images/logos/logo-primary.png" alt="Rivanta">
-        <button onclick="showHome()">Back</button>
-    </div>
-    <div class="spa-content">
-        <h1>Cancellation Policy</h1>
-    </div>
-</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+// ================== GALLERY JS ==================
+const track = document.querySelector('.gallery-track');
+let slides = document.querySelectorAll('.gallery-track img');
 
-  const track = document.querySelector('.gallery-track');
-  if (!track) return; // SAFETY: prevents SPA page errors
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
-  let slides = document.querySelectorAll('.gallery-track img');
+let index = 1;
+const delay = 5000;
+let interval;
 
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+// CLONE FIRST & LAST SLIDES
+const firstClone = slides[0].cloneNode(true);
+const lastClone = slides[slides.length - 1].cloneNode(true);
 
-  let index = 1;
-  const delay = 5000;
-  let interval;
+firstClone.id = 'first-clone';
+lastClone.id = 'last-clone';
 
-  // CLONE FIRST & LAST SLIDES
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[slides.length - 1].cloneNode(true);
+track.appendChild(firstClone);
+track.insertBefore(lastClone, slides[0]);
 
-  firstClone.id = 'first-clone';
-  lastClone.id = 'last-clone';
+slides = document.querySelectorAll('.gallery-track img');
 
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, slides[0]);
+const slideWidth = slides[index].offsetWidth + 15;
 
-  slides = document.querySelectorAll('.gallery-track img');
+// INITIAL POSITION
+track.style.transform = `translateX(-${slideWidth * index}px)`;
 
-  let slideWidth = slides[index].offsetWidth + 15;
-
-  // INITIAL POSITION
+// MOVE FUNCTION
+function moveToIndex() {
+  track.style.transition = 'transform 0.6s ease';
   track.style.transform = `translateX(-${slideWidth * index}px)`;
+}
 
-  function moveToIndex() {
-    track.style.transition = 'transform 0.6s ease';
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
-  }
+// NEXT
+function nextSlide() {
+  if (index >= slides.length - 1) return;
+  index++;
+  moveToIndex();
+}
 
-  function nextSlide() {
-    if (index >= slides.length - 1) return;
-    index++;
-    moveToIndex();
-  }
+// PREV
+function prevSlide() {
+  if (index <= 0) return;
+  index--;
+  moveToIndex();
+}
 
-  function prevSlide() {
-    if (index <= 0) return;
-    index--;
-    moveToIndex();
-  }
-
-  track.addEventListener('transitionend', () => {
-    if (slides[index].id === 'first-clone') {
-      track.style.transition = 'none';
-      index = 1;
-      track.style.transform = `translateX(-${slideWidth * index}px)`;
-    }
-
-    if (slides[index].id === 'last-clone') {
-      track.style.transition = 'none';
-      index = slides.length - 2;
-      track.style.transform = `translateX(-${slideWidth * index}px)`;
-    }
-  });
-
-  nextBtn?.addEventListener('click', nextSlide);
-  prevBtn?.addEventListener('click', prevSlide);
-
-  function startAuto() {
-    interval = setInterval(nextSlide, delay);
-  }
-
-  startAuto();
-
-  window.addEventListener('resize', () => {
-    slideWidth = slides[index].offsetWidth + 15;
+// AFTER TRANSITION FIX
+track.addEventListener('transitionend', () => {
+  if (slides[index].id === 'first-clone') {
     track.style.transition = 'none';
+    index = 1;
     track.style.transform = `translateX(-${slideWidth * index}px)`;
-  });
+  }
 
+  if (slides[index].id === 'last-clone') {
+    track.style.transition = 'none';
+    index = slides.length - 2;
+    track.style.transform = `translateX(-${slideWidth * index}px)`;
+  }
 });
-<script>
-function showAbout() {
-  document.getElementById("homePage").style.display = "none";
-  document.getElementById("aboutPage").style.display = "block";
-  window.scrollTo(0, 0);
-}
 
-function showHome() {
-  document.getElementById("aboutPage").style.display = "none";
-  document.getElementById("homePage").style.display = "block";
-  window.scrollTo(0, 0);
+// BUTTONS
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
+
+// AUTO SCROLL (5s)
+function startAuto() {
+  interval = setInterval(() => {
+    nextSlide();
+  }, delay);
+}
+startAuto();
+
+// RESIZE SAFETY
+window.addEventListener('resize', () => {
+  track.style.transition = 'none';
+  track.style.transform = `translateX(-${slideWidth * index}px)`;
+});
+
+// ================= SPA LOGIC ==================
+function loadAbout(e) {
+    e.preventDefault();
+    const content = document.getElementById('content');
+    content.innerHTML = `
+        <section class="main">
+            <h2>About Rivanta Resorts</h2>
+            <p>
+                Welcome to Rivanta Resorts — a serene escape in the heart of Kasol. 
+                Our resort offers luxurious accommodations, breathtaking views, and 
+                personalized experiences that make your stay unforgettable.
+            </p>
+            <p>
+                Explore our amenities, indulge in local cuisine, or embark on adventures 
+                curated by our expert team. We’re here to craft your story with comfort and elegance.
+            </p>
+        </section>
+    `;
 }
 </script>
-
-</script>
-
 </body>
 </html>
