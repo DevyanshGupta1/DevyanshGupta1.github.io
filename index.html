@@ -377,28 +377,6 @@ footer {
     font-size: 16px;
     }
     /* Make gallery show only ONE image at a time */
-  .gallery-track {
-    gap: 0;
-  }
-
-  .gallery-track img {
-    width: 100vw;      /* one full screen image */
-    flex-shrink: 0;
-  }
-  .gallery-wrapper {
-    overflow: hidden;
-  }
-
-  .gallery-track {
-    display: flex;
-    gap: 30px; /* Add gap between images */
-  }
-
-  .gallery-track img {
-    flex: 0 0 calc(100% - 15px); /* One image minus the gap */
-    height: auto;
-    object-fit: cover;
-  }
   .gallery-wrapper {
         overflow: hidden;
         width: 100%;
@@ -406,26 +384,15 @@ footer {
 
     .gallery-track {
         display: flex;
-        gap: 12px;
     }
 
     .gallery-track img {
         flex: 0 0 100%;
         width: 100%;
-        max-width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 12px;
-    }
-    .gallery-track {
-        gap: 0;
-    }
-
-    .gallery-track img {
-        flex: 0 0 100%;
-        width: 100%;
-        height: 220px;      /* safe height for mobile */
-        object-fit: contain;
+        height: 260px;              /* IMPORTANT: forces visibility */
+        max-height: 260px;
+        object-fit: cover;         /* back to cover */
+        object-position: center;
     }
 
 }
