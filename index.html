@@ -337,9 +337,31 @@ footer {
     line-height: 1.6;
     letter-spacing: 1px;
 }
+    /* Button inside main image */
+.main-image-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 36px;
+    background: #cda146;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-image-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(205, 161, 70, 0.8);
+}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
+    .main-image-btn {
+        padding: 12px 28px;
+        font-size: 14px;
+    }
 
     .top-bar {
         padding: 15px 15px 0;
