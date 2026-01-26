@@ -517,7 +517,7 @@ footer {
             <div class="top-right">
                 <div class="phone">+91 86298 64262</div>
                 <nav class="navbar">
-                    <a href="#" onclick="showAbout()">About</a>
+                    <a href="javascript:void(0)" onclick="showAbout()">About</a>
                     <a href="#">Amenities</a>
                     <a href="#gallery">Gallery</a>
                     <a href="https://bookingengine.stayflexi.com/?hotel_id=30029">Booking</a>
@@ -597,7 +597,7 @@ footer {
     <!-- ABOUT PAGE -->
 <div id="aboutPage" class="spa-page">
     <div class="spa-topbar">
-        <img src="images/logos/logo-primary.png" alt="Rivanta">
+        <img src="images/logos/logo-primary.png" alt="Rivanta" class="about-logo">
         <button onclick="showHome()">Back</button>
     </div>
     <div class="spa-content">
@@ -608,7 +608,7 @@ footer {
 <!-- PRIVACY POLICY PAGE -->
 <div id="privacyPage" class="spa-page">
     <div class="spa-topbar">
-        <img src="images/logos/logo-primary.png" alt="Rivanta">
+        <img src="images/logos/logo-primary.png" alt="Rivanta" class="about-logo">
         <button onclick="showHome()">Back</button>
     </div>
     <div class="spa-content">
@@ -706,6 +706,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+<script>
+function showAbout() {
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("aboutPage").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  document.getElementById("aboutPage").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
+  window.scrollTo(0, 0);
+}
+</script>
+
 </script>
 
 </body>
