@@ -306,7 +306,37 @@ footer {
   transform: scale(1.1);
   box-shadow: 0 0 10px #cda146;
 }
+/* ================= MAIN IMAGE SECTION ================= */
+.main-image-section {
+    position: relative;
+    height: 90vh;
+    background: url("images/main/pic.jpg") center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.main-image-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45); /* slight dark for text readability */
+}
+
+.main-image-overlay {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.main-image-overlay p {
+    color: #ffffff;
+    font-size: 28px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
@@ -394,6 +424,14 @@ footer {
         object-fit: cover;         /* back to cover */
         object-position: center;
     }
+    .main-image-section {
+        height: 70vh;
+    }
+
+    .main-image-overlay p {
+        font-size: 18px;
+        line-height: 1.5;
+    }
 
 }
 </style>
@@ -452,13 +490,16 @@ footer {
 </section>
 
 
-<section class="main">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <p>Vivamus lacinia odio vitae vestibulum vestibulum.</p>
-    <p>Cras placerat ultricies sapien, nec tempor elit.</p>
-    <p>Donec sit amet turpis nec lorem varius convallis.</p>
-    <p>Integer non libero at nulla tincidunt vehicula.</p>
+<section class="main-image-section">
+    <div class="main-image-overlay">
+        <p>
+            At Rivanta Resort, every question brings you closer to your perfect escape.<br><br>
+            Wondering about our amenities, adventures, or how to make your stay unforgettable?<br>
+            Ask your queries—we’re here to craft your story with us
+        </p>
+    </div>
 </section>
+
 
 <div class="section-shadow"></div>
 
