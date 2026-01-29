@@ -549,6 +549,51 @@ footer {
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(205, 161, 70, 0.35);
 }
+
+    /* ===== TERMS & CONDITIONS PAGE ONLY ===== */
+
+.terms-page {
+  min-height: 100vh;
+  background: #1e3032;
+  color: #ffffff;
+  padding: 80px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.terms-page h2 {
+  font-size: 42px;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
+}
+
+.terms-page p {
+  max-width: 900px;
+  font-size: 18px;
+  line-height: 1.7;
+  opacity: 0.9;
+  margin-bottom: 16px;
+}
+
+.terms-page button {
+  margin-top: 30px;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 999px;
+  background: #cda146;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.terms-page button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(205,161,70,0.7);
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
     .main-image-btn {
@@ -946,12 +991,12 @@ Guests receive a 50% refund for cancellations made up to 15 days before arrival.
   </section>
 </div>
 
-<div id="page-terms" style="display:none; min-height:100vh;">
-  <section class="main">
+<div id="page-terms" style="display:none">
+  <section class="terms=page">
     <h2>      Rivanta Resort Terms and Conditions
 Last Updated: 28-01-2026</h2>
 
-    <p style="max-width:900px; line-height:1.7; margin-top:20px;">
+    <p>
 
 
 Introduction
@@ -1038,15 +1083,7 @@ Phone: +91-8629864262
 
     <button
       onclick="showHome()"
-      style="
-        margin-top:25px;
-        padding:12px 22px;
-        border:none;
-        border-radius:6px;
-        background:#cda146;
-        color:#fff;
-        cursor:pointer;
-      ">
+      >
       Back to Home
     </button>
   </section>
