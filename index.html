@@ -754,8 +754,8 @@ footer {
         </div>
 
         <div class="footer-right">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Cancellation Policy</a>
+            <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+            <a href="#" onclick="showCancellation()">Cancellation Policy</a>
             <div>info@rivantaresorts.com</div>
         </div>
     </div>
@@ -784,6 +784,53 @@ footer {
     <button onclick="showHome()" style="margin-top:20px; padding:12px 20px; border:none; border-radius:6px; background:#cda146; color:#fff; cursor:pointer;">Back to Home</button>
   </section>
 </div>
+
+<div id="page-privacy" class="spa-page">
+  <section class="main">
+    <h2>Privacy Policy</h2>
+
+    <p>
+      At Rivanta Resorts, your privacy is important to us. We ensure that all personal
+      information shared with us is handled securely and responsibly.
+    </p>
+
+    <p>
+      Information collected during bookings, inquiries, or reviews is used only to
+      enhance guest experience and for operational purposes. We do not sell or share
+      personal data with third parties.
+    </p>
+
+    <p>
+      By using our services, you consent to our privacy practices as outlined above.
+    </p>
+
+    <button onclick="showHome()">Back to Home</button>
+  </section>
+</div>
+
+<div id="page-cancellation" class="spa-page">
+  <section class="main">
+    <h2>Cancellation Policy</h2>
+
+    <p>
+      Reservations canceled up to 7 days prior to the check-in date are eligible
+      for a full refund.
+    </p>
+
+    <p>
+      Cancellations made within 7 days of check-in may incur charges depending
+      on the booking terms.
+    </p>
+
+    <p>
+      No-shows or early check-outs are non-refundable unless otherwise stated
+      during booking.
+    </p>
+
+    <button onclick="showHome()">Back to Home</button>
+  </section>
+</div>
+
 
 <script>
 // Gallery slider logic
@@ -835,10 +882,32 @@ function loadAbout(e){
   document.getElementById('page-home').style.display = 'none';
   document.getElementById('page-about').style.display = 'flex';
 }
-function showHome(){
-  document.getElementById('page-about').style.display = 'none';
-  document.getElementById('page-home').style.display = 'block';
-}
+  function hideAllPages() {
+    document.getElementById("page-home").style.display = "none";
+    document.getElementById("page-about").style.display = "none";
+    document.getElementById("page-privacy").style.display = "none";
+    document.getElementById("page-cancellation").style.display = "none";
+  }
+
+  function showHome() {
+    hideAllPages();
+    document.getElementById("page-home").style.display = "block";
+  }
+
+  function showAbout() {
+    hideAllPages();
+    document.getElementById("page-about").style.display = "block";
+  }
+
+  function showPrivacy() {
+    hideAllPages();
+    document.getElementById("page-privacy").style.display = "block";
+  }
+
+  function showCancellation() {
+    hideAllPages();
+    document.getElementById("page-cancellation").style.display = "block";
+  }
 </script>
 
 </body>
