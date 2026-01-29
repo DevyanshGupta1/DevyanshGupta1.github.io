@@ -17,7 +17,67 @@ html, body {
     font-family: Celebri;
     color: #fff;
 }
+/* ===== ROOM SLIDER ===== */
+.terms-room-slider {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+  gap: 10px;
+}
 
+.terms-room-track {
+  display: flex;
+  overflow: hidden;
+  gap: 20px;
+  flex: 1;
+}
+
+.room-box {
+  min-width: 300px;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.room-box img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.room-info {
+  padding: 12px;
+}
+
+.room-info h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+}
+
+.room-info p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Slider buttons */
+.prev-room, .next-room {
+  background: linear-gradient(135deg, #cda146, #e6c36a);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #0f172a;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.prev-room:hover, .next-room:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(205,161,70,0.5);
+}
 /* ================= HERO ================= */
 .hero {
     position: relative;
@@ -801,8 +861,30 @@ footer {
     </div>
   </div>
 </section>
-
+<div class="terms-room-slider">
+      <button class="prev-room">‹</button>
+      <div class="terms-room-track">
+        <!-- Room 1 -->
+        <div class="room-box">
+          <img src="https://images.unsplash.com/photo-1560448204-87a5f5ff9a9c" alt="Room 1">
+          <div class="room-info">
+            <h3>Room 1</h3>
+            <p>Cozy room with mountain view and modern amenities.</p>
+          </div>
+        </div>
+        <!-- Room 2 -->
+        <div class="room-box">
+          <img src="https://images.unsplash.com/photo-1576675787304-5b0b29d13c87" alt="Room 2">
+          <div class="room-info">
+            <h3>Room 2</h3>
+            <p>Spacious suite with private balcony and premium facilities.</p>
+          </div>
+        </div>
+      </div>
+      <button class="next-room">›</button>
+    </div>
 <section class="main-image-section">
+    
     <div class="main-image-overlay">
         <p>
             At Rivanta Resort, every question brings you closer to your perfect escape.<br><br>
@@ -1193,6 +1275,30 @@ function showTerms() {
 window.addEventListener("DOMContentLoaded", () => {
   showHome();
 });
+const roomTrack = document.querySelector('.terms-room-track');
+const prevRoomBtn = document.querySelector('.prev-room');
+const nextRoomBtn = document.querySelector('.next-room');
+
+let roomIndex = 0;
+const roomBoxes = document.querySelectorAll('.room-box');
+
+function updateRoomSlider() {
+  const boxWidth = roomBoxes[0].offsetWidth + 20; // include gap
+  roomTrack.style.transform = `translateX(-${boxWidth * roomIndex}px)`;
+}
+
+nextRoomBtn.addEventListener('click', () => {
+  if(roomIndex < roomBoxes.length - 1) roomIndex++;
+  updateRoomSlider();
+});
+
+prevRoomBtn.addEventListener('click', () => {
+  if(roomIndex > 0) roomIndex--;
+  updateRoomSlider();
+});
+
+// Optional: adjust on window resize
+window.addEventListener('resize', updateRoomSlider);
 
 </script>
 
