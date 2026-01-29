@@ -355,7 +355,71 @@ footer {
     transform: scale(1.06);
     box-shadow: 0 0 20px rgba(205, 161, 70, 0.8);
 }
+/* =========================
+   ABOUT PAGE (SPA VIEW)
+   ========================= */
 
+#aboutView {
+  display: none;                /* shown via JS */
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0f172a;          /* same site background */
+  z-index: 9999;
+}
+
+/* Top bar (logo + back button) */
+.about-top {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.about-logo img {
+  height: 42px;
+  width: auto;
+}
+
+/* Back button */
+.about-back-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #ffffff;
+  font-family: "Calibri", sans-serif;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.about-back-btn:hover {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* Main content wrapper */
+#aboutViewContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Heading */
+.about-heading {
+  font-family: "Calibri", sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
     .main-image-btn {
@@ -453,6 +517,18 @@ footer {
         font-size: 18px;
         line-height: 1.5;
     }
+      .about-heading {
+    font-size: 32px;
+  }
+
+  .about-logo img {
+    height: 34px;
+  }
+
+  .about-back-btn {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
