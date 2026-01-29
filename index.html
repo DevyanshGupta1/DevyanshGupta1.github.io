@@ -879,37 +879,42 @@ startAuto();
 window.addEventListener('resize', () => { track.style.transition='none'; track.style.transform=`translateX(-${slideWidth*index}px)`;});
 
 // SPA routing logic
-function loadAbout(e){
-  e.preventDefault();
-  document.getElementById('page-home').style.display = 'none';
-  document.getElementById('page-about').style.display = 'flex';
+function hideAllPages() {
+  document.getElementById("page-home").style.display = "none";
+  document.getElementById("page-about").style.display = "none";
+  document.getElementById("page-privacy").style.display = "none";
+  document.getElementById("page-cancellation").style.display = "none";
 }
-  function hideAllPages() {
-    document.getElementById("page-home").style.display = "none";
-    document.getElementById("page-about").style.display = "none";
-    document.getElementById("page-privacy").style.display = "none";
-    document.getElementById("page-cancellation").style.display = "none";
-  }
 
-  function showHome() {
-    hideAllPages();
-    document.getElementById("page-home").style.display = "block";
-  }
+function showHome() {
+  hideAllPages();
+  document.getElementById("page-home").style.display = "block";
+  window.scrollTo(0, 0);
+}
 
-  function showAbout() {
-    hideAllPages();
-    document.getElementById("page-about").style.display = "block";
-  }
+function showAbout() {
+  hideAllPages();
+  document.getElementById("page-about").style.display = "flex";
+  window.scrollTo(0, 0);
+}
 
-  function showPrivacy() {
-    hideAllPages();
-    document.getElementById("page-privacy").style.display = "block";
-  }
+function showPrivacy() {
+  hideAllPages();
+  document.getElementById("page-privacy").style.display = "flex";
+  window.scrollTo(0, 0);
+}
 
-  function showCancellation() {
-    hideAllPages();
-    document.getElementById("page-cancellation").style.display = "block";
-  }
+function showCancellation() {
+  hideAllPages();
+  document.getElementById("page-cancellation").style.display = "flex";
+  window.scrollTo(0, 0);
+}
+
+/* ✅ FORCE HOME ON FIRST LOAD */
+window.addEventListener("DOMContentLoaded", () => {
+  showHome();
+});
+
 </script>
 
 </body>
