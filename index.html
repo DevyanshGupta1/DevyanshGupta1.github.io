@@ -1257,37 +1257,25 @@ Phone: +91-8629864262
 
 
 <script>
-/* =========================================================
-   SPA PAGE CONTROL (HOME DEFAULT)
-   ========================================================= */
+/* ===============================
+   SPA PAGE CONTROLLER
+   =============================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-  showHome();
-});
-
-/* Hide all SPA pages */
 function hideAllPages() {
-  const pages = [
-    "page-home",
-    "page-about",
-    "page-privacy",
-    "page-cancellation",
-    "page-terms"
-  ];
-
-  pages.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = "none";
-  });
+  document.getElementById("page-home").style.display = "none";
+  document.getElementById("page-about").style.display = "none";
+  document.getElementById("page-privacy").style.display = "none";
+  document.getElementById("page-cancellation").style.display = "none";
+  document.getElementById("page-terms").style.display = "none";
 }
 
-/* Page switchers */
 function showHome() {
   hideAllPages();
   document.getElementById("page-home").style.display = "block";
 }
 
-function showAbout() {
+function showAbout(e) {
+  if (e) e.preventDefault();
   hideAllPages();
   document.getElementById("page-about").style.display = "block";
 }
@@ -1307,184 +1295,171 @@ function showTerms() {
   document.getElementById("page-terms").style.display = "block";
 }
 
-/* =========================================================
-   INDIGO-STYLE TILTED GALLERY (17 IMAGES)
-   ========================================================= */
-
-const galleryCards = document.querySelectorAll(".card");
-const playPauseBtn = document.getElementById("playPause");
-const nextBtn = document.getElementById("next");
-const prevBtn = document.getElementById("prev");
-
-let currentIndex = 0;
-let autoPlay = true;
-let galleryInterval = null;
-
-/* Render tilt positions */
-function renderGallery() {
-  galleryCards.forEach((card, i) => {
-    card.classList.remove("active", "prev", "next", "hidden");
-
-    if (i === currentIndex) {
-      card.classList.add("active");
-    } 
-    else if (i === (currentIndex - 1 + galleryCards.length) % galleryCards.length) {
-      card.classList.add("prev");
-    } 
-    else if (i === (currentIndex + 1) % galleryCards.length) {
-      card.classList.add("next");
-    } 
-    else {
-      card.classList.add("hidden");
-    }
-  });
-}
-
-/* Navigation */
-function nextGallery() {
-  currentIndex = (currentIndex + 1) % galleryCards.length;
-  renderGallery();
-}
-
-function prevGallery() {
-  currentIndex =
-    (currentIndex - 1 + galleryCards.length) % galleryCards.length;
-  renderGallery();
-}
-
-/* Auto play */
-function startGalleryAuto() {
-  stopGalleryAuto();
-  galleryInterval = setInterval(nextGallery, 2000);
-}
-
-function stopGalleryAuto() {
-  if (galleryInterval) {
-    clearInterval(galleryInterval);
-    galleryInterval = null;
-  }
-}
-
-/* Button events */
-if (nextBtn) {
-  nextBtn.addEventListener("click", () => {
-    stopGalleryAuto();
-    nextGallery();
-  });
-}
-
-if (prevBtn) {
-  prevBtn.addEventListener("click", () => {
-    stopGalleryAuto();
-    prevGallery();
-  });
-}
-
-if (playPauseBtn) {
-  playPauseBtn.addEventListener("click", () => {
-    autoPlay = !autoPlay;
-
-    if (autoPlay) {
-      playPauseBtn.textContent = "⏸";
-      startGalleryAuto();
-    } else {
-      playPauseBtn.textContent = "▶";
-      stopGalleryAuto();
-    }
-  });
-}
-
-/* Init gallery */
-if (galleryCards.length > 0) {
-  renderGallery();
-  startGalleryAuto();
-}
-
-/* =========================================================
-   SAFETY: PREVENT JS RUNNING BEFORE ELEMENTS EXIST
-   ========================================================= */
-
-window.addEventListener("resize", () => {
-  renderGallery();
+/* 🔒 ENSURE HOME LOADS FIRST */
+document.addEventListener("DOMContentLoaded", () => {
+  showHome();
 });
+
+
+/* ===============================
+   MAIN GALLERY SLIDER (UNCHANGED)
+   =============================== */
+
+const track = document.querySelector('.gallery-track');
+let slides = document.querySelectorAll('.gallery-track img');
+
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let index = 1;
+const delay = 5000;
+let interval;
+
+const firstClone = slides[0].cloneNode(true);
+const lastClone = slides[slides.length - 1].cloneNode(true);
+
+firstClone.id = 'first-clone';
+lastClone.id = 'last-clone';
+
+track.appendChild(firstClone);
+track.insertBefore(lastClone, slides[0]);
+
+slides = document.querySelectorAll('.gallery-track img');
+
+const slideWidth = slides[index].offsetWidth + 15;
+
+track.style.transform = `translateX(-${slideWidth * index}px)`;
+
+function moveToIndex() {
+  track.style.transition = 'transform 0.6s ease';
+  track.style.transform = `translateX(-${slideWidth * index}px)`;
+}
+
+function nextSlide() {
+  if (index >= slides.length - 1) return;
+  index++;
+  moveToIndex();
+}
+
+function prevSlide() {
+  if (index <= 0) return;
+  index--;
+  moveToIndex();
+}
+
+track.addEventListener('transitionend', () => {
+  if (slides[index].id === 'first-clone') {
+    track.style.transition = 'none';
+    index = 1;
+    track.style.transform = `translateX(-${slideWidth * index}px)`;
+  }
+
+  if (slides[index].id === 'last-clone') {
+    track.style.transition = 'none';
+    index = slides.length - 2;
+    track.style.transform = `translateX(-${slideWidth * index}px)`;
+  }
+});
+
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
+
+function startAuto() {
+  interval = setInterval(nextSlide, delay);
+}
+startAuto();
+
+window.addEventListener('resize', () => {
+  track.style.transition = 'none';
+  track.style.transform = `translateX(-${slideWidth * index}px)`;
+});
+
+
 /* ===============================
    ROOMS SLIDER (INDIGO STYLE)
    =============================== */
 
-const cards = document.querySelectorAll(".card");
-const playPauseBtn = document.getElementById("playPause");
+const roomTrack = document.querySelector('.rooms-track');
+let roomCards = document.querySelectorAll('.room-card');
 
-let current = 0;
-let autoPlay = true;
-let interval;
+const prevRoom = document.getElementById('roomPrev');
+const nextRoom = document.getElementById('roomNext');
 
-/* RENDER STATES */
-function renderGallery() {
-  cards.forEach((card, i) => {
-    card.className = "card hidden";
+let roomIndex = 1;
+const roomDelay = 2000;
+let roomInterval;
 
-    if (i === current) {
-      card.className = "card active";
-    }
+/* CLONES */
+const roomFirstClone = roomCards[0].cloneNode(true);
+const roomLastClone = roomCards[roomCards.length - 1].cloneNode(true);
 
-    if (i === (current - 1 + cards.length) % cards.length) {
-      card.className = "card prev";
-    }
+roomFirstClone.id = 'room-first-clone';
+roomLastClone.id = 'room-last-clone';
 
-    if (i === (current + 1) % cards.length) {
-      card.className = "card next";
-    }
-  });
-}
+roomTrack.appendChild(roomFirstClone);
+roomTrack.insertBefore(roomLastClone, roomCards[0]);
 
-/* NAVIGATION */
-function nextSlide() {
-  current = (current + 1) % cards.length;
-  renderGallery();
-}
-
-function prevSlide() {
-  current = (current - 1 + cards.length) % cards.length;
-  renderGallery();
-}
-
-/* AUTO */
-function startAuto() {
-  interval = setInterval(nextSlide, 2000);
-}
-
-function stopAuto() {
-  clearInterval(interval);
-}
-
-/* EVENTS */
-document.getElementById("next").onclick = () => {
-  stopAuto();
-  nextSlide();
-};
-
-document.getElementById("prev").onclick = () => {
-  stopAuto();
-  prevSlide();
-};
-
-playPauseBtn.onclick = () => {
-  autoPlay = !autoPlay;
-  if (autoPlay) {
-    startAuto();
-    playPauseBtn.textContent = "⏸";
-  } else {
-    stopAuto();
-    playPauseBtn.textContent = "▶";
-  }
-};
+roomCards = document.querySelectorAll('.room-card');
 
 /* INIT */
-renderGallery();
-startAuto();
+roomTrack.style.transform = `translateX(-100%)`;
+
+function moveRoom() {
+  roomTrack.style.transition = 'transform 0.6s ease';
+  roomTrack.style.transform = `translateX(-${roomIndex * 100}%)`;
+}
+
+function nextRoomSlide() {
+  if (roomIndex >= roomCards.length - 1) return;
+  roomIndex++;
+  moveRoom();
+}
+
+function prevRoomSlide() {
+  if (roomIndex <= 0) return;
+  roomIndex--;
+  moveRoom();
+}
+
+/* LOOP FIX */
+roomTrack.addEventListener('transitionend', () => {
+  if (roomCards[roomIndex].id === 'room-first-clone') {
+    roomTrack.style.transition = 'none';
+    roomIndex = 1;
+    roomTrack.style.transform = `translateX(-100%)`;
+  }
+
+  if (roomCards[roomIndex].id === 'room-last-clone') {
+    roomTrack.style.transition = 'none';
+    roomIndex = roomCards.length - 2;
+    roomTrack.style.transform = `translateX(-${roomIndex * 100}%)`;
+  }
+});
+
+/* AUTO */
+function startRoomAuto() {
+  roomInterval = setInterval(nextRoomSlide, roomDelay);
+}
+
+function resetRoomAuto() {
+  clearInterval(roomInterval);
+  startRoomAuto();
+}
+
+startRoomAuto();
+
+/* ARROWS */
+nextRoom.addEventListener('click', () => {
+  nextRoomSlide();
+  resetRoomAuto();
+});
+
+prevRoom.addEventListener('click', () => {
+  prevRoomSlide();
+  resetRoomAuto();
+});
 
 </script>
-
 
 </body>
 </html>
