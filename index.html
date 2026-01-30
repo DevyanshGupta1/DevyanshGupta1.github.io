@@ -1301,80 +1301,106 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* ===============================
-   MAIN GALLERY SLIDER (UNCHANGED)
-   =============================== */
+/* =========================================================
+   INDIGO-STYLE TILTED GALLERY (17 IMAGES)
+   ========================================================= */
 
-const track = document.querySelector('.gallery-track');
-let slides = document.querySelectorAll('.gallery-track img');
+const galleryCards = document.querySelectorAll(".card");
+const playPauseBtn = document.getElementById("playPause");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
 
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+let currentIndex = 0;
+let autoPlay = true;
+let galleryInterval = null;
 
-let index = 1;
-const delay = 5000;
-let interval;
+/* Render tilt positions */
+function renderGallery() {
+  galleryCards.forEach((card, i) => {
+    card.classList.remove("active", "prev", "next", "hidden");
 
-const firstClone = slides[0].cloneNode(true);
-const lastClone = slides[slides.length - 1].cloneNode(true);
-
-firstClone.id = 'first-clone';
-lastClone.id = 'last-clone';
-
-track.appendChild(firstClone);
-track.insertBefore(lastClone, slides[0]);
-
-slides = document.querySelectorAll('.gallery-track img');
-
-const slideWidth = slides[index].offsetWidth + 15;
-
-track.style.transform = `translateX(-${slideWidth * index}px)`;
-
-function moveToIndex() {
-  track.style.transition = 'transform 0.6s ease';
-  track.style.transform = `translateX(-${slideWidth * index}px)`;
+    if (i === currentIndex) {
+      card.classList.add("active");
+    } 
+    else if (i === (currentIndex - 1 + galleryCards.length) % galleryCards.length) {
+      card.classList.add("prev");
+    } 
+    else if (i === (currentIndex + 1) % galleryCards.length) {
+      card.classList.add("next");
+    } 
+    else {
+      card.classList.add("hidden");
+    }
+  });
 }
 
-function nextSlide() {
-  if (index >= slides.length - 1) return;
-  index++;
-  moveToIndex();
+/* Navigation */
+function nextGallery() {
+  currentIndex = (currentIndex + 1) % galleryCards.length;
+  renderGallery();
 }
 
-function prevSlide() {
-  if (index <= 0) return;
-  index--;
-  moveToIndex();
+function prevGallery() {
+  currentIndex =
+    (currentIndex - 1 + galleryCards.length) % galleryCards.length;
+  renderGallery();
 }
 
-track.addEventListener('transitionend', () => {
-  if (slides[index].id === 'first-clone') {
-    track.style.transition = 'none';
-    index = 1;
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
+/* Auto play */
+function startGalleryAuto() {
+  stopGalleryAuto();
+  galleryInterval = setInterval(nextGallery, 2000);
+}
+
+function stopGalleryAuto() {
+  if (galleryInterval) {
+    clearInterval(galleryInterval);
+    galleryInterval = null;
   }
-
-  if (slides[index].id === 'last-clone') {
-    track.style.transition = 'none';
-    index = slides.length - 2;
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
-  }
-});
-
-nextBtn.addEventListener('click', nextSlide);
-prevBtn.addEventListener('click', prevSlide);
-
-function startAuto() {
-  interval = setInterval(nextSlide, delay);
 }
-startAuto();
 
-window.addEventListener('resize', () => {
-  track.style.transition = 'none';
-  track.style.transform = `translateX(-${slideWidth * index}px)`;
+/* Button events */
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    stopGalleryAuto();
+    nextGallery();
+  });
+}
+
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    stopGalleryAuto();
+    prevGallery();
+  });
+}
+
+if (playPauseBtn) {
+  playPauseBtn.addEventListener("click", () => {
+    autoPlay = !autoPlay;
+
+    if (autoPlay) {
+      playPauseBtn.textContent = "⏸";
+      startGalleryAuto();
+    } else {
+      playPauseBtn.textContent = "▶";
+      stopGalleryAuto();
+    }
+  });
+}
+
+/* Init gallery */
+if (galleryCards.length > 0) {
+  renderGallery();
+  startGalleryAuto();
+}
+
+/* =========================================================
+   SAFETY: PREVENT JS RUNNING BEFORE ELEMENTS EXIST
+   ========================================================= */
+
+window.addEventListener("resize", () => {
+  renderGallery();
 });
-
-
 /* ===============================
    ROOMS SLIDER (INDIGO STYLE)
    =============================== */
