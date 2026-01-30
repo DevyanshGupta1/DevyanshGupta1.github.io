@@ -1363,25 +1363,84 @@ function showTerms() {
 window.addEventListener("DOMContentLoaded", () => {
   showHome();
 });
-const roomTrack = document.querySelector('.rooms-track');
-  const roomCards = document.querySelectorAll('.room-card');
+ const roomTrack = document.querySelector('.rooms-track');
+  let roomCards = document.querySelectorAll('.room-card');
+
   const prevRoom = document.getElementById('roomPrev');
   const nextRoom = document.getElementById('roomNext');
 
-  let roomIndex = 0;
+  let index = 1;
+  const delay = 2000;
+  let interval;
 
-  function updateRoomSlide() {
-    roomTrack.style.transform = `translateX(-${roomIndex * 100}%)`;
+  /* ===== CLONE FIRST & LAST (INFINITE LOOP) ===== */
+  const firstClone = roomCards[0].cloneNode(true);
+  const lastClone = roomCards[roomCards.length - 1].cloneNode(true);
+
+  firstClone.id = 'room-first-clone';
+  lastClone.id = 'room-last-clone';
+
+  roomTrack.appendChild(firstClone);
+  roomTrack.insertBefore(lastClone, roomCards[0]);
+
+  roomCards = document.querySelectorAll('.room-card');
+
+  /* ===== INITIAL POSITION ===== */
+  roomTrack.style.transform = `translateX(-100%)`;
+
+  function moveSlide() {
+    roomTrack.style.transition = 'transform 0.6s ease';
+    roomTrack.style.transform = `translateX(-${index * 100}%)`;
   }
 
+  function nextSlide() {
+    if (index >= roomCards.length - 1) return;
+    index++;
+    moveSlide();
+  }
+
+  function prevSlide() {
+    if (index <= 0) return;
+    index--;
+    moveSlide();
+  }
+
+  /* ===== MAGIC LOOP FIX ===== */
+  roomTrack.addEventListener('transitionend', () => {
+    if (roomCards[index].id === 'room-first-clone') {
+      roomTrack.style.transition = 'none';
+      index = 1;
+      roomTrack.style.transform = `translateX(-100%)`;
+    }
+
+    if (roomCards[index].id === 'room-last-clone') {
+      roomTrack.style.transition = 'none';
+      index = roomCards.length - 2;
+      roomTrack.style.transform = `translateX(-${index * 100}%)`;
+    }
+  });
+
+  /* ===== AUTO SCROLL ===== */
+  function startAuto() {
+    interval = setInterval(nextSlide, delay);
+  }
+
+  function resetAuto() {
+    clearInterval(interval);
+    startAuto();
+  }
+
+  startAuto();
+
+  /* ===== BUTTONS ===== */
   nextRoom.addEventListener('click', () => {
-    roomIndex = (roomIndex + 1) % roomCards.length;
-    updateRoomSlide();
+    nextSlide();
+    resetAuto();
   });
 
   prevRoom.addEventListener('click', () => {
-    roomIndex = (roomIndex - 1 + roomCards.length) % roomCards.length;
-    updateRoomSlide();
+    prevSlide();
+    resetAuto();
   });
 </script>
 
