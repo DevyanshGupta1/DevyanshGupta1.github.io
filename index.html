@@ -758,7 +758,40 @@ footer {
 .sk-google-reviews iframe::-webkit-scrollbar {
   display: none !important;
 }
+/* ===============================
+   WHATSAPP PHONE BUTTON (NAVBAR)
+   =============================== */
 
+.top-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: #cda146;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect — SAME as Book Now */
+.top-phone:hover {
+  box-shadow: 0 0 20px rgba(205, 161, 70, 0.9);
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+/* WhatsApp icon */
+.top-phone::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background: url("https://cdn.simpleicons.org/whatsapp/ffffff") no-repeat center;
+  background-size: contain;
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
     .main-image-btn {
