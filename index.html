@@ -945,6 +945,24 @@ footer {
     height: 420px;
     margin-top: 40px;
   }
+.hero {
+    background-attachment: scroll !important; /* MOST IMPORTANT */
+    background-size: cover !important;
+    background-position: center center !important;
+    transform: none !important;
+    filter: none !important;
+    -webkit-transform: none !important;
+    -webkit-filter: none !important;
+    will-change: auto !important;
+  }
+
+  /* Prevent mobile GPU scaling issues */
+  .hero::after {
+    transform: none !important;
+    filter: none !important;
+    -webkit-transform: none !important;
+    -webkit-filter: none !important;
+  }
 }
 </style>
 </head>
