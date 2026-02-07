@@ -703,7 +703,39 @@ footer {
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(205, 161, 70, 0.35);
 }
+.gallery-split {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 50px;
+  align-items: start;
+}
 
+/* Google Reviews Box */
+.google-reviews {
+  background: #020617;
+  border-radius: 22px;
+  padding: 22px;
+  height: 520px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* scrollbar (subtle like grexa) */
+.google-reviews::-webkit-scrollbar {
+  width: 6px;
+}
+.google-reviews::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+}
+
+.google-reviews iframe {
+  width: 100%;
+  height: 900px;
+  border: none;
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
     .main-image-btn {
@@ -881,6 +913,14 @@ footer {
 
   .room-arrow.right {
     margin-left: 6px;
+  }
+    .gallery-split {
+    grid-template-columns: 1fr;
+  }
+
+  .google-reviews {
+    height: 420px;
+    margin-top: 40px;
   }
 }
 </style>
