@@ -762,6 +762,10 @@ footer {
    WHATSAPP PHONE BUTTON (NAVBAR)
    =============================== */
 
+/* ===============================
+   WHATSAPP PHONE BUTTON (NAVBAR)
+   =============================== */
+
 .top-phone {
   display: inline-flex;
   align-items: center;
@@ -774,16 +778,17 @@ footer {
   font-size: 16px;
   font-weight: 500;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
 }
 
-/* Hover effect — SAME as Book Now */
+/* Hover same as Book Now */
 .top-phone:hover {
   box-shadow: 0 0 20px rgba(205, 161, 70, 0.9);
   transform: scale(1.05);
   text-decoration: none;
 }
 
-/* WhatsApp icon */
+/* WhatsApp Icon */
 .top-phone::before {
   content: "";
   width: 18px;
@@ -996,14 +1001,15 @@ footer {
     -webkit-transform: none !important;
     -webkit-filter: none !important;
   }
-    .top-phone {
-    font-size: 14px;
-    padding: 8px 18px;
+   .top-phone {
+    padding: 10px;
+    font-size: 0;          /* hides number text */
+    gap: 0;
   }
 
   .top-phone::before {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 }
 </style>
